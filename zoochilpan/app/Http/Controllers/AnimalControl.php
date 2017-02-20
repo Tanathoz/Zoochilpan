@@ -18,7 +18,7 @@ class AnimalControl extends Controller
 
     public function index()
     {
-        $ejemplares=Animal::All();
+        $ejemplares=Animal::paginate(3);
          return view('Animales.lista',compact('ejemplares'));
     }
     public function create(){
@@ -27,6 +27,13 @@ class AnimalControl extends Controller
     }
 
     public function store(Request $request){
+        try {
+
+
+
+
+
+
         Animal::create([
             'id' =>$request['id'],
             'nombreCientifico'=>$request['nombreCientifico'],
@@ -50,6 +57,13 @@ class AnimalControl extends Controller
         //return "se ha registrado un animal";
         Session::flash('message','Se agrego  correctamente ');
         return Redirect::to('/animal');
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que el id no este en la base de datos ');
+            return Redirect::to('/animal');
+        } catch (PDOException $e) {
+            dd($e);
+        }
        // return redirect('/animal')->with('message','store');
     }
     public function update( Request $request, $id){

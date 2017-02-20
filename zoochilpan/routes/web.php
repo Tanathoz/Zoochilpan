@@ -19,6 +19,11 @@ Route::get('ejemplar',function(){
 
 Route::resource('animal','AnimalControl');
 
+Route::resource('veterinario','VeterinarioController');
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
