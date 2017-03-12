@@ -4,28 +4,28 @@ namespace Zoochilpan;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Veterinario extends Model
+class Especie extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'veterinarios';
+    protected $table = 'especies';
 
     /**
     * The database primary key value.
     *
     * @var string
     */
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'idEspecie';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['nombre','apellidoPaterno','apellidoMaterno','sexo','especialidad','areaEncargada'];
+    protected $fillable = ['idFamilia', 'nombre'];
 
     
 }

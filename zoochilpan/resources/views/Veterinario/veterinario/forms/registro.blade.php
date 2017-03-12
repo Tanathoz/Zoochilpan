@@ -30,3 +30,18 @@
 
 
 </div>
+
+<div class="form-group col-md-6">
+    {!! Form::label('Especialidad ') !!}
+    {!! Form::text('especialidad',null,['class'=>'form-control','placeholder'=>'pequeñas especies']) !!}
+
+</div>
+
+
+
+<div class="form-group col-md-6">
+    {!! Form::label('Area a cargo ') !!}
+    {!! Form::text('areaEncargada',null,['class'=>'form-control','placeholder'=>'primates ']) !!}
+
+</div>
+

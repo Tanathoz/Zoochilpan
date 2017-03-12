@@ -20,6 +20,11 @@ Route::get('ejemplar',function(){
 Route::resource('animal','AnimalControl');
 
 Route::resource('veterinario','VeterinarioController');
+Route::resource('familia','FamController');
+Route::resource('especie','EspController');
+Route::get('/cargarFamilias','FamController@getFamilias');
+Route::get('/cargarEspecies','EspController@getEspecies');
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,3 +32,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+

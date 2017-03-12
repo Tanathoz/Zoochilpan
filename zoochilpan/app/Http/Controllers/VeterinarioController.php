@@ -50,6 +50,8 @@ class VeterinarioController extends Controller
           'apellidoPaterno'=>$request['apellidoPaterno'],
             'apellidoMaterno'=>$request['apellidoMaterno'],
             'sexo'=>$request['sexo'],
+            'especialidad'=>$request['especialidad'],
+            'areaEncargada'=>$request['areaEncargada'],
         ]);
 
         Session::flash('message', 'Veterinario Agregado!');

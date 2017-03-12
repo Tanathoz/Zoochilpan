@@ -10,6 +10,8 @@
             <h3>Editar el animal :{{$animal->nombreComun}}</h3>
          </div>
              <div class="panel-body">
+
+
             @include('Animales.form.registro')
             {!! Form::submit('Actualizar',['class'=>'btn btn-primary']) !!}
 

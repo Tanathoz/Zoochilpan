@@ -14,7 +14,8 @@
         <th>Apellido Paterno</th>
         <th>Apellido Materno</th>
         <th>Sexo</th>
-
+        <th>Especialidad</th>
+        <th>Area a cargo</th>
         </thead>
 
         @foreach($veterinarios as $veterinario)
@@ -24,7 +25,8 @@
             <td> {{$veterinario->apellidoPaterno}} </td>
             <td> {{$veterinario->apellidoMaterno}} </td>
             <td> {{$veterinario->sexo}} </td>
-
+            <td> {{$veterinario->especialidad}} </td>
+            <td> {{$veterinario->areaEncargada}} </td>
             <td>   {!!  link_to_route('veterinario.edit', $title = 'Editar', $parameters = $veterinario->id, $attributes = ['class'=>'btn btn-primary']) !!}
             </td>
             </tbody>
