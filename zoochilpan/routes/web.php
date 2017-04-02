@@ -24,7 +24,9 @@ Route::resource('familia','FamController');
 Route::resource('especie','EspController');
 Route::get('/cargarFamilias','FamController@getFamilias');
 Route::get('/cargarEspecies','EspController@getEspecies');
-
+Route::get('/cargarAnimales','AnimalControl@getAnimales');
+Route::get('/cargarDatosAnimales','AnimalControl@getDatosAnimal');
+Route::resource('ejemplar','EjemplarController');
 Route::get('/', function () {
     return view('welcome');
 });
@@ -34,3 +36,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 
+
+//Route::resource('Zoochilpan/ejemplar', 'Zoochilpan\\EjemplarController');

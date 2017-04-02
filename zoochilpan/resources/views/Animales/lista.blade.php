@@ -19,8 +19,8 @@
     <table class="table " >
         <thead>
             <th>Num</th>
+            <th>Nombre Científico</th>
             <th>Nombre Común</th>
-            <th>Nombre Cientifico</th>
             <th>Clase</th>
             <th>Orden</th>
             <th>Familia</th>

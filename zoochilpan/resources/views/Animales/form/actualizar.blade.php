@@ -1,7 +1,7 @@
 <div class="fish"> </div>
 <div class="form-group col-md-4  ">
     {!! Form::label('Numero de registro') !!}
-    {!! Form::input('number','id',null,['class'=>'form-control','placeholder'=>'numero de identificacion']) !!}
+    {!! Form::input('number','id',null,['id'=>'id','class'=>'form-control','placeholder'=>'numero de identificacion']) !!}
 
 </div>
 
@@ -31,9 +31,9 @@
 
 <div class="form-group">
     {!! Form::label('Orden') !!}
-{!! Form::select ('orden',['placeholder'=>'Selecciona orden'],null,['id'=>'orden','class'=>'form-control']) !!}
+{!! Form::select ('orde',['placeholder'=>$animal->orden],null,['id'=>'orde','class'=>'form-control']) !!}
 
-
+    <input type="text" name="orden" id="orden">
 
 
 </div>
@@ -41,16 +41,18 @@
 <div class="form-group">
     {!! Form::label('Familia') !!}
 
-    {!! Form::select ('familia',['placeholder'=>'Selecciona Familia'],null,['id'=>'familia','class'=>'form-control']) !!}
-    {!! Form::hidden('famili',null,['class'=>'form-control','placeholder'=>'1-4 Crías','id'=>'famili']) !!}
+    {!! Form::select ('famili',['placeholder'=>$animal->familia],null,['id'=>'famili','class'=>'form-control']) !!}
+
+    <input type="hidden" name="familia" id="familia">
 
 </div>
 
 
 <div class="form-group">
     {!! Form::label('Especie') !!}
-    {!! Form::select ('especie',['placeholder'=>'selecciona Especie'],null,['id'=>'especie','class'=>'form-control']) !!}
+    {!! Form::select ('especi',['placeholder'=>$animal->especie],null,['id'=>'especi','class'=>'form-control']) !!}
 
+    <input type="text" name="especie" id="especie">
 </div>
 
 
@@ -59,7 +61,7 @@
     {!! Form::label('Habitat') !!}
     {!! Form::select('habitat',['Altiplano'=>'Altiplano','Arrecife de coral'=>'Arrecife de coral','Bosque'=>'Bosque','Desierto'=>'Desierto',
     'Lago'=>'Lago','Marisma'=>'Marisma','Montaña'=>'Montaña','Océano'=>'Océano','Pantano'=>'Pantano','Pastizales'=>'Pastizales','Playa'=>'Playa','Pradera'=>'Pradera',
-    'Quebrada'=>'Quebrada','Región polar'=>'Región polar','Sabana'=>'Sabana','Selva'=>'Selva'],'carnivoros',['class'=>'form-control']) !!}
+    'Quebrada'=>'Quebrada','Región polar'=>'Región polar','Sabana'=>'Sabana','Selva'=>'Selva'],null,['placeholder'=>$animal->habitat,'class'=>'form-control']) !!}
 
 
 </div>
@@ -131,11 +133,47 @@
 
         $(document).ready(function (){
 
-         //   $("#familia").append('<option value="' + $(gestacn).val()+ '">' + $(gestacn).val()+ '</option>');
-            var  indice,numOrdenes,indiceFam,idOrden
-            var famiNombres= new Array();
-            $("select[name=clase]").change(function () {
-                $('#orden').empty().append('elige una opcion');
+            var  indice,numOrdenes,indiceFam,idOrden,id;
+            var famiNombres= new Array(), ordeNombres = new Array(), espeNombres=new Array();
+             id=$('#id').val()
+            alert ("el id"+id);
+
+
+            indice=$('select[name=clase]').prop('selectedIndex');
+            indice=parseInt(indice);
+
+            misordenes=eval("orden_" + indice)
+            num = misordenes.length
+
+            //if (clase2 != "...") {
+            //si estaba definido, entonces coloco las opciones de los ordenes.
+            //selecciono el array de provincia adecuado
+
+            $.ajax({
+                type:'get',
+                url:'{!! URL::to('cargarDatosAnimales')!!}',
+                data:{'id':id},
+                success:function(data){
+                    console.log('exito colega22')
+                    console.log(data)
+
+                   $("#famili").empty().append('<option value="' + data[0].id+ '">' + data[0].familia+ '</option>');
+                    $("#orde").append('<option value="' + data[0].id+ '">' + data[0].orden+ '</option>');
+                    $("#especi").append('<option value="' + data[0].id+ '">' + data[0].especie+ '</option>');
+                    $("#familia").val(data[0].familia)
+                    $("#orden").val(data[0].orden)
+                    $("#especie").val(data[0].especie)
+                },
+                error:function(){
+                    console.log('hay error')
+
+
+                }
+
+            })
+
+            $("select[name=clase]").click(function () {
+                $('#orde').empty().append('elige una opcion');
 
                 indice=$('select[name=clase]').prop('selectedIndex');
                 indice=parseInt(indice);
@@ -149,15 +187,16 @@
                 if(indice >=1) {
 
                     for (a = 0; a < num; a++)
-                        $('<option value="' + eval("orden_" + indice)[a] + '">' + eval("orden_" + indice)[a] + '</option>').appendTo("#orden");
+                        $('<option value="' + eval("orden_" + indice)[a] + '">' + eval("orden_" + indice)[a] + '</option>').appendTo("#orde");
 
 
+                            ordeNombres.push(eval("orden_" + indice)[a]);
 
                 }
 
                 if(indice<=0){
-                    alert("se metio");
-                    $("<option value='5'>Selecciona clase</option>").appendTo("#orden");
+
+                    $("<option value='5'>Selecciona clase</option>").appendTo("#orde");
 
                }
 
@@ -165,9 +204,13 @@
             });
             //evento de cambio de orden
 
-            $("select[name=orden]").change(function () {
+            $("select[name=orde]").click(function () {
                var div=$(this).val();
-                $('#familia').empty().append('elige una opcion');
+                $('#famili').empty().append('elige una opcion');
+
+
+
+
 
                 if(indice==1)
                     numOrdenes=0;
@@ -180,7 +223,7 @@
                 else
                     numOrdenes=66;
 
-                indiceFam=$('select[name=orden]').prop('selectedIndex');
+                indiceFam=$('select[name=orde]').prop('selectedIndex');
                 indiceFam=parseInt(indiceFam);
 
                 var idOrden=numOrdenes+indiceFam;
@@ -193,14 +236,12 @@
                     success:function(data){
                         console.log('exito colega')
                         console.log(data)
-
                         op+='<option value="0" selected disabled> Elige familia </option>';
-                        $("#familia").append('<option value="1"> Seleciona Familia</option>');
+                        $("#famili").append('<option value="1"> Seleciona Familia</option>');
 
                         for (var i=0;i<data.length;i++){
-                           // op+='<option value="'+data[i].nombre+'"> '+data[i].nombre+'</option>';
-                          //  $('<option value="' + data[i].idFam+ '">' + data[i].nombre+ '</option>').appendTo("#familia");
-                            $("#familia").append('<option value="' + data[i].idFam+ '">' + data[i].nombre+ '</option>');
+
+                            $("#famili").append('<option value="' + data[i].idFam+ '">' + data[i].nombre+ '</option>');
                             famiNombres.push(data[i].nombre);
                         }
                     },
@@ -208,19 +249,16 @@
                         console.log('hay error')
                     }
                 })
-
-
-
+                $("#orden").val(''+$('select[name=orde]').val());
             });
 
-            $("select[name=familia]").change(function () {
-               $('#especie').empty().append('elige una especie');
+            $("select[name=famili]").click(function () {
+               $('#especi').empty().append('elige una especie');
+
 
                 var idFamilia=$(this).val();
-                indiceFam2=$('select[name=familia]').prop('selectedIndex');
-
-
-                $("#famili").val(''+famiNombres[indiceFam2-1]);
+                indiceFam2=$('select[name=famili]').prop('selectedIndex');
+                $("#familia").val(''+famiNombres[indiceFam2-1]);
                 $.ajax({
                     type:'get',
                     url:'{!! URL::to('cargarEspecies')!!}',
@@ -234,13 +272,10 @@
                         for (var i=0;i<data.length;i++){
                             // op+='<option value="'+data[i].nombre+'"> '+data[i].nombre+'</option>';
                             //  $('<option value="' + data[i].idFam+ '">' + data[i].nombre+ '</option>').appendTo("#familia");
-                            $("#especie").append('<option value="' + data[i].nombre+ '">' + data[i].nombre+ '</option>');
+                            $("#especi").append('<option value="' + data[i].nombre+ '">' + data[i].nombre+ '</option>');
 
                         }
-
-                        //  div.find('.familia').html();
-                        // div.find('.familia').append(op);
-
+                        $("#especie").val(''+data[0].nombre);
 
                     },
                     error:function(){
@@ -249,10 +284,16 @@
 
                     }
 
+
+
                 })
 
             });
 
+            $("select[name=especi]").click(function () {
+                $("#especie").val(''+$('select[name=especi]').val());;
+
+              });
 
 
 

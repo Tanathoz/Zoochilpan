@@ -15,7 +15,17 @@ class AnimalControl extends Controller
         return 'hol MUNDO';
     }
 
+    public function getAnimales(Request $request ){
 
+        $animales=Animal::select('nombreComun','id')->get();
+        return response()->json($animales);
+    }
+
+    public function getDatosAnimal(Request $request ){
+
+        $animal=Animal::select('nombreCientifico','nombreComun','familia','orden','especie')->where('id',$request->id)->take(100)->get();
+        return response()->json($animal);
+    }
     public function index()
     {
         $ejemplares=Animal::paginate(3);

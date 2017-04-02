@@ -12,7 +12,7 @@
              <div class="panel-body">
 
 
-            @include('Animales.form.registro')
+            @include('Animales.form.actualizar')
             {!! Form::submit('Actualizar',['class'=>'btn btn-primary']) !!}
 
 
