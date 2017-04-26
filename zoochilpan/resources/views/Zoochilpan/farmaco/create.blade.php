@@ -7,9 +7,9 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Registrar un nuevo ejemplar</div>
+                    <div class="panel-heading">Registrar Nuevo farmaco</div>
                     <div class="panel-body">
-                        <a href="{{ url('/Zoochilpan/ejemplar') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/Zoochilpan/farmaco') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -21,9 +21,9 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['route'=>'ejemplar.store','method'=>'POST']) !!}
+                        {!! Form::open(['url' => '/Zoochilpan/farmaco', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('Zoochilpan.ejemplar.form' , ['ButtonText' => 'Registrar'])
+                        @include ('Zoochilpan.farmaco.form')
 
                         {!! Form::close() !!}
 

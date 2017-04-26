@@ -8,6 +8,7 @@
 
             {!! Form::open(['route'=>'animal.store','method'=>'POST']) !!}
             {!! Html::script('js/mostrarOpciones') !!}
+            <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"> Formularios de registro de Ejemplar </h3>
@@ -21,7 +22,7 @@
                 </div>
 
             {!! Form::close() !!}
-
+            </div>
 
 @stop
 

@@ -1,15 +1,15 @@
-@extends('Layouts.principal')
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
         <div class="row">
-
+            @include('admin.sidebar')
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Registrar un nuevo ejemplar</div>
+                    <div class="panel-heading">Edit farmaco #{{ $farmaco->id }}</div>
                     <div class="panel-body">
-                        <a href="{{ url('/Zoochilpan/ejemplar') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/Zoochilpan/farmaco') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -21,9 +21,14 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['route'=>'ejemplar.store','method'=>'POST']) !!}
+                        {!! Form::model($farmaco, [
+                            'method' => 'PATCH',
+                            'url' => ['/Zoochilpan/farmaco', $farmaco->id],
+                            'class' => 'form-horizontal',
+                            'files' => true
+                        ]) !!}
 
-                        @include ('Zoochilpan.ejemplar.form' , ['ButtonText' => 'Registrar'])
+                        @include ('Zoochilpan.farmaco.form', ['submitButtonText' => 'Update'])
 
                         {!! Form::close() !!}
 

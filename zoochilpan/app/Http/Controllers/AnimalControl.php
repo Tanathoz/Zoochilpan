@@ -26,10 +26,30 @@ class AnimalControl extends Controller
         $animal=Animal::select('nombreCientifico','nombreComun','familia','orden','especie')->where('id',$request->id)->take(100)->get();
         return response()->json($animal);
     }
-    public function index()
+    public function index(Request $request)
     {
-        $ejemplares=Animal::paginate(3);
-         return view('Animales.lista',compact('ejemplares'));
+        $keyword = $request->get('search');
+        $perPage = 25;
+
+        if (!empty($keyword)) {
+            $ejemplares = Animal::where('nombreCientifico', 'LIKE', "%$keyword%")
+                ->orWhere('nombreComun', 'LIKE', "%$keyword%")
+                ->orWhere('clase', 'LIKE', "%$keyword%")
+                ->orWhere('orden', 'LIKE', "%$keyword%")
+                ->orWhere('familia', 'LIKE', "%$keyword%")
+                ->orWhere('especie', 'LIKE', "%$keyword%")
+                ->orWhere('habitat', 'LIKE', "%$keyword%")
+                ->orWhere('ubicacionGeografica', 'LIKE', "%$keyword%")
+                ->paginate($perPage);
+        } else {
+            $ejemplares = Animal::paginate($perPage);
+        }
+
+        return view('Animales.lista', compact('ejemplares'));
+
+
+      //  $ejemplares=Animal::paginate(3);
+        // return view('Animales.lista',compact('ejemplares'));
     }
     public function create(){
 
@@ -81,7 +101,9 @@ class AnimalControl extends Controller
     }
 
     public  function show($id){
-        return 'Aqui mostramos la info del animal del id'.$id;
+        Animal::destroy($id);
+        Session::flash('message','Animal eliminado Correctamente');
+        return Redirect::to('/animal');
     }
 
     public function edit($id)

@@ -1,11 +1,15 @@
 <div class="fish"> </div>
+
 <div class="form-group col-md-4  ">
     {!! Form::label('Numero de registro') !!}
     {!! Form::input('number','id',null,['class'=>'form-control','placeholder'=>'numero de identificacion']) !!}
 
 </div>
-
-<div class="form-group ">
+<br>
+<div class="form-group">
+    <br>
+    <br>
+    <br>
     {!! Form::label('Nombre cientifico') !!}
     {!! Form::text('nombreCientifico',null,['class'=>'form-control','placeholder'=>'Pathera Leo']) !!}
 
@@ -100,7 +104,7 @@
     {!! Form::text('Alimentacion',null,['class'=>'form-control','placeholder'=>'cebras,buffalos']) !!}
 
 </div>
-
+</div>
 
 <!--{!! Form::text('prueba',null,['class'=>'form-control','placeholder'=>'']) !!} -->
 @section('javascript')

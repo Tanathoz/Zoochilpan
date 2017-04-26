@@ -1,13 +1,12 @@
-@extends('layouts.app')
+@extends('Layouts.principal')
 
 @section('content')
     <div class="container">
         <div class="row">
-            @include('admin.sidebar')
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit Ejemplar #{{ $ejemplar->marcaje }}</div>
+                    <div class="panel-heading">Editar Ejemplar #{{ $ejemplar->marcaje }}</div>
                     <div class="panel-body">
                         <a href="{{ url('/Zoochilpan/ejemplar') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
@@ -23,12 +22,12 @@
 
                         {!! Form::model($ejemplar, [
                             'method' => 'PATCH',
-                            'url' => ['/Zoochilpan/ejemplar', $ejemplar->marcaje],
+                            'url' => ['/ejemplar', $ejemplar->marcaje],
                             'class' => 'form-horizontal',
                             'files' => true
                         ]) !!}
 
-                        @include ('Zoochilpan.ejemplar.form', ['submitButtonText' => 'Update'])
+                        @include ('Zoochilpan.ejemplar.form', ['ButtonText' => 'Actualizar'])
 
                         {!! Form::close() !!}
 
@@ -37,4 +36,8 @@
             </div>
         </div>
     </div>
+
+@section('javascript')
+@endsection
+
 @endsection

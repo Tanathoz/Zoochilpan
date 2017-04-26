@@ -33,7 +33,7 @@
     {!! Form::label('Orden') !!}
 {!! Form::select ('orde',['placeholder'=>$animal->orden],null,['id'=>'orde','class'=>'form-control']) !!}
 
-    <input type="text" name="orden" id="orden">
+    <input type="hidden" name="orden" id="orden">
 
 
 </div>
@@ -52,7 +52,7 @@
     {!! Form::label('Especie') !!}
     {!! Form::select ('especi',['placeholder'=>$animal->especie],null,['id'=>'especi','class'=>'form-control']) !!}
 
-    <input type="text" name="especie" id="especie">
+    <input type="hidden" name="especie" id="especie">
 </div>
 
 
@@ -136,7 +136,7 @@
             var  indice,numOrdenes,indiceFam,idOrden,id;
             var famiNombres= new Array(), ordeNombres = new Array(), espeNombres=new Array();
              id=$('#id').val()
-            alert ("el id"+id);
+
 
 
             indice=$('select[name=clase]').prop('selectedIndex');

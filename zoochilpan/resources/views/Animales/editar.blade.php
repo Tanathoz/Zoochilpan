@@ -21,12 +21,4 @@
 
     {!! Form::close() !!}
 
-
-    {!! Form::open(['route'=>['animal.destroy',$animal->id,'method'=>'DELETE']]) !!}
-    <input name="_method" type="hidden" value="DELETE">
-    <br>
-            {!! Form::submit('Eliminar',['class'=>'btn btn-danger']) !!}
-
-    {!! Form::close() !!}
-
 @stop

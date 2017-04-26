@@ -3,29 +3,29 @@
 namespace Zoochilpan;
 
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
-class Ejemplar extends Model
+
+class farmaco extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'ejemplares';
+    protected $table = 'farmacos';
 
     /**
     * The database primary key value.
     *
     * @var string
     */
-    protected $primaryKey = 'marcaje';
-    public $incrementing = false;
+    protected $primaryKey = 'id';
+
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['marcaje','idAnimal','fechaNacimiento', 'fechaAlta', 'sexo', 'nombrePropio'];
+    protected $fillable = ['nombre', 'via'];
 
     
 }

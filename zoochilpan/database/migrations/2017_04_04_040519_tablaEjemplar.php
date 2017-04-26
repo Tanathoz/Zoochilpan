@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Fluent;
-class CreateEjemplarsTable extends Migration
+use Illuminate\Database\Migrations\Migration;
+
+class TablaEjemplar extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +13,7 @@ class CreateEjemplarsTable extends Migration
      */
     public function up()
     {
-
-        Schema::create('ejemplars', function(Blueprint $table) {
+        Schema::create('ejemplares', function(Blueprint $table) {
             $table->string('marcaje');
             $table->integer('idAnimal');
             $table->date('fechaNacimiento')->nullable();
@@ -23,7 +23,6 @@ class CreateEjemplarsTable extends Migration
             $table->foreign('idAnimal')->references('id')->on('animal')->onDelete('cascade')->onUpdate('cascade');$table->foreign('idAnimal')->references('id')->on('animal');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -33,6 +32,8 @@ class CreateEjemplarsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('ejemplars');
+        Schema::table('ejemplres', function (Blueprint $table) {
+            $table->dropColumn(['votes', 'avatar', 'location']);
+        });
     }
 }

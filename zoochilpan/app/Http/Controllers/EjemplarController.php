@@ -4,9 +4,10 @@ namespace Zoochilpan\Http\Controllers;
 
 use Zoochilpan\Http\Requests;
 use Zoochilpan\Http\Controllers\Controller;
-
+use Zoochilpan\Http\Controllers\DB;
 use Zoochilpan\Ejemplar;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Session;
 
 class EjemplarController extends Controller
@@ -18,32 +19,56 @@ class EjemplarController extends Controller
      */
     public function index(Request $request)
     {
-        print "hoola mndo";
+
         $keyword = $request->get('search');
         $perPage = 25;
 
+
         if (!empty($keyword)) {
-            $ejemplar = Ejemplar::where('fechaNacimiento', 'LIKE', "%$keyword%")
-				->orWhere('fechaIngreso', 'LIKE', "%$keyword%")
-				->orWhere('sexo', 'LIKE', "%$keyword%")
-				->orWhere('alias', 'LIKE', "%$keyword%")
-				
+
+            $ejemplar = Ejemplar::join('animal', 'idAnimal', '=', 'animal.id')
+                ->select('marcaje','fechaNacimiento','fechaAlta','sexo','nombrePropio', 'animal.nombreComun', 'animal.especie','animal.nombreCientifico')
+                ->where('fechaNacimiento', 'LIKE', "%$keyword%")
+                ->orWhere('fechaAlta', 'LIKE', "%$keyword%")
+                ->orWhere('animal.especie', 'LIKE', "%$keyword%")
+                ->orWhere('animal.nombreComun','LIKE', "%$keyword%" )
+                ->orWhere('sexo', 'LIKE', "%$keyword%")
+                ->orWhere('nombrePropio', 'LIKE', "%$keyword%")
+
                 ->paginate($perPage);
         } else {
-            $ejemplar = Ejemplar::paginate($perPage);
+            $ejemplar = Ejemplar::join('animal', 'idAnimal', '=', 'animal.id')
+                ->select('marcaje','fechaNacimiento','fechaAlta','sexo','nombrePropio', 'animal.nombreComun', 'animal.especie')
+                ->paginate($perPage);
         }
 
         return view('Zoochilpan.ejemplar.index', compact('ejemplar'));
+
+
+       // $ejemplares=Ejemplar::paginate(5);
+        //return view('Zoochilpan.ejemplar.lista',compact('ejemplares'));
     }
 
 
 
+
+        public function getDatosEjemplar(Request $request ){
+
+            $ejemplar=Ejemplar::join('animal', 'idAnimal', '=', 'animal.id')
+                ->select('fechaNacimiento','fechaAlta','sexo','nombrePropio','idAnimal', 'animal.nombreComun', 'animal.especie')
+            ->where('marcaje',$request->marcaje)->take(100)->get();
+            return response()->json($ejemplar);
+
+           // $ejemplar=Ejemplar::select('fechaNacimiento','fechaAlta','sexo','nombrePropio')->where('marcaje',$request->marcaje)->take(100)->get();
+            //return response()->json($ejemplar);
+
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('Zoochilpan.ejemplar.create');
     }
@@ -62,9 +87,9 @@ class EjemplarController extends Controller
         
         Ejemplar::create($requestData);
 
-        Session::flash('flash_message', 'Ejemplar added!');
+        Session::flash('flash_message', 'Ejemplar registrado!');
 
-        return redirect('Zoochilpan/ejemplar');
+        return redirect('/ejemplar');
     }
 
     /**
@@ -113,7 +138,7 @@ class EjemplarController extends Controller
 
         Session::flash('flash_message', 'Ejemplar updated!');
 
-        return redirect('Zoochilpan/ejemplar');
+        return redirect('/ejemplar');
     }
 
     /**
@@ -127,8 +152,8 @@ class EjemplarController extends Controller
     {
         Ejemplar::destroy($id);
 
-        Session::flash('flash_message', 'Ejemplar deleted!');
+        Session::flash('flash_message', 'Ejemplar Borrado!');
 
-        return redirect('Zoochilpan/ejemplar');
+        return redirect('/ejemplar');
     }
 }
