@@ -1,4 +1,4 @@
-@extends('Layouts.principal')
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -6,9 +6,9 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Editar Ejemplar #{{ $ejemplar->marcaje }}</div>
+                    <div class="panel-heading">Edit hojaProfilaxi #{{ $hojaprofilaxi->id }}</div>
                     <div class="panel-body">
-                        <a href="{{ url('/Zoochilpan/ejemplar') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/hoja-profilaxi') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -20,14 +20,14 @@
                             </ul>
                         @endif
 
-                        {!! Form::model($ejemplar, [
+                        {!! Form::model($hojaprofilaxi, [
                             'method' => 'PATCH',
-                            'url' => ['/ejemplar', $ejemplar->marcaje],
+                            'url' => ['/hoja-profilaxi', $hojaprofilaxi->id],
                             'class' => 'form-horizontal',
                             'files' => true
                         ]) !!}
 
-                        @include ('Zoochilpan.ejemplar.form', ['ButtonText' => 'Actualizar'])
+                        @include ('Zoochilpan.hoja-profilaxi.form', ['submitButtonText' => 'Update'])
 
                         {!! Form::close() !!}
 
@@ -36,8 +36,4 @@
             </div>
         </div>
     </div>
-
-@section('javascript')
-@endsection
-
 @endsection

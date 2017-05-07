@@ -9,16 +9,16 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Farmaco</div>
                     <div class="panel-body">
-                        <a href="{{ url('/Zoochilpan/farmaco/create') }}" class="btn btn-success btn-sm" title="Agregar farmaco">
-                            <i class="fa fa-plus" aria-hidden="true"></i> <span class="glyphicon glyphicon-plus-sign"> Agregar</span>
+                        <a href="{{ url('/farmaco/create') }}" class="btn btn-success btn-sm" title="Agregar farmaco">
+                            <i class="fa fa-plus" aria-hidden="true"></i><span class="glyphicon glyphicon-plus">  </span> Agregar nuevo
                         </a>
 
-                        {!! Form::open(['method' => 'GET', 'url' => '/Zoochilpan/farmaco', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
+                        {!! Form::open(['method' => 'GET', 'url' => '/farmaco', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Buscar...">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit">
-                                   <span class="glyphicon glyphicon-search">  </span>
+                                    <span class="glyphicon glyphicon-search">  </span>
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -31,7 +31,7 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th>Nombre</th><th>Via</th><th>Actions</th>
+                                        <th>ID</th><th>Nombre</th><th>Via</th><th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,18 +40,18 @@
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->nombre }}</td><td>{{ $item->via }}</td>
                                         <td>
-                                            <a href="{{ url('/Zoochilpan/farmaco/' . $item->id) }}" title="View farmaco"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/Zoochilpan/farmaco/' . $item->id . '/edit') }}" title="Edit farmaco"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+
+                                            <a href="{{ url('/farmaco/' . $item->id . '/edit') }}" title="Editar farmaco"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="glyphicon glyphicon-pencil">  </span></button></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
-                                                'url' => ['/Zoochilpan/farmaco', $item->id],
+                                                'url' => ['/farmaco', $item->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
-                                                {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
+                                                {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i><span class="glyphicon glyphicon-trash">  </span> ', array(
                                                         'type' => 'submit',
                                                         'class' => 'btn btn-danger btn-xs',
-                                                        'title' => 'Delete farmaco',
-                                                        'onclick'=>'return confirm("Confirm delete?")'
+                                                        'title' => 'Borrar farmaco',
+                                                        'onclick'=>'return confirm("Confirmar borrado?")'
                                                 )) !!}
                                             {!! Form::close() !!}
                                         </td>

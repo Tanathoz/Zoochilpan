@@ -4,13 +4,12 @@ namespace Zoochilpan\Http\Controllers;
 
 use Zoochilpan\Http\Requests;
 use Zoochilpan\Http\Controllers\Controller;
-use Zoochilpan\Http\Controllers\DB;
-use Zoochilpan\Farmaco;
+
+use Zoochilpan\hojaProfilaxi;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Session;
 
-class farmacoController extends Controller
+class hojaProfilaxiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,28 +22,21 @@ class farmacoController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $farmaco = Farmaco::where('nombre', 'LIKE', "%$keyword%")
-				->orWhere('via', 'LIKE', "%$keyword%")
+            $hojaprofilaxi = hojaProfilaxi::where('lugar', 'LIKE', "%$keyword%")
+				->orWhere('fecha', 'LIKE', "%$keyword%")
+				->orWhere('tratamiento', 'LIKE', "%$keyword%")
+				->orWhere('fechaAplicacion', 'LIKE', "%$keyword%")
+				->orWhere('observaciones', 'LIKE', "%$keyword%")
+				->orWhere('comentarios', 'LIKE', "%$keyword%")
 				
                 ->paginate($perPage);
         } else {
-            $farmaco = Farmaco::paginate($perPage);
+            $hojaprofilaxi = hojaProfilaxi::paginate($perPage);
         }
 
-        return view('Zoochilpan.farmaco.index', compact('farmaco'));
+        return view('Zoochilpan.hoja-profilaxi.index', compact('hojaprofilaxi'));
     }
 
-    public function getFarmacos(Request $request ){
-
-        $farmacos=Farmaco::select('nombre','id')->get();
-        return response()->json($farmacos);
-    }
-
-    public function getDatosFarmaco(Request $request ){
-
-        $farmaco=Farmaco::select('nombre','via')->where('id',$request->id)->take(100)->get();
-        return response()->json($farmaco);
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -52,7 +44,7 @@ class farmacoController extends Controller
      */
     public function create()
     {
-        return view('Zoochilpan.farmaco.create');
+        return view('Zoochilpan.hoja-profilaxi.create');
     }
 
     /**
@@ -67,11 +59,11 @@ class farmacoController extends Controller
         
         $requestData = $request->all();
         
-        Farmaco::create($requestData);
+        hojaProfilaxi::create($requestData);
 
-        Session::flash('flash_message', 'farmaco agregado!');
+        Session::flash('flash_message', 'hojaProfilaxi added!');
 
-        return redirect('farmaco');
+        return redirect('hoja-profilaxi');
     }
 
     /**
@@ -83,9 +75,9 @@ class farmacoController extends Controller
      */
     public function show($id)
     {
-        $farmaco = Farmaco::findOrFail($id);
+        $hojaprofilaxi = hojaProfilaxi::findOrFail($id);
 
-        return view('Zoochilpan.farmaco.show', compact('farmaco'));
+        return view('Zoochilpan.hoja-profilaxi.show', compact('hojaprofilaxi'));
     }
 
     /**
@@ -97,9 +89,9 @@ class farmacoController extends Controller
      */
     public function edit($id)
     {
-        $farmaco = Farmaco::findOrFail($id);
+        $hojaprofilaxi = hojaProfilaxi::findOrFail($id);
 
-        return view('Zoochilpan.farmaco.edit', compact('farmaco'));
+        return view('Zoochilpan.hoja-profilaxi.edit', compact('hojaprofilaxi'));
     }
 
     /**
@@ -115,12 +107,12 @@ class farmacoController extends Controller
         
         $requestData = $request->all();
         
-        $farmaco = Farmaco::findOrFail($id);
-        $farmaco->update($requestData);
+        $hojaprofilaxi = hojaProfilaxi::findOrFail($id);
+        $hojaprofilaxi->update($requestData);
 
-        Session::flash('flash_message', 'farmaco actualizado!');
+        Session::flash('flash_message', 'hojaProfilaxi updated!');
 
-        return redirect('farmaco');
+        return redirect('hoja-profilaxi');
     }
 
     /**
@@ -132,10 +124,10 @@ class farmacoController extends Controller
      */
     public function destroy($id)
     {
-        farmaco::destroy($id);
+        hojaProfilaxi::destroy($id);
 
-        Session::flash('flash_message', 'farmaco borrado!');
+        Session::flash('flash_message', 'hojaProfilaxi deleted!');
 
-        return redirect('farmaco');
+        return redirect('hoja-profilaxi');
     }
 }

@@ -22,6 +22,18 @@ class VeterinarioController extends Controller
         return view('Veterinario.veterinario.lista', compact('veterinarios'));
     }
 
+    public function getVeterinarios(Request $request ){
+
+        $veterinarios=Veterinario::select('nombre','id','apellidoPaterno','apellidoMaterno')->get();
+        return response()->json($veterinarios);
+
+    }
+
+    public function getDatosVeterinario(Request $request ){
+
+        $veterinarios=Veterinario::select('nombre','apellidoPaterno','apellidoMaterno','sexo','especialidad')->where('id',$request->id)->take(100)->get();
+        return response()->json($veterinarios);
+    }
     /**
      * Show the form for creating a new resource.
      *

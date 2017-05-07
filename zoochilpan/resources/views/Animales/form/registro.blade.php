@@ -1,5 +1,6 @@
 <div class="fish"> </div>
-
+<fieldset class="scheduler-border">
+    <legend align="left">Taxonomia</legend>
 <div class="form-group col-md-4  ">
     {!! Form::label('Numero de registro') !!}
     {!! Form::input('number','id',null,['class'=>'form-control','placeholder'=>'numero de identificacion']) !!}
@@ -56,9 +57,9 @@
     {!! Form::select ('especie',['placeholder'=>'selecciona Especie'],null,['id'=>'especie','class'=>'form-control']) !!}
 
 </div>
-
-
-
+</fieldset>
+<fieldset class="scheduler-border">
+    <legend align="left">Vida y Reproduccion </legend>
 <div class="form-group ">
     {!! Form::label('Habitat') !!}
     {!! Form::select('habitat',['Altiplano'=>'Altiplano','Arrecife de coral'=>'Arrecife de coral','Bosque'=>'Bosque','Desierto'=>'Desierto',
@@ -105,7 +106,7 @@
 
 </div>
 </div>
-
+</fieldset>
 <!--{!! Form::text('prueba',null,['class'=>'form-control','placeholder'=>'']) !!} -->
 @section('javascript')
     <script>

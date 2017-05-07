@@ -37,8 +37,8 @@
     <table class="table " >
         <thead>
             <th>Num</th>
-            <th>Nombre Científico</th>
             <th>Nombre Común</th>
+            <th>Nombre Científico</th>
             <th>Clase</th>
             <th>Orden</th>
             <th>Familia</th>
@@ -56,8 +56,8 @@
         @foreach($ejemplares as $ejemplare)
         <tbody>
            <td>{{$ejemplare->id}} </td>
-           <td>{{$ejemplare->nombreCientifico}}  </td>
            <td> {{$ejemplare->nombreComun}} </td>
+           <td>{{$ejemplare->nombreCientifico}}  </td>
            <td> {{$ejemplare->clase}} </td>
            <td> {{$ejemplare->orden}} </td>
            <td> {{$ejemplare->familia}} </td>

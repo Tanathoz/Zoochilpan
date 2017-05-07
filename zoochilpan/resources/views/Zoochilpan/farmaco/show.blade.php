@@ -10,11 +10,11 @@
                     <div class="panel-heading">farmaco {{ $farmaco->id }}</div>
                     <div class="panel-body">
 
-                        <a href="{{ url('/Zoochilpan/farmaco') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <a href="{{ url('/Zoochilpan/farmaco/' . $farmaco->id . '/edit') }}" title="Edit farmaco"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                        <a href="{{ url('/farmaco') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/farmaco/' . $farmaco->id . '/edit') }}" title="Edit farmaco"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['Zoochilpan/farmaco', $farmaco->id],
+                            'url' => ['farmaco', $farmaco->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(

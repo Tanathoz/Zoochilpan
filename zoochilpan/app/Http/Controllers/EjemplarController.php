@@ -30,7 +30,7 @@ class EjemplarController extends Controller
                 ->select('marcaje','fechaNacimiento','fechaAlta','sexo','nombrePropio', 'animal.nombreComun', 'animal.especie','animal.nombreCientifico')
                 ->where('fechaNacimiento', 'LIKE', "%$keyword%")
                 ->orWhere('fechaAlta', 'LIKE', "%$keyword%")
-                ->orWhere('animal.especie', 'LIKE', "%$keyword%")
+                ->orWhere('animal.nombreCientifico', 'LIKE', "%$keyword%")
                 ->orWhere('animal.nombreComun','LIKE', "%$keyword%" )
                 ->orWhere('sexo', 'LIKE', "%$keyword%")
                 ->orWhere('nombrePropio', 'LIKE', "%$keyword%")
@@ -38,7 +38,7 @@ class EjemplarController extends Controller
                 ->paginate($perPage);
         } else {
             $ejemplar = Ejemplar::join('animal', 'idAnimal', '=', 'animal.id')
-                ->select('marcaje','fechaNacimiento','fechaAlta','sexo','nombrePropio', 'animal.nombreComun', 'animal.especie')
+                ->select('marcaje','fechaNacimiento','fechaAlta','sexo','nombrePropio', 'animal.nombreComun', 'animal.especie','animal.nombreCientifico')
                 ->paginate($perPage);
         }
 
@@ -48,14 +48,23 @@ class EjemplarController extends Controller
        // $ejemplares=Ejemplar::paginate(5);
         //return view('Zoochilpan.ejemplar.lista',compact('ejemplares'));
     }
+    public function getEjemplares(Request $request ){
 
+        $ejemplares=Ejemplar::select('nombrePropio','marcaje')->get();
+        return response()->json($ejemplares);
+    }
+    public function getDatosEjemplares(Request $request ){
+
+        $ejemplar=Ejemplar::select('fechaNacimiento','nombrePropio','sexo')->where('marcaje',$request->marcaje)->take(100)->get();
+        return response()->json($ejemplar);
+    }
 
 
 
         public function getDatosEjemplar(Request $request ){
 
             $ejemplar=Ejemplar::join('animal', 'idAnimal', '=', 'animal.id')
-                ->select('fechaNacimiento','fechaAlta','sexo','nombrePropio','idAnimal', 'animal.nombreComun', 'animal.especie')
+                ->select('fechaNacimiento','fechaAlta','sexo','nombrePropio','idAnimal', 'animal.nombreComun', 'animal.especie','animal.nombreCientifico')
             ->where('marcaje',$request->marcaje)->take(100)->get();
             return response()->json($ejemplar);
 
