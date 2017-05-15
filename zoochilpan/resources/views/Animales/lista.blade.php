@@ -19,9 +19,14 @@
 
 @section('content')
 
-    <h2> Gestión de Animales</h2>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Gestion de Animales</div>
+            <div class="panel-body">
+                <a href="{{ url('/animal/create') }}" class="btn btn-success btn-sm" title="Registrar animal">
+                    <i class="fa fa-plus" aria-hidden="true"></i>+Animal
+                </a>
 
-    <br>
     {!! Form::open(['method' => 'GET', 'url' => '/animal', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
     <div class="input-group col-8">
         <input type="text" class="form-control" name="search" placeholder="Buscar...">
@@ -44,12 +49,6 @@
             <th>Familia</th>
             <th>Especie</th>
             <th>Habitat</th>
-            <th>Gestacion</th>
-            <th>Camada</th>
-            <th>Longevidad</th>
-            <th>Peso</th>
-            <th>Ubicación</th>
-            <th>Alimentación</th>
             <th>Acciones</th>
         </thead>
 
@@ -63,19 +62,17 @@
            <td> {{$ejemplare->familia}} </td>
            <td> {{$ejemplare->especie}} </td>
            <td> {{$ejemplare->habitat}} </td>
-           <td> {{$ejemplare->gestacion}} </td>
-           <td> {{$ejemplare->camada}} </td>
-           <td> {{$ejemplare->longevidad}} </td>
-           <td> {{$ejemplare->peso}} </td>
-           <td> {{$ejemplare->ubicacionGeografica}} </td>
-           <td> {{$ejemplare->Alimentacion}} </td>
-           <td>   {!!  link_to_route('animal.edit', $title = 'Editar', $parameters = $ejemplare->id, $attributes = ['class'=>'btn btn-primary']) !!}
+
+           <td>
+               <a href="{{ url('/animal/' . $ejemplare->id.'') }}" title="Ver Animal"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> <span class="glyphicon glyphicon-eye-open">  </span></button></a>
+               <a href="{{ url('/animal/' . $ejemplare->id . '/edit') }}" title="Editar Animal"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="glyphicon glyphicon-pencil">  </span></button></a>
+
                {!! Form::open([
                                                  'method'=>'DELETE',
                                                  'url' => ['/animal', $ejemplare->id],
                                                  'style' => 'display:inline'
                                              ]) !!}
-               {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i>Borrar', array(
+               {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i><span class="glyphicon glyphicon-trash">  </span>', array(
                        'type' => 'submit',
                        'class' => 'btn btn-danger btn-xs',
                        'title' => 'Borrar animal',
@@ -89,6 +86,10 @@
     </table>
 
 {!! $ejemplares->render() !!}
+            </div>
+
+        </div>
+    </div>
 
 @stop
 

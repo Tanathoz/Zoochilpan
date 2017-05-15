@@ -4,17 +4,15 @@
 <div class="form-group {{ $errors->has('lugar') ? 'has-error' : ''}}">
     {!! Form::label('lugar', 'Lugar', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('lugar', null, ['class' => 'form-control']) !!}
+        {!! Form::text('lugar','Zoológico Zoochilpan', ['class' => 'form-control']) !!}
         {!! $errors->first('lugar', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 
-
-
 <div class="form-group {{ $errors->has('fecha') ? 'has-error' : ''}}">
     {!! Form::label('fecha', 'Fecha', ['class' => 'col-md-4 control-label']) !!}
-    <div class="col-md-6">
-        <input type="date" name="fecha" id="fecha">
+    <div class="col-md-4 input-group-date">
+        <input type="text" class="form-control" name="fecha" id="fecha">
        {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -47,7 +45,7 @@
 
     {!! Form::label('marcajeEjemplar' ,'Marcaje', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('marcajeEjemplar',null,['class'=>'form-control ','disabled','placeholder'=>'Chip Avid16-002', 'id'=>'marcajeEjemplar']) !!}
+        {!! Form::text('marcajeEjemplar',null,['class'=>'form-control ','placeholder'=>'Chip Avid16-002', 'id'=>'marcajeEjemplar']) !!}
     </div>
 </div>
 
@@ -65,30 +63,33 @@
         {!! $errors->first('tratamiento', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-group {{ $errors->has('fechaAplicacion') ? 'has-error' : ''}}">
-    {!! Form::label('fechaAplicacion', 'Fecha Aplicacion', ['class' => 'col-md-4 control-label']) !!}
-    <div class="col-md-6">
-        <input type="date" name="fechaAplicacion" id="Aplicacion">
+
+<div class="form-group {{ $errors->has('fecha') ? 'has-error' : ''}}">
+    {!! Form::label('fechaApliacion', 'Fecha Inicio', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-4 input-group-date">
+        <input type="text" class="form-control " name="fechaAplicacion" id="fechaAplicacion" >
+
         {!! $errors->first('fechaAplicacion', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+
+
 {!! Form::label('Emergente', 'Agregar farmaco', ['class' => 'col-md-4 control-label']) !!}
 <a href="#ventanaFarmaco" class="btn btn-primary btn-sm" name="Emergente" data-toggle="modal"> <span class="glyphicon glyphicon-plus"></span></a>
 <div class="table-responsive col-md-15" style="text-align:center;">
     <table id="tblFarmaco" class="table table-borderless" style="align:center">
         <thead>
         <tr>
-            <th>IDderrer</th><th>Nombre</th><th>Via</th><th>Dosis</th><th>Frecuencia</th><th>Fecha</th>
+            <th>ID</th><th>Nombre</th><th>Via</th><th>Dosis</th><th>Frecuencia</th><th>Fecha</th>
         </tr>
         </thead>
         <tbody>
-        <td> </td><td> </td><td></td>
-        <td></td><td></td><td></td>
+        <td name="idFarm"> </td><td name="nombreFarm"> </td><td name="viaFarm" ></td> <td name="dosisFarm"></td><td name="freFarm"></td><td name="fechaFarm"></td>
 
         </tbody>
      </table>
 
-    <button id="btnadd" name="btnadd" class="btn btn-primary">Agregar Nuevo</button>
+
 </div>
 
 <div class="form-group {{ $errors->has('observaciones') ? 'has-error' : ''}}">
@@ -114,13 +115,7 @@
     </div>
 </div>
 
-<div class="form-group {{ $errors->has('nombreCompleto') ? 'has-error' : ''}}">
-    {!! Form::label('nombreCompleto', 'Nombre Veterinario', ['class' => 'col-md-4 control-label']) !!}
-    <div class="col-md-8">
-        {!! Form::text('nombreCompleto', null, ['class' => 'form-control']) !!}
-        {!! $errors->first('nombreCompleto', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
+
 
 <div class="form-group ">
 
@@ -131,13 +126,7 @@
     </div>
 </div>
 
-<div class="form-group {{ $errors->has('nombreArea') ? 'has-error' : ''}}">
-    {!! Form::label('nombreArea', 'Nombre Encargado de Aréa', ['class' => 'col-md-4 control-label']) !!}
-    <div class="col-md-8">
-        {!! Form::text('nombreArea', null, ['class' => 'form-control']) !!}
-        {!! $errors->first('nombreArea', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
+<input type="text" name="idHojaPro"   id="idHojaPro">
 
 <div class="form-group">
     <div class="col-md-offset-4 col-md-4">
@@ -154,15 +143,16 @@
                         <h3 class="modal-title">Datos del fármaco</h3>
                     </div>
                     <!-- contenido de la ventana -->
-                    <div class="modal-body">
-                        <div class="form-group">
-                            {!! Form::label('idFarmaco', 'Farmaco', ['class' => 'col-md-4 control-label']) !!}
-                            {!! Form::select ('idFarmaco',['placeholder'=>'Selecciona farmaco'],null,['id'=>'idFarmaco','class'=>'form-control']) !!}
 
-                        </div>
-                    </div>
 
                     <form method="post" id="farmacoInsert">
+                        <div class="form-group modal-body">
+                            {!! Form::label('idFarmaco', 'Farmaco', ['class' => 'col-md-4 control-label']) !!}
+                            <div class="col-md-6">
+                                {!! Form::select ('idFarmaco',['placeholder'=>'Selecciona farmaco'],null,['id'=>'idFarmaco','class'=>'form-control']) !!}
+
+                            </div>
+                        </div>
 
                         <div class="form-group modal-body {{ $errors->has('nombreFarmaco') ? 'has-error' : ''}}">
                             {!! Form::label('nombreFarmaco', 'Nombre', ['class' => 'col-md-4 control-label']) !!}
@@ -193,10 +183,10 @@
                             {!! $errors->first('frecuencia', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
-                    <div class="form-group modal-body {{ $errors->has('fechaAplicacion') ? 'has-error' : ''}}">
-                        {!! Form::label('fechaAplicacion', 'Fecha de Aplicacion', ['class' => 'col-md-4 control-label']) !!}
+                    <div class="form-group modal-body {{ $errors->has('fechaAplic') ? 'has-error' : ''}}">
+                        {!! Form::label('fechaAplic', 'Fecha de Aplicacion', ['class' => 'col-md-4 control-label']) !!}
                         <div class="col-md-4">
-                            <input type="date" name="fechaAplicacion" id="fechaAplicacion">
+                            <input type="date" name="fechaAplic" id="fechaAplic">
 
                         </div>
                     </div>
@@ -214,9 +204,19 @@
 @section('javascript')
     <script>
         $(document).ready(function (){
-            var flag, dosisFart="";
+            var flag, dosisFart="",count=0;
             flag=$("#bandera").val();
-
+            $('#fecha').datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
+            $('#fechaAplicacion').datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
+            //$.ajaxSetup({
+              //  headers: {
+                //    'X-CSRF-TOKEN': $('input[name=_token]').attr('content')
+                //}
+            //});
 
             $.ajax({
                 type: 'get',
@@ -232,7 +232,22 @@
                 error: function () {
                     console.log('hay error')
                 }
-            })
+            });
+
+            $.ajax({
+                type: 'get',
+                url: '{!! URL::to('cargarMaxId')!!}',
+                data: {},
+                success: function (data) {
+                    console.log('exito de IDDD');
+
+                    $("#idHojaPro").val('' + data[0].id);
+                    console.log("mira"+data[0].id);
+                },
+                error: function () {
+                    console.log('hay ERROR PRRO')
+                }
+            });
             $.ajax({
                 type: 'get',
                 url: '{!! URL::to('cargarVeterinarios')!!}',
@@ -241,8 +256,8 @@
                     console.log('exito colega')
                     console.log(data)
                     for (var i = 0; i < data.length; i++) {
-                        $("#idVeterinario").append('<option value="' + data[i].id + '">' + data[i].nombre +"-" +data[i].apellidoPaterno + '</option>');
-                        $("#idEncargado").append('<option value="' + data[i].id + '">' + data[i].nombre +"-"+data[i].apellidoPaterno + '</option>');
+                        $("#idVeterinario").append('<option value="' + data[i].id + '">' + data[i].nombre +"  " +data[i].apellidoPaterno +"  " +data[i].apellidoMaterno + '</option>');
+                        $("#idEncargado").append('<option value="' + data[i].id + '">' + data[i].nombre +"  "+data[i].apellidoPaterno + "  " +data[i].apellidoMaterno +'</option>');
                     }
                 },
                 error: function () {
@@ -268,6 +283,7 @@
             })
             $("select[name=marcajeSelect]").change(function () {
                 var marcaje = $(this).val();
+                alert (marcaje);
                 $.ajax({
                     type: 'get',
                     url: '{!! URL::to('cargarDatosEjemplares')!!}',
@@ -275,7 +291,7 @@
                     success: function (data) {
                         console.log('exito colega22')
                         console.log(data)
-                        $("#marcajeEjemplar").val('' + marcaje);
+                        $("#marcajeEjemplar").val(marcaje);
                         $("#sexo").val('' + data[0].sexo);
                         $("#nombreComun").val('' + data[0].nombreComun);
                         $("#nombreCientifico").val('' + data[0].nombreCientifico);
@@ -287,19 +303,74 @@
             });
 
 
-            $("input[id=fechaAplicacion]").change(function(){
-                alert($('input[id=fechaAplicacion]').val());
-            });
+
 
 
             $("#AddFarmaco").click(function(event){
                var nombreFar= $('input[name=nombreFarmaco]').val();
+                count++;
                 dosisFar=$('input[id=dosis]').val();
                 var viaFar=$('input[name=via]').val();
                 var frecuenciaFar=$('input[id=frecuencia]').val();
-                var fechaFar=$('input[id=fechaAplicacion]').val();
+                var fechaFar=$('input[id=fechaAplic]').val();
                 var idFar = $('select[name=idFarmaco]').val();
-                $('#tblFarmaco tr:last').after('<tr><td> '+idFar+'</td><td>'+nombreFar+'</td><td>'+viaFar+'</td><td>'+dosisFar+'</td><td>'+frecuenciaFar+'</td><td>'+fechaFar+'</td></tr>');
+                var idProfilaxis=$('input[id=idHojaPro]').val();
+                  idProfilaxis=parseInt(idProfilaxis);
+                 idProfilaxis=idProfilaxis+1;
+                $('#tblFarmaco tr:last').before('<tr ><td class="idFarm"> '+idFar+'</td><td name="nombreFarm[]">'+nombreFar+'</td><td name="viaFarm[]">'+viaFar+'</td><td name="dosisFarm[]">'+dosisFar+'</td><td name="freFarm[]">'+frecuenciaFar+'</td><td name="fechaFarm[]">'+fechaFar+'</td></tr>');
+                $("#via").val('');
+                $("#nombreFarmaco").val('');
+                $("#dosis").val('');
+                $("#frecuencia").val('');
+                $("#fechaAplic").val('');
+              //  var children = $("tr td")[1].innerHTML;
+                var valores="" ;
+                var contador = 0;
+                var contador2 = 5;
+                var CSRF_TOKEN = '{{csrf_token()}}';
+                var route ="localhost/8000/farmacoProfilaxis";
+                $(".idFarm").parent("tr").find("td").each(function() {
+
+                        valores += $(this).html();
+                    if(contador == contador2)
+                    {
+                        valores += ";";
+                        contador2 += 6 ;
+                    }
+                    else {
+                        valores += ",";
+                    }
+                    contador++;
+
+                });
+                var arregloDeCadenas = valores.split(';');
+                var nuevaCadena = valores.replace(/;/g, ',');
+
+                var arregloDatos=nuevaCadena.split(',');
+                var paso=0;
+                for (i = 0; i < arregloDeCadenas.length-1; i++) {
+                    $.ajax({
+                        url: '{!! URL::to('guardarFarmacos')!!}',
+                        headers: {'X-CSRF-TOKEN':CSRF_TOKEN},
+                        type:"POST",
+                        dataType:'json',
+                        data:{idProfilaxis:idProfilaxis,idFarmaco:arregloDatos[paso],dosis:arregloDatos[paso+3],frecuencia:arregloDatos[paso+4],fechaAplicacion:arregloDatos[paso+5]},
+                        success: function(response){
+                            console.log(response);
+                            console.log('exito de POST');
+                        }
+                    });
+                   // alert(""+arregloDatos[paso]+"  "+arregloDatos[paso+1]+" "+arregloDatos[paso+1]+" "+arregloDatos[paso+3]+" "+arregloDatos[paso+4]+" "+arregloDatos[paso+5])
+                  //  arregloDatos  = arregloDeCadenas[paso].split(',');
+                       paso+=6;
+                    }
+              //  }
+                  // for (i=0; i<arregloDatos.length; i++) {
+
+                 // }
+
+
+
                 event.preventDefault();
             });
 
@@ -307,14 +378,16 @@
             $("#btnadd").click(function(event){
 
                 $('#tblFarmaco tr:last').after( '<tr><td> {!! Form::select ("idFarmaco",["placeholder"=>"Selecciona farmaco"],null,["id"=>"idFarmaco","class"=>"form-control"]) !!}</td><td> <input type="text" name="nombreFarmaco" id="nombreFarmaco" class="form-control"></td><td> <input type="text" name="via" id="via" class="form-control"></td> <td>{!! Form::text("dosis", null, ["class" => "form-control"]) !!} </td><td>{!! Form::text("frecuencia", null, ["class" => "form-control"]) !!}</td><td><input type="date" name="fechaAplicacion" id="fechaAplicacion"></td></tr> ');
+
                 event.preventDefault();
+
             });
           /*  $("#btnadd").click(function(event){
                 count++;
                 $('#tblFarmaco tr:last').after( "<th> {!! Form::select ('idFarmaco',['placeholder'=>'Selecciona farmaco'],null,['id'=>'idFarmaco','class'=>'form-control']) !!}</th><th> <input type='text' name='nombreFarmaco' id='nombreFarmaco'class='form-control'></th><th> <input type='text' name='via' id='via' class='form-control'></th> <th>{!! Form::text('dosis', null, ['class' => 'form-control']) !!} </th><th>{!! Form::text('frecuencia', null, ['class' => 'form-control']) !!}</th><th><input type='date' name='fechaAplicacion' id='fechaAplicacion'></th> ");
                 event.preventDefault();
             }); */
-          
+
 
             $("select[name=idVeterinario]").change(function () {
                 var id = $(this).val();

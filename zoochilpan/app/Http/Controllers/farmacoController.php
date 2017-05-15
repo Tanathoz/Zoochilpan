@@ -39,7 +39,19 @@ class farmacoController extends Controller
         $farmacos=Farmaco::select('nombre','id')->get();
         return response()->json($farmacos);
     }
-
+    public function getMaxId(Request $request ){
+        //$farmacos=  DB::table('farmacos')->where('id', DB::raw("(select max(`id`) from farmacos)"))->get();
+        //$farmacos=Farmaco::whereRaw('id =(select max (`id`) from farmacos)')->get();
+       // $order = Orders::whereRaw('id = (select max(`id`) from orders)')->get();
+        //$farmaco = DB::table('farmacos')->latest();
+      //  $farmaco=Farmaco::select('nombre','via')->get();
+       //$farmaco = Farmaco::find(DB::table('farmacos')->max('id'))->get();
+      // $farmaco= Farmaco::all();
+       // var_dump($farmaco->last());
+        $farmaco=Farmaco::select('id','nombre')->orderBy('id','desc')->take(1)->get();
+       // $farmaco=DB::table('farmacos')->orderBy('id', 'desc')->first();
+        return response()->json($farmaco);
+    }
     public function getDatosFarmaco(Request $request ){
 
         $farmaco=Farmaco::select('nombre','via')->where('id',$request->id)->take(100)->get();

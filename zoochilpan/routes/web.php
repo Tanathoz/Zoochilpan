@@ -25,6 +25,7 @@ Route::resource('especie','EspController');
 Route::resource('ejemplar','EjemplarController');
 Route::resource('farmaco','farmacoController');
 Route::resource('profilaxis','hojaProfilaxiController');
+Route::resource('farmacoProfilaxis','farmacoProfilaxisController');
 Route::get('/cargarFamilias','FamController@getFamilias');
 Route::get('/cargarEspecies','EspController@getEspecies');
 Route::get('/cargarAnimales','AnimalControl@getAnimales');
@@ -35,6 +36,8 @@ Route::get('/cargarVeterinarios','VeterinarioController@getVeterinarios');
 Route::get('/cargarDatosVeterinarios','VeterinarioController@getDatosVeterinario');
 Route::get('/cargarFarmacos','farmacoController@getFarmacos');
 Route::get('/cargarDatosFarmacos','farmacoController@getDatosFarmaco');
+Route::get('/cargarMaxId','hojaProfilaxiController@getMaxId');
+Route::post('guardarFarmacos','farmacoProfilaxisController@guardaFarmaco');
 Route::get('/', function () {
     return view('welcome');
 });

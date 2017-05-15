@@ -56,14 +56,68 @@ class hojaProfilaxiController extends Controller
      */
     public function store(Request $request)
     {
-        
+        /*
+        $host="localhost";
+        $user="root";
+        $pass="12345";
+        $base="zoochilpan";
+       // $db= new PDO('mysql:host=localhost;dbname=zoochilpan','root','12345');
+        $cone=mysqli_connect($host,$user,$pass,$base);
+        if (mysqli_connect_errno())
+        {
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        }
+       $max =mysqli_query($cone,"SELECT MAX(id) AS id FROM farmacos");
+
+        $resultarr =mysqli_fetch_array($max);
+        $conteo=$resultarr[0];
+        echo $conteo+1;
+
+        $id= $_POST['idFarm'];
+        $nombre= $_POST['nombreFarm'];
+        $via= $_POST['viaFarm'];
+        $fre= $_POST['freFarm'];
+        $dosis= $_POST['dosisFarm'];
+        $fecha= $_POST['fechaFarm'];
+
+        foreach ($nombre as $nom){
+            echo "<br>".$nom;
+        } */
+
         $requestData = $request->all();
         
         hojaProfilaxi::create($requestData);
 
-        Session::flash('flash_message', 'hojaProfilaxi added!');
+        Session::flash('flash_message', 'hojaProfilaxi agregado!');
 
-        return redirect('hoja-profilaxi');
+        return redirect('/profilaxis');
+
+    }
+
+    public function guardaFarmaco(){
+        $bd_host = "127.0.0.1";
+        $bd_usuario = "root";
+        $bd_password = "12345";
+        $bd_base = "zoochilpan";
+
+        $conexion = mysqli_connect ($bd_host, $bd_usuario, $bd_password,$bd_base);
+//mysql_select_db ($bd_base, $conexion);
+        if (mysqli_connect_errno())
+        {
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        }
+        else{
+            echo "todo bien";
+        }
+        $idFarmaco=$_POST['idFarmaco'];
+        $idProfilaxis=$_POST['idProfilaxis'];
+        $dosis=$_POST['dosis'];
+        $frecuencia=$_POST['frecuencia'];
+        $fechaAplicacion=$_POST['fechaAplicacion'];
+
+
+        mysqli_query($conexion,"insert into farmacoprofilaxis values('".$idProfilaxis."','".$idFarmaco."','".$dosis."','".$frecuencia."','".$fechaAplicacion."')");
+        mysqli_close($conexion);
     }
 
     /**
@@ -130,4 +184,12 @@ class hojaProfilaxiController extends Controller
 
         return redirect('hoja-profilaxi');
     }
+
+    public function getMaxId(Request $request ){
+        $profilaxis=hojaProfilaxi::select('id')->orderBy('id','desc')->take(1)->get();
+        return response()->json($profilaxis);
+    }
+
+
+
 }

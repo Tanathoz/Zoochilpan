@@ -25,7 +25,7 @@ class hojaProfilaxi extends Model
      *
      * @var array
      */
-    protected $fillable = ['lugar', 'fecha', 'tratamiento', 'fechaAplicacion', 'observaciones', 'comentarios'];
+    protected $fillable = ['lugar', 'fecha','marcajeEjemplar', 'tratamiento', 'fechaAplicacion', 'observaciones', 'comentarios','idVeterinario','idEncargado'];
 
     
 }

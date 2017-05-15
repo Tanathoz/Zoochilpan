@@ -101,9 +101,8 @@ class AnimalControl extends Controller
     }
 
     public  function show($id){
-        Animal::destroy($id);
-        Session::flash('message','Animal eliminado Correctamente');
-        return Redirect::to('/animal');
+        $animal = Animal::find($id);
+        return view('Animales.form.ver',['animal'=>$animal]);
     }
 
     public function edit($id)

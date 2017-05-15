@@ -9,7 +9,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Registrar Hoja Profilaxis</div>
                     <div class="panel-body">
-                        <a href="{{ url('/hoja-profilaxi') }}" title="Volver"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i>  <span class="glyphicon glyphicon-arrow-left"></button></a>
+                        <a href="{{ url('/profilaxis') }}" title="Volver"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i>  <span class="glyphicon glyphicon-arrow-left"></button></a>
                         <br />
                         <br />
 
@@ -21,8 +21,9 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/hoja-profilaxi', 'class' => 'form-horizontal', 'files' => true]) !!}
 
+                        {!! Form::open(['route'=>'profilaxis.store', 'class' => 'form-horizontal', 'files' => true,'method'=>'POST']) !!}
+                    <input type="hidden" name="_token"  value="{{csrf_token()}}" id="token">
                         @include ('Zoochilpan.hoja-profilaxi.form',['ButtonText' => 'Registrar'])
 
                         {!! Form::close() !!}

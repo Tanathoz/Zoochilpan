@@ -10,6 +10,8 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Ejemplar</div>
                         <div class="panel-body">
+
+
                             <a href="{{ url('/ejemplar/create') }}" class="btn btn-success btn-sm" title="Agregar Ejemplar">
                                 <i class="fa fa-plus" aria-hidden="true"></i> Registrar  ejemplar
                             </a>
@@ -50,17 +52,17 @@
 
                                             <td>
 
-                                                <a href="{{ url('/ejemplar/' . $item->marcaje . '/edit') }}" title="Edit Ejemplar"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button></a>
+                                                <a href="{{ url('/ejemplar/' . $item->marcaje . '/edit') }}" title="Editar Ejemplar"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="glyphicon glyphicon-pencil">  </span></button></a>
 
                                                 {!! Form::open([
                                                     'method'=>'DELETE',
                                                     'url' => ['/ejemplar', $item->marcaje],
                                                     'style' => 'display:inline'
                                                 ]) !!}
-                                                {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i>Borrar', array(
+                                                {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i><span class="glyphicon glyphicon-trash">  </span>', array(
                                                         'type' => 'submit',
                                                         'class' => 'btn btn-danger btn-xs',
-                                                        'title' => 'Delete Ejemplar',
+                                                        'title' => 'Borrar Ejemplar',
                                                         'onclick'=>'return confirm("Confirmar borrado?")'
                                                 )) !!}
                                                 {!! Form::close() !!}

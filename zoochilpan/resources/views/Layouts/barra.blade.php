@@ -17,14 +17,14 @@
                 <li class="dropdown ">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gestión de Fauna <span class="caret"></span> </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li > Animales </li>
-                        <li > <a href="/animal">Consultar Animales</a> </li>
+                        <li > Animales  </li>
+                        <li > <a href="/animal"> Animales</a> </li>
 
                         <li > Ejemplares </li>
-                        <li > <a href="/ejemplar">Consultar Ejemplares</a> </li>
+                        <li > <a href="/ejemplar"> Ejemplares</a> </li>
                         <li > Taxonomia</li>
-                        <li > <a href="/ejemplar">Consultar Familias</a> </li>
-                        <li > <a href="/ejemplar">Consultar Especies</a> </li>
+                        <li > <a href="/ejemplar"> Familias</a> </li>
+                        <li > <a href="/ejemplar"> Especies</a> </li>
 
 
 
@@ -43,24 +43,24 @@
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">&nbsp;&nbsp;&nbsp;&nbsp;Seguimiento de  Salud <span class="caret"></span> </a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">&nbsp;&nbsp;&nbsp;&nbsp;Control de  Salud <span class="caret"></span> </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li > Hojas Clínicas </li>
-                        <li > <a href="#">Hojas Clínicas</a> </li>
-                        <li > <a href="#">Hojas Profilaxis</a> </li>
-                        <li > <a href="/farmaco">Farmacos</a> </li>
+                        <li > Profilaxis  </li>
+                        <li > <a href="#">Consultas Clínicas</a> </li>
+                        <li > <a href="#">Medicina Preventiva</a> </li>
+                        <li > <a href="/farmaco">Gestion Farmacos</a> </li>
 
                     </ul>
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">&nbsp;&nbsp;&nbsp;&nbsp;Registro de Mortalidad <span class="caret"></span> </a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">&nbsp;&nbsp;&nbsp;&nbsp; Mortalidad <span class="caret"></span> </a>
                     <ul class="dropdown-menu" role="menu">
                         <li > Necropsias </li>
-                        <li > <a href="#">Consultar necropsias</a> </li>
+                        <li > <a href="#">Gestión Necropsias</a> </li>
 
                         <li > Siniestro </li>
-                        <li > <a href="#">Consultar siniestros</a> </li>
+                        <li > <a href="#">Gestión Siniestros</a> </li>
 
                     </ul>
                 </li>
