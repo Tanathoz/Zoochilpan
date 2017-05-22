@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class farmacoProfilaxis extends Model
 {
     protected $table = 'farmacoprofilaxis';
-
+    public $timestamps = false;
 
     /**
      * Attributes that should be mass-assignable.

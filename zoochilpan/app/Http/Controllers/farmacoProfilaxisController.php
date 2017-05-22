@@ -7,33 +7,79 @@ use Zoochilpan\Http\Requests;
 use Zoochilpan\Http\Controllers\Controller;
 
 use Zoochilpan\farmacoProfilaxis;
-
+use DB;
 use Session;
 class farmacoProfilaxisController extends Controller
 {
     public function store(Request $request)
     {
         if($request->ajax()){
+            farmacoProfilaxis::create([
+                'idProfilaxis' =>$request['idProfilaxis'],
+                'idFarmaco' =>$request['idFarmaco'],
+                'dosis' =>$request['dosis'],
+                'frecuencia' =>$request['frecuencia'],
+                'fechaAplicacion' =>$request['fechaAplicacion'],
+            ]);
             return response()->json([
-                "mensaje"=>$request->all()
+                "mensaje"=>"guardado"
             ]);
         }
     }
 
 
 
-    public function guardaFarmaco(Request $request){
+    public function guardaFarmaco(Request $request)
+    {
+        if ($request->ajax()) {
+            farmacoProfilaxis::create($request->all());
+            return response()->json([
+                "mensaje" => $request->all()
+            ]);
+        }
+    }
+
+    public function numeroFarmaco(Request $request)
+    {
+        $numFarmaco=DB::table('farmacoprofilaxis')
+            ->select(DB::raw('count(*) as idPro, idProfilaxis'))
+           ->where('idProfilaxis','=',$request->idProfilaxis )-> groupBy('idProfilaxis')->get();
+       return response()->json($numFarmaco);
+
+    }
+    public function getFarmacosProfilaxis(Request $request)
+    {
+        $farmaco=farmacoProfilaxis::join('farmacos','idFarmaco','=','farmacos.id')
+        ->select('idFarmaco','dosis','frecuencia','fechaAplicacion','farmacos.nombre','farmacos.via')
+            ->where('idProfilaxis',$request->idProfilaxis)->take(100)->get();
+        return response()->json($farmaco);
+
+    }
+    public function DeleteFarmacoProfilaxis(Request $request)
+    {
+        DB::table('farmacoprofilaxis')->where('idProfilaxis', '=', $request->idProfilaxis)
+            ->where('idFarmaco', '=', $request->idFarmaco)->delete();
+
+    }
+
+    public function DeleteTodosFarmacos(Request $request)
+    {
+        DB::table('farmacoprofilaxis')->where('idProfilaxis', '=', $request->idProfilaxis)
+            ->delete();
+    }
+    public function UpdateFarmacoProfilaxis(Request $request)
+    {
+        DB::table('farmacoprofilaxis')
+            ->where('idProfilaxis','=',$request->idProfilaxis)
+            ->where('idFarmaco','=',$request->idFarmaco)
+            ->update(['dosis' => $request->dosis, 'frecuencia'=>$request->frecuencia, 'fechaAplicacion'=>$request->fechaAplicacion]);
+    }
 
 
-if($request->ajax()){
-    return response()->json([
-        "mensaje"=>$request->all()
-    ]);
-}
 
-        DB::table('farmacoprofilaxis')->insert(
-            ['idProfilaxis' => $request->idProfilaxis, 'idFarmaco'=>$request->idFarmaco,'dosis'=>$request->dosis, 'frecuencia'=>$request->frecuencia,'fechaAplicacion'=>$request->fechaAplicacion ]
-        );
+    //    DB::table('farmacoprofilaxis')->insert(
+      //      ['idProfilaxis' => $request->idProfilaxis, 'idFarmaco'=>$request->idFarmaco,'dosis'=>$request->dosis, 'frecuencia'=>$request->frecuencia,'fechaAplicacion'=>$request->fechaAplicacion ]
+      //  );
         /*
         $bd_host = "127.0.0.1";
         $bd_usuario = "root";
@@ -58,5 +104,5 @@ if($request->ajax()){
 
         mysqli_query($conexion,"insert into farmacoprofilaxis values('".$idProfilaxis."','".$idFarmaco."','".$dosis."','".$frecuencia."','".$fechaAplicacion."')");
         mysqli_close($conexion);
-    } */}
+    } */
 }

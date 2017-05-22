@@ -7,13 +7,13 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Hojas de Profilaxis</div>
+                    <div class="panel-heading">Necropsia</div>
                     <div class="panel-body">
-                        <a href="{{ url('/profilaxis/create') }}" class="btn btn-success btn-sm" title="Agregar hoja">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Agregar hoja
+                        <a href="{{ url('/necropsia/create') }}" class="btn btn-success btn-sm" title="agregar Necropsia>
+                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 
-                        {!! Form::open(['method' => 'GET', 'url' => '/hojaprofilaxi', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
+                        {!! Form::open(['method' => 'GET', 'url' => '/necropsia', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Buscar...">
                             <span class="input-group-btn">
@@ -31,27 +31,27 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th>Lugar</th><th>Fecha</th><th>Tratamiento</th><th>Marcaje</th><th>Ejemplar</th><th>Sexo</th><th>Acciones</th>
+                                        <th>ID</th><th>Lugar</th><th>Fecha</th><th>Hora</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($hojaprofilaxi as $item)
+                                @foreach($necropsia as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->lugar }}</td><td>{{ $item->fecha }}</td><td>{{ $item->tratamiento }}</td><td>{{ $item->marcajeEjemplar }}</td><td>{{ $item->nombrePropio }}</td><td>{{ $item->sexo }}</td>
+                                        <td>{{ $item->lugar }}</td><td>{{ $item->fecha }}</td><td>{{ $item->hora }}</td>
                                         <td>
-                                            <a href="{{ url('/profilaxis/' . $item->id) }}" title="Ver datos hoja"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> <span class="glyphicon glyphicon-eye-open"></span></button></a>
-                                            <a href="{{ url('/profilaxis/' . $item->id . '/edit') }}" title="Edit hojaProfilaxi"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="glyphicon glyphicon-pencil"></span></button></a>
+                                            <a href="{{ url('/necropsia/' . $item->id) }}" title="View Necropsium"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                            <a href="{{ url('/necropsia/' . $item->id . '/edit') }}" title="Edit Necropsium"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
-                                                'url' => ['/profilaxis', $item->id],
+                                                'url' => ['/necropsia', $item->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
-                                                {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> <span class="glyphicon glyphicon-trash">Borrar', array(
+                                                {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
                                                         'type' => 'submit',
                                                         'class' => 'btn btn-danger btn-xs',
-                                                        'title' => 'Borrar Hoja',
-                                                        'onclick'=>'return confirm("Confirmar borrado?")'
+                                                        'title' => 'Delete Necropsium',
+                                                        'onclick'=>'return confirm("Confirm delete?")'
                                                 )) !!}
                                             {!! Form::close() !!}
                                         </td>
@@ -59,7 +59,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $hojaprofilaxi->appends(['search' => Request::get('search')])->render() !!} </div>
+                            <div class="pagination-wrapper"> {!! $necropsia->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
 
                     </div>

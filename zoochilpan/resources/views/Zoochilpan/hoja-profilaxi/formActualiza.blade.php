@@ -42,7 +42,7 @@
 
     {!! Form::label('marcajeEjemplar' ,'Marcaje', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('marcajeEjemplar',null,['class'=>'form-control ','readonly','placeholder'=>'Chip Avid16-002', 'id'=>'marcajeEjemplar']) !!}
+        {!! Form::text('marcajeEjemplar',null,['class'=>'form-control ','placeholder'=>'Chip Avid16-002', 'id'=>'marcajeEjemplar']) !!}
     </div>
 </div>
 
@@ -124,10 +124,10 @@
 </div>
 
 <input type="hidden" name="idHojaPro"   id="idHojaPro">
-
+<input type="text" name="numPro"   id="numPro">
 <div class="form-group">
     <div class="col-md-offset-4 col-md-4">
-        {!! Form::submit(isset($submitButtonText) ? $submitButtonText : 'Registrar', ['class' => 'btn btn-primary','id'=>'btnAdd']) !!}
+        {!! Form::submit(isset($submitButtonText) ? $submitButtonText : 'Actualizar', ['class' => 'btn btn-primary','id'=>'btnAdd']) !!}
     </div>
 </div>
 <input type="hidden" name="bandera" id="bandera" value="{{$ButtonText}}">
@@ -154,7 +154,7 @@
                     <div class="form-group modal-body">
                         {!! Form::label('idFarmaco', 'Farmaco', ['class' => 'col-md-4 control-label']) !!}
                         <div class="col-md-6">
-                            {!! Form::select ('idFarmaco',['0'=>'Selecciona farmaco'],null,['id'=>'idFarmaco','class'=>'form-control']) !!}
+                            {!! Form::select ('idFarmaco',['placeholder'=>'Selecciona farmaco'],null,['id'=>'idFarmaco','class'=>'form-control','disabled']) !!}
 
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                     <div class="form-group modal-body {{ $errors->has('nombreFarmaco') ? 'has-error' : ''}}">
                         {!! Form::label('nombreFarmaco', 'Nombre', ['class' => 'col-md-4 control-label']) !!}
                         <div class="col-md-4">
-                            {!! Form::text('nombreFarmaco', null, ['class' => 'form-control','readonly']) !!}
+                            {!! Form::text('nombreFarmaco', null, ['class' => 'form-control','disabled']) !!}
                             {!! $errors->first('nombreFarmaco', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
@@ -170,7 +170,7 @@
                     <div class="form-group modal-body {{ $errors->has('via') ? 'has-error' : ''}}">
                         {!! Form::label('via', 'Via', ['class' => 'col-md-4 control-label']) !!}
                         <div class="col-md-4">
-                            {!! Form::text('via', null, ['class' => 'form-control','readonly']) !!}
+                            {!! Form::text('via', null, ['class' => 'form-control','disabled']) !!}
                             {!! $errors->first('via', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
@@ -186,6 +186,13 @@
                         <div class="col-md-4">
                             {!! Form::text('frecuencia', null, ['class' => 'form-control']) !!}
                             {!! $errors->first('frecuencia', '<p class="help-block">:message</p>') !!}
+                        </div>
+                    </div>
+                    <div class="form-group modal-body {{ $errors->has('frecuencia') ? 'has-error' : ''}}">
+
+                        <div class="col-md-4">
+
+                            <input type="hidden" name="indice"   id="indice">
                         </div>
                     </div>
 
@@ -204,33 +211,19 @@
         <script>
             $(document).ready(function (){
                 var flag, dosisFart="",count=0;
+                var CSRF_TOKEN = '{{csrf_token()}}';
+                var id;
+                id ={{$hojaprofilaxi->id}}
                 flag=$("#bandera").val();
+
                 $('#fecha').datetimepicker({
                     format: 'YYYY-MM-DD'
                 });
                 $('#fechaAplicacion').datetimepicker({
                     format: 'YYYY-MM-DD'
                 });
-                //$.ajaxSetup({
-                //  headers: {
-                //    'X-CSRF-TOKEN': $('input[name=_token]').attr('content')
-                //}
-                //});
-                $.ajax({
-                    type: 'get',
-                    url: '{!! URL::to('cargarEjemplares')!!}',
-                    data: {},
-                    success: function (data) {
-                        console.log('exito colega')
-                        console.log(data)
-                        for (var i = 0; i < data.length; i++) {
-                            $("#marcajeSelect").append('<option value="' + data[i].marcaje + '">' + data[i].nombrePropio + '</option>');
-                        }
-                    },
-                    error: function () {
-                        console.log('hay error')
-                    }
-                });
+
+
                 $.ajax({
                     type: 'get',
                     url: '{!! URL::to('cargarMaxId')!!}',
@@ -244,37 +237,9 @@
                         console.log('hay ERROR PRRO')
                     }
                 });
-                $.ajax({
-                    type: 'get',
-                    url: '{!! URL::to('cargarVeterinarios')!!}',
-                    data: {},
-                    success: function (data) {
-                        console.log('exito colega')
-                        console.log(data)
-                        for (var i = 0; i < data.length; i++) {
-                            $("#idVeterinario").append('<option value="' + data[i].id + '">' + data[i].nombre +"  " +data[i].apellidoPaterno +"  " +data[i].apellidoMaterno + '</option>');
-                            $("#idEncargado").append('<option value="' + data[i].id + '">' + data[i].nombre +"  "+data[i].apellidoPaterno + "  " +data[i].apellidoMaterno +'</option>');
-                        }
-                    },
-                    error: function () {
-                        console.log('hay error')
-                    }
-                })
-                $.ajax({
-                    type: 'get',
-                    url: '{!! URL::to('cargarFarmacos')!!}',
-                    data: {},
-                    success: function (data) {
-                        console.log('exito colega')
-                        console.log(data)
-                        for (var i = 0; i < data.length; i++) {
-                            $("#idFarmaco").append('<option value="' + data[i].id + '">' + data[i].nombre + '</option>');
-                        }
-                    },
-                    error: function () {
-                        console.log('hay error')
-                    }
-                })
+
+
+
                 $("select[name=marcajeSelect]").change(function () {
                     var marcaje = $(this).val();
 
@@ -295,50 +260,6 @@
                         }
                     })
                 });
-                $("#btnAdd").click(function(event){
-                    var idProfilaxis=$('input[id=idHojaPro]').val();
-                    idProfilaxis=parseInt(idProfilaxis);
-                    idProfilaxis=idProfilaxis+1;
-                    var valores="" ;
-                    var contador = 0;
-                    var contador2 = 6;
-                    var CSRF_TOKEN = '{{csrf_token()}}';
-                    $(".idFarm").parent("tr").find("td").each(function() {
-                        valores += $(this).html();
-                        if(contador == contador2)
-                        {
-                            valores += ";";
-                            contador2 += 7 ;
-                        }
-                        else {
-                            valores += ",";
-                        }
-                        contador++;
-                    });
-
-                    var arregloDeCadenas = valores.split(';');
-                    var nuevaCadena = valores.replace(/;/g, ',');
-                    var arregloDatos=nuevaCadena.split(',');
-                    var paso=0;
-                    for (i = 0; i < arregloDeCadenas.length-1; i++) {
-                        $.ajax({
-                            url: '{!! URL::to('guardarFarmacos')!!}',
-                            headers: {'X-CSRF-TOKEN':CSRF_TOKEN},
-                            type:"POST",
-                            dataType:'json',
-                            data:{idProfilaxis:idProfilaxis,idFarmaco:arregloDatos[paso],dosis:arregloDatos[paso+3],frecuencia:arregloDatos[paso+4],fechaAplicacion:arregloDatos[paso+5]},
-                            success: function(response){
-                                console.log(response);
-                                console.log('exito de POST');
-                            }
-                        });
-                        // alert(""+arregloDatos[paso]+"  "+arregloDatos[paso+1]+" "+arregloDatos[paso+1]+" "+arregloDatos[paso+3]+" "+arregloDatos[paso+4]+" "+arregloDatos[paso+5])
-                        //  arregloDatos  = arregloDeCadenas[paso].split(',');
-                        paso+=7;
-                    }
-
-                });
-
 
                 $("#AddFarmaco").click(function(event){
                     var nombreFar= $('input[name=nombreFarmaco]').val();
@@ -348,64 +269,36 @@
                     var frecuenciaFar=$('input[id=frecuencia]').val();
                     var fechaFar=$('input[id=fechaAplic]').val();
                     var idFar = $('select[name=idFarmaco]').val();
+                    var index = $('input[name=indice]').val();
+                    event.preventDefault();
 
-                    $('#tblFarmaco tr:last').before('<tr ><td class="idFarm"> '+idFar+'</td><td name="nombreFarm[]">'+nombreFar+'</td><td name="viaFarm[]">'+viaFar+'</td><td name="dosisFarm[]">'+dosisFar+'</td><td name="freFarm[]">'+frecuenciaFar+'</td><td name="fechaFarm[]">'+fechaFar+'</td><td><button class="btn btn-primary btn-xs editar" id="editar" name="editar"> <span class="glyphicon glyphicon-pencil"></span></button><button class="btn btn-danger btn-xs borrar"  id="borrar" name="borrar"> <span class="glyphicon glyphicon-trash"></span></button></td></tr>');
+                   // $('#tblFarmaco').closest('tr:eq("' + index + '")').remove();
+                 // $('#tblFarmaco tr:eq("' + index + '")').append('<tr ><td class="idFarm"> '+idFar+'</td><td name="nombreFarm[]">'+nombreFar+'</td><td name="viaFarm[]">'+viaFar+'</td><td name="dosisFarm[]">'+dosisFar+'</td><td name="freFarm[]">'+frecuenciaFar+'</td><td name="fechaFarm[]">'+fechaFar+'</td><td><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="glyphicon glyphicon-pencil"></span></button><button class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="glyphicon glyphicon-trash"></span></button></td></tr>');
+                   $('#tblFarmaco tr:last').before('<tr ><td class="idFarm"> '+idFar+'</td><td name="nombreFarm[]">'+nombreFar+'</td><td name="viaFarm[]">'+viaFar+'</td><td name="dosisFarm[]">'+dosisFar+'</td><td name="freFarm[]">'+frecuenciaFar+'</td><td name="fechaFarm[]">'+fechaFar+'</td><td><button class="btn btn-primary btn-xs editar" id="editar" name="editar"> <span class="glyphicon glyphicon-pencil"></span></button><button class="btn btn-danger btn-xs borrar"  id="borrar" name="borrar"> <span class="glyphicon glyphicon-trash"></span></button></td></tr>');
+                    $.ajax({
+                        url: '{!! URL::to('ActualizarFarmaco')!!}',
+                        headers: {'X-CSRF-TOKEN':CSRF_TOKEN},
+                        type:"PUT",
+                        dataType:'json',
+                        data:{idProfilaxis:id,idFarmaco:idFar,dosis:dosisFar,frecuencia:frecuenciaFar,fechaAplicacion:fechaFar},
+                        success: function(response){
+                            console.log(response);
+                            console.log('exito de Actualizar');
+                        }
+                    });
+
                     $("#via").val('');
                     $("#nombreFarmaco").val('');
                     $("#dosis").val('');
                     $("#frecuencia").val('');
                     $("#fechaAplic").val('');
-                    //  var children = $("tr td")[1].innerHTML;
-
-                    //  }
-                    // for (i=0; i<arregloDatos.length; i++) {
-                    // }
                     event.preventDefault();
                 });
-                $(function () {
-                    $(document).on('click', '.borrar', function (event) {
-                        event.preventDefault();
-                        $(this).closest('tr').remove();
-                    });
-                });
-                $(function () {
-                    $(document).on('click', '.editar', function (event) {
-                        event.preventDefault();
-                       var valFar,cosa;
-                        cosa=$(this).parents("tr");
-                        $(this).parents("tr").find("td").each(function(){
-                            valFar+=$(this).html()+",";
-                            event.preventDefault();
-                           $(this).closest('tr').remove();
-                        });
-
-                        var arregloDa=valFar.split(',');
-                        var idf=arregloDa[0].substring(10,11);
-                        idf=idf.toString();
-                        var i="   1    ";
-                        idf=idf.trim();
-                        //alert(idf);
-                        $('#idFarmaco > option[value="0"]').attr('selected', 'selected');
-
-                     //   $("#nombreFarmaco").val(arregloDa[1]);
-                      //  $("#via").val(arregloDa[2]);
-                        $("#dosis").val(arregloDa[3]);
-                        $("#frecuencia").val(arregloDa[4]);
-                        $("#fechaAplic").val(arregloDa[5]);
-                        $("#ventanaFarmaco").modal("show");
-
-                    });
-                });
-
                 $("#btnadd").click(function(event){
                     $('#tblFarmaco tr:last').after( '<tr><td> {!! Form::select ("idFarmaco",["placeholder"=>"Selecciona farmaco"],null,["id"=>"idFarmaco","class"=>"form-control"]) !!}</td><td> <input type="text" name="nombreFarmaco" id="nombreFarmaco" class="form-control"></td><td> <input type="text" name="via" id="via" class="form-control"></td> <td>{!! Form::text("dosis", null, ["class" => "form-control"]) !!} </td><td>{!! Form::text("frecuencia", null, ["class" => "form-control"]) !!}</td><td><input type="date" name="fechaAplicacion" id="fechaAplicacion"></td></tr> ');
                     event.preventDefault();
                 });
-                /*  $("#btnadd").click(function(event){
-                 count++;
-                 $('#tblFarmaco tr:last').after( "<th> {!! Form::select ('idFarmaco',['placeholder'=>'Selecciona farmaco'],null,['id'=>'idFarmaco','class'=>'form-control']) !!}</th><th> <input type='text' name='nombreFarmaco' id='nombreFarmaco'class='form-control'></th><th> <input type='text' name='via' id='via' class='form-control'></th> <th>{!! Form::text('dosis', null, ['class' => 'form-control']) !!} </th><th>{!! Form::text('frecuencia', null, ['class' => 'form-control']) !!}</th><th><input type='date' name='fechaAplicacion' id='fechaAplicacion'></th> ");
-                 event.preventDefault();
-                 }); */
+
                 $("select[name=idVeterinario]").change(function () {
                     var id = $(this).val();
                     $.ajax({
@@ -457,79 +350,260 @@
                         }
                     })
                 });
-                $("#farmacoInsert").on('submit',function(event){
-                    event.preventDefault();
-                    if ($("nombreFarmaco").val ==""){
-                        alert("Nombre del farmaco no puede ir vacio")
-                    }
-                    else if ($("fechaAplicacion").val ==""){
-                        alert("fecha Aplicación no puede ir vacio")
-                    }
-                });
+
                 if (flag=="Actualizar")  {
-                    var con=1;
-                    //    $("select[name=idAnimal]").click(function () {
+                    var conM=1,conV=1,conE=1;
+                    var id;
+                    id ={{$hojaprofilaxi->id}}
+                     var idProfilaxis;
+                    idProfilaxis={{$hojaprofilaxi->id}}
+                    $.ajax({
+                        type: 'get',
+                        url: '{!! URL::to('cargarNum')!!}',
+                        data: {'idProfilaxis':idProfilaxis},
+                        success: function (data) {
+                            console.log('QUEDFJDFJK ');
+                            $("#numPro").val('' + data[0].idPro);
+                            var numProf=data[0].idPro;
+                            cont=0;
+                            for (i = 0; i <numProf; i++) {
+                                $.ajax({
+                                    type: 'get',
+                                    url: '{!! URL::to('DatosFarmacos')!!}',
+                                    data: {'idProfilaxis':idProfilaxis},
+                                    success: function (datas) {
+                                        console.log('Vengaaa');
+                                        console.log("miraada"+datas[cont].nombre+" "+datas[cont].dosis);
+                                        $('#tblFarmaco tr:last').before('<tr><td>'+datas[cont].idFarmaco+'</td><td>'+datas[cont].nombre+'</td><td>'+datas[cont].via+'</td><td>'+datas[cont].dosis+'</td><td>'+datas[cont].frecuencia+'</td><td>'+datas[cont].fechaAplicacion+'</td><td><button class="btn btn-primary btn-xs editar" id="editar" name="editar"> <span class="glyphicon glyphicon-pencil"></span></button><button class="btn btn-danger btn-xs borrar"  id="borrar" name="borrar"> <span class="glyphicon glyphicon-trash"></span></button></td></tr>');
+                                        cont++;
+
+
+                                    },
+                                    error: function () {
+                                        console.log('NANANA')
+                                    }
+                                });
+                            }
+
+                        },
+                        error: function () {
+                            console.log('hay ERROR PRRO')
+                        }
+                    });
+
+
+
+                    $.ajax({
+                        type:'get',
+                        url:'{!! URL::to('cargarDatosProfilaxis')!!}',
+                        data:{'id':id},
+                        success:function(data){
+                            console.log('las hojas')
+                            console.log(data)
+                            $("#marcajeSelect").empty().append('<option value="' + data[0].marcajeEjemplar+ '">' + data[0].nombrePropio+ '</option>');
+                            $("#fecha").val(data[0].fecha);
+                            $("#sexo").val(data[0].sexo);
+                            $("#fechaAplicacion").val(data[0].fechaAplicacion);
+                          var idV=data[0].idVeterinario;
+                            var idE=data[0].idEncargado;
+                            $.ajax({
+                                type: 'get',
+                                url: '{!! URL::to('cargarDatosVeterinarios')!!}',
+                                data: {'id': idV},
+                                success: function (data) {
+                                    console.log('exito colega22')
+                                    console.log(data)
+                                    $("#idVeterinario").empty().append('<option value="' + idV + '">' + data[0].nombre +"  " +data[0].apellidoPaterno +"  " +data[0].apellidoMaterno + '</option>');
+                                },
+                                error: function () {
+                                    console.log('hay error')
+                                }
+                            });
+                            $.ajax({
+                                type: 'get',
+                                url: '{!! URL::to('cargarDatosVeterinarios')!!}',
+                                data: {'id': idE},
+                                success: function (data) {
+                                    console.log('exito colega22')
+                                    console.log(data)
+                                    $("#idEncargado").empty().append('<option value="' + idE + '">' + data[0].nombre +"  " +data[0].apellidoPaterno +"  " +data[0].apellidoMaterno + '</option>');
+                                },
+                                error: function () {
+                                    console.log('hay error')
+                                }
+                            });
+                        },
+                        error:function(){
+                            console.log('hay error')
+                        }
+                    });
+
+                    $(function () {
+                        $(document).on('click', '.borrar', function (event) {
+                            event.preventDefault();
+                            var valFar;
+                            $(this).parents("tr").find("td").each(function(){
+                                valFar+=$(this).html()+",";
+                                //$(this).closest('tr').remove();
+                            });
+                            var arregloDa=valFar.split(',');
+                            var idf=arregloDa[0].substring(9,10);
+                            alert(idf+" "+idProfilaxis);
+
+                            $(this).closest('tr').remove();
+                            $.ajax({
+                                type:'delete',
+                                headers: {'X-CSRF-TOKEN':CSRF_TOKEN},
+                                url:'{!! URL::to('borrarFarmaco')!!}',
+                                data:{'idProfilaxis':idProfilaxis,'idFarmaco':idf},
+                                success:function(data){
+                                    console.log('Se BORRO');
+
+                                    // $("#idAnimal").append('<option value="' + 2 + '">  cambiar animal</option>');
+                                },
+                                error:function(){
+                                    console.log('hay error')
+                                }
+                            });
+                        });
+                    });
+                    $(function () {
+                        $(document).on('click', '.editar', function (event) {
+                            event.preventDefault();
+                            var valFar,indice;
+                            indice=$(this).parents("tr").index();
+
+                            $(this).parents("tr").find("td").each(function(){
+                                valFar+=$(this).html()+",";
+                                event.preventDefault();
+                                $(this).closest('tr').remove();
+                            });
+
+
+                            var arregloDa=valFar.split(',');
+                            var idf=arregloDa[0].substring(9,10);
+                            idf=idf.toString();
+
+                            idf=idf.trim();
+                            //alert(idf);
+                            $('#idFarmaco > option[value="' + idf+ '"]').attr('selected', 'selected');
+
+                              $("#nombreFarmaco").val(arregloDa[1]);
+                              $("#via").val(arregloDa[2]);
+                            $("#dosis").val(arregloDa[3]);
+                            $("#frecuencia").val(arregloDa[4]);
+                            $("#fechaAplic").val(arregloDa[5]);
+                            $("#indice").val(indice);
+                            $("#ventanaFarmaco").modal("show");
+
+                        });
+                    });
                     var marcaje
-                    marcaje=$("#marcaje").val();
-                    alert("hola que hace"+marcaje)
+                    marcaje=$("#marcajeEjemplar").val();
                     $.ajax({
                         type:'get',
                         url:'{!! URL::to('cargarDatosEjemplares')!!}',
                         data:{'marcaje':marcaje},
                         success:function(data){
                             console.log('exito colega')
-                            console.log(data)
-                            $("#idAnimal").empty().append('<option value="' + data[0].idAnimal+ '">' + data[0].nombreComun+ '</option>');
-                            $("#fechaNacimiento").val(data[0].fechaNacimiento)
-                            $("#fechaAlta").val(data[0].fechaAlta)
                             $("#nombreComun").val(data[0].nombreComun)
-                            $("#nombreCientifico").val(data[0].especie)
+                            $("#nombreCientifico").val(data[0].nombreCientifico)
                             // $("#idAnimal").append('<option value="' + 2 + '">  cambiar animal</option>');
                         },
                         error:function(){
                             console.log('hay error')
                         }
-                    })
-                    $("select[name=idAnimal]").click(function () {
-                        var id = $("#idAnimal").val();
-                        if (con<=1) {
-                            $('#idAnimal').empty();
+                    });
+
+                    $("select[name=marcajeSelect]").click(function(){
+                       var mar=$("#marcajeSelect").val();
+                        if(conM==1) {
+                            $('#marcajeSelect').empty();
                             $.ajax({
                                 type: 'get',
-                                url: '{!! URL::to('cargarAnimales')!!}',
+                                url: '{!! URL::to('cargarEjemplares')!!}',
                                 data: {},
                                 success: function (data) {
                                     console.log('exito colega')
                                     console.log(data)
-                                    $("#idAnimal").append('<option value="1"> Seleciona animal</option>');
                                     for (var i = 0; i < data.length; i++) {
-                                        $("#idAnimal").append('<option value="' + data[i].id + '">' + data[i].nombreComun + '</option>');
+                                        $("#marcajeSelect").append('<option value="' + data[i].marcaje + '">' + data[i].nombrePropio + '</option>');
                                     }
                                 },
                                 error: function () {
                                     console.log('hay error')
                                 }
-                            })
-                            con=con+1;
+                            });
+                            conM=2;
                         }
+
                         $.ajax({
-                            type: 'get',
-                            url: '{!! URL::to('cargarDatosAnimales')!!}',
-                            data: {'id': id},
-                            success: function (data) {
-                                console.log('exito colega22')
-                                console.log(data)
-                                $("#nombreComun").val('' + data[0].nombreComun);
-                                $("#nombreCientifico").val('' + data[0].nombreCientifico);
+                            type:'get',
+                            url:'{!! URL::to('cargarDatosEjemplares')!!}',
+                            data:{'marcaje':mar},
+                            success:function(data){
+                                console.log('exito colega')
+                                $("#nombreComun").val(data[0].nombreComun)
+                                $("#nombreCientifico").val(data[0].nombreCientifico)
+                                // $("#idAnimal").append('<option value="' + 2 + '">  cambiar animal</option>');
                             },
-                            error: function () {
+                            error:function(){
                                 console.log('hay error')
                             }
-                        })
-                        // alert("valor"+id)
+                        });
+                    });
+
+                    $("select[name=idVeterinario]").click(function(){
+                        var id=$("#idVeterinario").val();
+                        if(conV==1) {
+                            $('#idVeterinario').empty();
+                            $.ajax({
+                                type: 'get',
+                                url: '{!! URL::to('cargarVeterinarios')!!}',
+                                data: {},
+                                success: function (data) {
+                                    console.log('exito colega')
+                                    console.log(data)
+                                    for (var i = 0; i < data.length; i++) {
+                                        $("#idVeterinario").append('<option value="' + data[i].id + '">' + data[i].nombre +"  " +data[i].apellidoPaterno +"  " +data[i].apellidoMaterno + '</option>');
+                                    }
+                                },
+                                error: function () {
+                                    console.log('hay error')
+                                }
+                            });
+                            conV=2;
+                        }
+
+
+                    });
+                    $("select[name=idEncargado]").click(function(){
+                        var id=$("#idEncargado").val();
+                        if(conE==1) {
+                            $('#idEncargado').empty();
+                            $.ajax({
+                                type: 'get',
+                                url: '{!! URL::to('cargarVeterinarios')!!}',
+                                data: {},
+                                success: function (data) {
+                                    console.log('exito colega')
+                                    console.log(data)
+                                    for (var i = 0; i < data.length; i++) {
+                                        $("#idEncargado").append('<option value="' + data[i].id + '">' + data[i].nombre +"  " +data[i].apellidoPaterno +"  " +data[i].apellidoMaterno + '</option>');
+                                    }
+                                },
+                                error: function () {
+                                    console.log('hay error')
+                                }
+                            });
+                            conE=2;
+                        }
+
                     });
                 }
+
             });
         </script>
+
 
 @endsection

@@ -58,10 +58,7 @@ class EjemplarController extends Controller
         $ejemplar=Ejemplar::select('fechaNacimiento','nombrePropio','sexo')->where('marcaje',$request->marcaje)->take(100)->get();
         return response()->json($ejemplar);
     }
-
-
-
-        public function getDatosEjemplar(Request $request ){
+    public function getDatosEjemplar(Request $request ){
 
             $ejemplar=Ejemplar::join('animal', 'idAnimal', '=', 'animal.id')
                 ->select('fechaNacimiento','fechaAlta','sexo','nombrePropio','idAnimal', 'animal.nombreComun', 'animal.especie','animal.nombreCientifico')

@@ -4,7 +4,7 @@ namespace Zoochilpan\Http\Controllers;
 
 use Zoochilpan\Http\Requests;
 use Zoochilpan\Http\Controllers\Controller;
-
+use DB;
 use Zoochilpan\hojaProfilaxi;
 use Illuminate\Http\Request;
 use Session;
@@ -22,16 +22,32 @@ class hojaProfilaxiController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $hojaprofilaxi = hojaProfilaxi::where('lugar', 'LIKE', "%$keyword%")
-				->orWhere('fecha', 'LIKE', "%$keyword%")
-				->orWhere('tratamiento', 'LIKE', "%$keyword%")
-				->orWhere('fechaAplicacion', 'LIKE', "%$keyword%")
-				->orWhere('observaciones', 'LIKE', "%$keyword%")
-				->orWhere('comentarios', 'LIKE', "%$keyword%")
-				
+           // $hojaprofilaxi = hojaProfilaxi::where('lugar', 'LIKE', "%$keyword%")
+		//		->orWhere('fecha', 'LIKE', "%$keyword%")
+		//		->orWhere('tratamiento', 'LIKE', "%$keyword%")
+		//		->orWhere('fechaAplicacion', 'LIKE', "%$keyword%")
+	   //			->orWhere('observaciones', 'LIKE', "%$keyword%")
+		//		->orWhere('comentarios', 'LIKE', "%$keyword%")
+          //      ->paginate($perPage);
+
+            $hojaprofilaxi = hojaProfilaxi::join('ejemplares', 'marcajeEjemplar', '=', 'ejemplares.marcaje')
+                ->select('id','lugar','fecha','marcajeEjemplar','tratamiento','fechaAplicacion', 'ejemplares.nombrePropio','ejemplares.sexo')
+                ->where('lugar', 'LIKE', "%$keyword%")
+                ->orWhere('fecha', 'LIKE', "%$keyword%")
+                ->orWhere('tratamiento', 'LIKE', "%$keyword%")
+                ->orWhere('fechaAplicacion', 'LIKE', "%$keyword%")
+                ->orWhere('ejemplares.nombrePropio','LIKE', "%$keyword%" )
+                ->orWhere('ejemplares.sexo', 'LIKE', "%$keyword%")
                 ->paginate($perPage);
+
         } else {
-            $hojaprofilaxi = hojaProfilaxi::paginate($perPage);
+            //$ejemplar = Ejemplar::join('animal', 'idAnimal', '=', 'animal.id')
+              //  ->select('marcaje','fechaNacimiento','fechaAlta','sexo','nombrePropio', 'animal.nombreComun', 'animal.especie','animal.nombreCientifico')
+               // ->paginate($perPage);
+
+            $hojaprofilaxi = hojaProfilaxi::join('ejemplares', 'marcajeEjemplar','=','ejemplares.marcaje')
+            ->select('id','lugar','fecha','marcajeEjemplar','tratamiento','fechaAplicacion','ejemplares.nombrePropio','ejemplares.sexo')
+            ->paginate($perPage);
         }
 
         return view('Zoochilpan.hoja-profilaxi.index', compact('hojaprofilaxi'));
@@ -42,6 +58,15 @@ class hojaProfilaxiController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function getDatosProfilaxis(Request $request ){
+
+        $profilaxis=hojaProfilaxi::join('ejemplares', 'marcajeEjemplar', '=', 'ejemplares.marcaje')
+            ->select('lugar','fecha','marcajeEjemplar','idVeterinario','idEncargado','tratamiento','fechaAplicacion','fechaAplicacion','ejemplares.nombrePropio','ejemplares.sexo')
+            ->where('id',$request->id)->take(100)->get();
+        return response()->json($profilaxis);
+
+    }
     public function create()
     {
         return view('Zoochilpan.hoja-profilaxi.create');
@@ -56,34 +81,6 @@ class hojaProfilaxiController extends Controller
      */
     public function store(Request $request)
     {
-        /*
-        $host="localhost";
-        $user="root";
-        $pass="12345";
-        $base="zoochilpan";
-       // $db= new PDO('mysql:host=localhost;dbname=zoochilpan','root','12345');
-        $cone=mysqli_connect($host,$user,$pass,$base);
-        if (mysqli_connect_errno())
-        {
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        }
-       $max =mysqli_query($cone,"SELECT MAX(id) AS id FROM farmacos");
-
-        $resultarr =mysqli_fetch_array($max);
-        $conteo=$resultarr[0];
-        echo $conteo+1;
-
-        $id= $_POST['idFarm'];
-        $nombre= $_POST['nombreFarm'];
-        $via= $_POST['viaFarm'];
-        $fre= $_POST['freFarm'];
-        $dosis= $_POST['dosisFarm'];
-        $fecha= $_POST['fechaFarm'];
-
-        foreach ($nombre as $nom){
-            echo "<br>".$nom;
-        } */
-
         $requestData = $request->all();
         
         hojaProfilaxi::create($requestData);
@@ -166,7 +163,7 @@ class hojaProfilaxiController extends Controller
 
         Session::flash('flash_message', 'hojaProfilaxi updated!');
 
-        return redirect('hoja-profilaxi');
+        return redirect('/profilaxis');
     }
 
     /**
@@ -178,16 +175,18 @@ class hojaProfilaxiController extends Controller
      */
     public function destroy($id)
     {
+        $cf=csrf_token();
         hojaProfilaxi::destroy($id);
-
-        Session::flash('flash_message', 'hojaProfilaxi deleted!');
-
-        return redirect('hoja-profilaxi');
+        DB::table('farmacoprofilaxis')->where('idProfilaxis', '=', $id)
+            ->delete();
+        Session::flash('flash_message', 'hojaProfilaxis borrada!');
+        return redirect('/profilaxis');
     }
 
     public function getMaxId(Request $request ){
-        $profilaxis=hojaProfilaxi::select('id')->orderBy('id','desc')->take(1)->get();
+       $profilaxis=hojaProfilaxi::select('id')->orderBy('id','desc')->take(1)->get();
         return response()->json($profilaxis);
+
     }
 
 

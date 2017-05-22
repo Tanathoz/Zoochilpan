@@ -1,13 +1,8 @@
 
 <div class="form-group clase col-md-6 center-block">
-
-
     {!! Form::label('clase a la que pertenece la especie') !!}
     {!! Form::select('clase',['Selecciona Clase'=>'Selecciona Clase','Anfibios'=>'Anfibios','Aves'=>'Aves',
          'Mamiferos'=>'Mamiferos','Peces'=>'Peces','Reptiles'=>'Reptiles'],null,['class'=>'form-control'],array('onchange'=>'cambia_orden()')) !!}
-
-
-
 </div>
 
 

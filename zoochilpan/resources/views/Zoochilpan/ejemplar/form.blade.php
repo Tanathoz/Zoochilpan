@@ -117,7 +117,7 @@
                 //    $("select[name=idAnimal]").click(function () {
                 var marcaje
                 marcaje=$("#marcaje").val();
-                alert("hola que hace"+marcaje)
+
                 $.ajax({
                     type:'get',
                     url:'{!! URL::to('cargarDatosEjemplares')!!}',
@@ -155,7 +155,7 @@
                             error: function () {
                                 console.log('hay error')
                             }
-                        })
+                        });
                         con=con+1;
                     }
                     $.ajax({

@@ -4,11 +4,12 @@
     <div class="container">
         <div class="row">
 
+
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit hojaProfilaxi #{{ $hojaprofilaxi->id }}</div>
+                    <div class="panel-heading">Registrar Nueva Necropsia</div>
                     <div class="panel-body">
-                        <a href="{{ url('/profilaxis') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/necropsia') }}" title="Volver"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button></a>
                         <br />
                         <br />
 
@@ -20,14 +21,9 @@
                             </ul>
                         @endif
 
-                        {!! Form::model($hojaprofilaxi, [
-                            'method' => 'PATCH',
-                            'url' => ['/profilaxis', $hojaprofilaxi->id],
-                            'class' => 'form-horizontal',
-                            'files' => true
-                        ]) !!}
+                        {!! Form::open(['url' => '/necropsia', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('Zoochilpan.hoja-profilaxi.formActualiza', ['ButtonText' => 'Actualizar'])
+                        @include ('Zoochilpan.necropsia.form')
 
                         {!! Form::close() !!}
 
