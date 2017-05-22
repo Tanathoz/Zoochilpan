@@ -94,7 +94,7 @@
                 error: function () {
                     console.log('hay error')
                 }
-            })
+            });
             $("select[name=idAnimal]").change(function () {
                 var id = $(this).val();
                 $.ajax({

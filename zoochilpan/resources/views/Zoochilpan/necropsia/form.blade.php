@@ -17,9 +17,10 @@
         {!! $errors->first('hora', '<p class="help-block">:message</p>') !!}
     </div>
     </div>
-    <div>
-     <div class="form-group">
-        {!! Form::label('Animal') !!}
+    <div class="form-group">
+
+        {!! Form::label('idAnimal', 'Animal', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
         {!! Form::select ('idAnimal',['placeholder'=>'Selecciona animal'],null,['id'=>'idAnimal','class'=>'form-control']) !!}
 
      </div>
@@ -117,7 +118,21 @@
             $('#fecha').datetimepicker({
                 format: 'YYYY-MM-DD'
             });
-
+            $.ajax({
+                type: 'get',
+                url: '{!! URL::to('cargarAnimales')!!}',
+                data: {},
+                success: function (data) {
+                    console.log('exito colega')
+                    console.log(data)
+                    for (var i = 0; i < data.length; i++) {
+                        $("#idAnimal").append('<option value="' + data[i].id + '">' + data[i].nombreComun + '</option>');
+                    }
+                },
+                error: function () {
+                    console.log('hay error')
+                }
+            });
             $.ajax({
                 type: 'get',
                 url: '{!! URL::to('cargarEjemplares')!!}',
