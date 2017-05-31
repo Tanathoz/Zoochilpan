@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('Layouts.principal')
 
 @section('content')
     <div class="container">
         <div class="row">
-            @include('admin.sidebar')
+
 
             <div class="col-md-9">
                 <div class="panel panel-default">
@@ -28,7 +28,7 @@
                             'files' => true
                         ]) !!}
 
-                        @include ('Zoochilpan.necropsia.form', ['submitButtonText' => 'Update'])
+                        @include ('Zoochilpan.necropsia.form', ['submitButtonText' => 'Actualizar'])
 
                         {!! Form::close() !!}
 

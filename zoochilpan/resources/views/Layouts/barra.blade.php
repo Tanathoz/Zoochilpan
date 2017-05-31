@@ -23,8 +23,8 @@
                         <li > Ejemplares </li>
                         <li > <a href="/ejemplar"> Ejemplares</a> </li>
                         <li > Taxonomia</li>
-                        <li > <a href="/ejemplar"> Familias</a> </li>
-                        <li > <a href="/ejemplar"> Especies</a> </li>
+                        <li > <a href="/familia"> Familias</a> </li>
+                        <li > <a href="/especie"> Especies</a> </li>
 
 
 
@@ -33,7 +33,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Control Alimenticio <span class="caret"></span> </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li > <a href="#"> Dietas Animales</a> </li>
+                        <li > <a href="/dieta"> Dietas Animales</a> </li>
 
 
                         <li class="divider">  </li>
@@ -47,7 +47,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li > Profilaxis  </li>
                         <li > <a href="#">Consultas Clínicas</a> </li>
-                        <li > <a href="#">Medicina Preventiva</a> </li>
+                        <li > <a href="/profilaxis">Medicina Preventiva</a> </li>
                         <li > <a href="/farmaco">Gestion Farmacos</a> </li>
 
                     </ul>
@@ -57,7 +57,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">&nbsp;&nbsp;&nbsp;&nbsp; Mortalidad <span class="caret"></span> </a>
                     <ul class="dropdown-menu" role="menu">
                         <li > Necropsias </li>
-                        <li > <a href="#">Gestión Necropsias</a> </li>
+                        <li > <a href="/necropsia">Gestión Necropsias</a> </li>
 
                         <li > Siniestro </li>
                         <li > <a href="#">Gestión Siniestros</a> </li>

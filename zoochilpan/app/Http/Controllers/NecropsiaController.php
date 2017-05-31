@@ -22,24 +22,50 @@ class NecropsiaController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $necropsia = Necropsium::where('lugar', 'LIKE', "%$keyword%")
-				->orWhere('fecha', 'LIKE', "%$keyword%")
-				->orWhere('hora', 'LIKE', "%$keyword%")
-				->orWhere('antecedentes', 'LIKE', "%$keyword%")
-				->orWhere('diagnosticoMuerte', 'LIKE', "%$keyword%")
-				->orWhere('estadoFisico', 'LIKE', "%$keyword%")
-				->orWhere('lesiones', 'LIKE', "%$keyword%")
-				->orWhere('toracica', 'LIKE', "%$keyword%")
-				->orWhere('abdominal', 'LIKE', "%$keyword%")
-				
+            $necropsia = Necropsium::join('ejemplares', 'marcajeEjemplar', '=', 'ejemplares.marcaje')
+                ->select('id','lugar','fecha','hora','marcajeEjemplar','diagnosticoMuerte', 'ejemplares.nombrePropio','ejemplares.sexo')
+                ->where('lugar', 'LIKE', "%$keyword%")
+                ->orWhere('fecha', 'LIKE', "%$keyword%")
+                ->orWhere('hora', 'LIKE', "%$keyword%")
+                ->orWhere('diagnosticoMuerte', 'LIKE', "%$keyword%")
+                ->orWhere('marcajeEjemplar','LIKE', "%$keyword%" )
+                ->orWhere('ejemplares.nombrePropio','LIKE', "%$keyword%" )
+                ->orWhere('ejemplares.sexo', 'LIKE', "%$keyword%")
                 ->paginate($perPage);
+
         } else {
-            $necropsia = Necropsium::paginate($perPage);
+            $necropsia = Necropsium::join('ejemplares', 'marcajeEjemplar','=','ejemplares.marcaje')
+                ->select('id','lugar','fecha','hora','marcajeEjemplar','diagnosticoMuerte','ejemplares.nombrePropio','ejemplares.sexo')
+                ->paginate($perPage);
+
         }
 
         return view('Zoochilpan.necropsia.index', compact('necropsia'));
     }
+    public function getDatosNecropsia(Request $request ){
 
+        $necro=Necropsium::join('ejemplares', 'marcajeEjemplar', '=', 'ejemplares.marcaje')
+            ->select('lugar','fecha','marcajeEjemplar','idVeterinario','idEncargado','ejemplares.nombrePropio','ejemplares.sexo','ejemplares.idAnimal')
+            ->where('id',$request->id)->take(100)->get();
+        return response()->json($necro);
+
+    }
+
+    public function getNecropsias(Request $request ){
+
+        $necro=Necropsium::join('ejemplares', 'marcajeEjemplar', '=', 'ejemplares.marcaje')
+        ->select('id','diagnosticoMuerte','marcajeEjemplar','ejemplares.nombrePropio','ejemplares.idAnimal')->get();
+        return response()->json($necro);
+    }
+
+    public function getUnaNecropsia(Request $request ){
+
+        $necro=Necropsium::join('ejemplares', 'marcajeEjemplar', '=', 'ejemplares.marcaje')
+            ->select('id','lugar','fecha','hora','diagnosticoMuerte','antecedentes','estadoFisico',
+                'lesiones','toracica','abdominal','muestras','marcajeEjemplar','idVeterinario',
+                'idEncargado','ejemplares.nombrePropio','ejemplares.sexo','ejemplares.idAnimal')->where('id',$request->idNecropsia)->take(100)->get();;
+        return response()->json($necro);
+    }
     /**
      * Show the form for creating a new resource.
      *

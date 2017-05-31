@@ -21,10 +21,10 @@
 
     <div class="col-md-12">
         <div class="panel panel-default">
-            <div class="panel-heading">Gestion de Animales</div>
+            <div class="panel-heading"><center><h3 class="opcion_iluminada">Gestion de Animales</h3></center></div>
             <div class="panel-body">
                 <a href="{{ url('/animal/create') }}" class="btn btn-success btn-sm" title="Registrar animal">
-                    <i class="fa fa-plus" aria-hidden="true"></i>+Animal
+                    <i class="fa fa-plus" aria-hidden="true"></i><span class="glyphicon glyphicon-plus">  </span>
                 </a>
 
     {!! Form::open(['method' => 'GET', 'url' => '/animal', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}

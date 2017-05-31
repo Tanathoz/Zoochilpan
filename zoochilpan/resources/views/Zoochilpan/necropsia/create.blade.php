@@ -23,7 +23,7 @@
 
                         {!! Form::open(['url' => '/necropsia', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('Zoochilpan.necropsia.form')
+                        @include ('Zoochilpan.necropsia.form',['submitButtonText' => 'Registrar'])
 
                         {!! Form::close() !!}
 

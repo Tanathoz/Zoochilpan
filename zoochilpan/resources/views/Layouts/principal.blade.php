@@ -17,9 +17,9 @@
 </head>
 <body >
 <header>
-    <img src="/plugin/img/GobiernodelEstado.png"  width="433" height="100" title="imagen abc"/>
-    <img src="/plugin/img/semarenRGB.jpg" width=433" height="100" title="imagen abc"/>
-    <img src="/plugin/img/LogoZoochilpan.jpg"  width="433" height="100" title="imagen abc"/>
+    <img src="/plugin/img/GobiernodelEstado.png"  width="433" height="100" title="imagen "/>
+    <img src="/plugin/img/semarenRGB.jpg" width=433" height="100" title="imagen "/>
+    <img src="/plugin/img/LogoZoochilpan.jpg"  width="433" height="100" title="imagen "/>
 </header>
  @include('Layouts.barra')
 

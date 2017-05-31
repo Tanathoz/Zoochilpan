@@ -1,7 +1,8 @@
 <div class="fish"> </div>
-<div class="form-group col-md-4  ">
-    {!! Form::label('Numero de registro') !!}
-    {!! Form::input('number','id',null,['id'=>'id','class'=>'form-control','placeholder'=>'numero de identificacion']) !!}
+<fieldset class="scheduler-border">
+    <legend align="left">Taxonomia</legend>
+<div class="form-group   ">
+    {!! Form::input('hidden','id',null,['id'=>'id','class'=>'form-control','placeholder'=>'numero de identificacion']) !!}
 
 </div>
 
@@ -55,7 +56,9 @@
     <input type="hidden" name="especie" id="especie">
 </div>
 
-
+</fieldset>
+<fieldset class="scheduler-border">
+    <legend align="left">Vida y Reproduccion </legend>
 
 <div class="form-group ">
     {!! Form::label('Habitat') !!}
@@ -102,7 +105,7 @@
     {!! Form::text('Alimentacion',null,['class'=>'form-control','placeholder'=>'cebras,buffalos']) !!}
 
 </div>
-
+</fieldset>
 
 <!--{!! Form::text('prueba',null,['class'=>'form-control','placeholder'=>'']) !!} -->
 @section('javascript')

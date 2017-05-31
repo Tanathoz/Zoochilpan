@@ -7,10 +7,10 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Hojas de Profilaxis</div>
+                    <div class="panel-heading"><center><h3 class="opcion_iluminada">Gestión de Profilaxis</h3></center></div>
                     <div class="panel-body">
                         <a href="{{ url('/profilaxis/create') }}" class="btn btn-success btn-sm" title="Agregar hoja">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Agregar hoja
+                            <i class="fa fa-plus" aria-hidden="true"> <span class="glyphicon glyphicon-plus"></span></i>
                         </a>
 
                         {!! Form::open(['method' => 'GET', 'url' => '/hojaprofilaxi', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
@@ -47,7 +47,7 @@
                                                 'url' => ['/profilaxis', $item->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
-                                                {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> <span class="glyphicon glyphicon-trash">Borrar', array(
+                                                {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> <span class="glyphicon glyphicon-trash">', array(
                                                         'type' => 'submit',
                                                         'class' => 'btn btn-danger btn-xs',
                                                         'title' => 'Borrar Hoja',

@@ -25,7 +25,7 @@ class Necropsium extends Model
      *
      * @var array
      */
-    protected $fillable = ['lugar', 'marcajeEjemplar','fecha', 'hora', 'antecedentes', 'diagnosticoMuerte', 'estadoFisico', 'lesiones', 'toracica', 'abdominal'];
+    protected $fillable = ['lugar', 'marcajeEjemplar','fecha', 'hora', 'antecedentes', 'diagnosticoMuerte', 'estadoFisico', 'lesiones', 'toracica', 'abdominal','muestras','idVeterinario','idEncargado'];
 
     
 }

@@ -1,16 +1,8 @@
 <div class="fish"> </div>
 <fieldset class="scheduler-border">
     <legend align="left">Taxonomia</legend>
-<div class="form-group col-md-4  ">
-    {!! Form::label('Numero de registro') !!}
-    {!! Form::input('number','id',null,['class'=>'form-control','placeholder'=>'numero de identificacion']) !!}
 
-</div>
-<br>
 <div class="form-group">
-    <br>
-    <br>
-    <br>
     {!! Form::label('Nombre cientifico') !!}
     {!! Form::text('nombreCientifico',null,['class'=>'form-control','placeholder'=>'Pathera Leo']) !!}
 

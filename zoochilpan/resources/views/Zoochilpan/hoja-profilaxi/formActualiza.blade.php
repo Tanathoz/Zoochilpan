@@ -124,7 +124,7 @@
 </div>
 
 <input type="hidden" name="idHojaPro"   id="idHojaPro">
-<input type="text" name="numPro"   id="numPro">
+<input type="hidden" name="numPro"   id="numPro">
 <div class="form-group">
     <div class="col-md-offset-4 col-md-4">
         {!! Form::submit(isset($submitButtonText) ? $submitButtonText : 'Actualizar', ['class' => 'btn btn-primary','id'=>'btnAdd']) !!}
@@ -224,6 +224,8 @@
                 });
 
 
+
+
                 $.ajax({
                     type: 'get',
                     url: '{!! URL::to('cargarMaxId')!!}',
@@ -238,6 +240,21 @@
                     }
                 });
 
+                $.ajax({
+                    type: 'get',
+                    url: '{!! URL::to('cargarFarmacos')!!}',
+                    data: {},
+                    success: function (data) {
+                        console.log('exito colega')
+                        console.log(data)
+                        for (var i = 0; i < data.length; i++) {
+                            $("#idFarmaco").append('<option value="' + data[i].id + '">' + data[i].nombre + '</option>');
+                        }
+                    },
+                    error: function () {
+                        console.log('hay error')
+                    }
+                });
 
 
                 $("select[name=marcajeSelect]").change(function () {
@@ -448,7 +465,7 @@
                             });
                             var arregloDa=valFar.split(',');
                             var idf=arregloDa[0].substring(9,10);
-                            alert(idf+" "+idProfilaxis);
+
 
                             $(this).closest('tr').remove();
                             $.ajax({
@@ -485,7 +502,7 @@
                             idf=idf.toString();
 
                             idf=idf.trim();
-                            //alert(idf);
+                           // alert(idf);
                             $('#idFarmaco > option[value="' + idf+ '"]').attr('selected', 'selected');
 
                               $("#nombreFarmaco").val(arregloDa[1]);

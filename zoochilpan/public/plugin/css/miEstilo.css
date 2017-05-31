@@ -48,3 +48,15 @@ legend.scheduler-border {
     border-bottom:none;
     margin-bottom:0;
 }
+h3 {
+    font-size: 48px;
+    color: #333;
+    padding: 1px;
+}
+.opcion_iluminada {
+    font-size: 30px;
+    color: #78341a;
+    text-decoration:none;
+    padding: 1px;
+    word-spacing: 8.6pt;
+}

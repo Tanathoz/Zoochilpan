@@ -211,11 +211,7 @@
                 $('#fechaAplicacion').datetimepicker({
                     format: 'YYYY-MM-DD'
                 });
-                //$.ajaxSetup({
-                //  headers: {
-                //    'X-CSRF-TOKEN': $('input[name=_token]').attr('content')
-                //}
-                //});
+
                 $.ajax({
                     type: 'get',
                     url: '{!! URL::to('cargarEjemplares')!!}',
@@ -259,7 +255,7 @@
                     error: function () {
                         console.log('hay error')
                     }
-                })
+                });
                 $.ajax({
                     type: 'get',
                     url: '{!! URL::to('cargarFarmacos')!!}',
@@ -274,7 +270,7 @@
                     error: function () {
                         console.log('hay error')
                     }
-                })
+                });
                 $("select[name=marcajeSelect]").change(function () {
                     var marcaje = $(this).val();
 
@@ -332,8 +328,6 @@
                                 console.log('exito de POST');
                             }
                         });
-                        // alert(""+arregloDatos[paso]+"  "+arregloDatos[paso+1]+" "+arregloDatos[paso+1]+" "+arregloDatos[paso+3]+" "+arregloDatos[paso+4]+" "+arregloDatos[paso+5])
-                        //  arregloDatos  = arregloDeCadenas[paso].split(',');
                         paso+=7;
                     }
 
@@ -362,6 +356,7 @@
                     // }
                     event.preventDefault();
                 });
+
                 $(function () {
                     $(document).on('click', '.borrar', function (event) {
                         event.preventDefault();

@@ -11,13 +11,14 @@
             <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"> Formularios de registro de Ejemplar </h3>
+                   <center> <h3 class="panel-title opcion_iluminada"> Formularios de registro de Animal </h3></center>
                 </div>
                 <div class="panel-body">
                 @include('Animales.form.registro')
+                    <center>
                 {!! Form::submit('Registrar',['class'=>'btn btn-primary']) !!}
 
-
+                    </center>
                    </div>
                 </div>
 
