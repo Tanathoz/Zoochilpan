@@ -76,7 +76,7 @@
 </div><div class="form-group {{ $errors->has('lesiones') ? 'has-error' : ''}}">
     {!! Form::label('lesiones', 'Lesiones', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('lesiones', null, ['class' => 'form-control','readonly']) !!}
+        {!! Form::textarea('lesiones', null, ['class' => 'form-control','readonly']) !!}
         {!! $errors->first('lesiones', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('toracica') ? 'has-error' : ''}}">
@@ -149,7 +149,7 @@
 </div>
 
 <input type="hidden" name="bandera" id="bandera" value="{{$submitButtonText}}">
-<input type="text" name="id" id="id" >
+
 @section('javascript')
     <script>
         var flag;
@@ -201,8 +201,8 @@
                                 $("#diagnosticoMuerte").val('' + data[0].diagnosticoMuerte);
                                 $("#estadoFisico").val('' + data[0].estadoFisico);
                                 $("#lesiones").val('' + data[0].lesiones);
-                                $("#toracica").val(data[0].lugar);
-                                $("#abdominal").val('' + data[0].fecha);
+                                $("#toracica").val(data[0].toracica);
+                                $("#abdominal").val('' + data[0].abdominal);
                                 $("#muestras").val('' + data[0].muestras);
                                 var idV=data[0].idVeterinario;
                                 var idE=data[0].idEncargado;

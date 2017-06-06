@@ -4,7 +4,7 @@ namespace Zoochilpan\Http\Controllers;
 
 use Zoochilpan\Http\Requests;
 use Zoochilpan\Http\Controllers;
-
+use DB;
 use Zoochilpan\hojaclinica;
 use Illuminate\Http\Request;
 use Session;
@@ -129,9 +129,11 @@ class hojaclinicaController extends Controller
      */
     public function destroy($id)
     {
+        $cf=csrf_token();
         hojaclinica::destroy($id);
-
-        Session::flash('flash_message', 'hojaclinica deleted!');
+        DB::table('farmaco_clinicas')->where('idClinica', '=', $id)
+            ->delete();
+        Session::flash('flash_message', 'hojaclinica Borrada!');
 
         return redirect('hojaclinica');
     }

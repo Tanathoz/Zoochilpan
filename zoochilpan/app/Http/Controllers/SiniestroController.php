@@ -23,7 +23,7 @@ class SiniestroController extends Controller
 
         if (!empty($keyword)) {
             $siniestro = Siniestro::join('necropsias','idNecropsia','=','necropsias.id')
-                ->select('siniestros.id','medidaPreventiva','necropsias.id','necropsias.lugar','necropsias.fecha','necropsias.hora','necropsias.marcajeEjemplar','necropsias.diagnosticoMuerte')
+                ->select('siniestros.id','medidaPreventiva','necropsias.lugar','necropsias.fecha','necropsias.hora','necropsias.marcajeEjemplar','necropsias.diagnosticoMuerte')
                 ->where('necropsias.lugar', 'LIKE', "%$keyword%")
                 ->orWhere('necropsias.fecha', 'LIKE', "%$keyword%")
                 ->orWhere('necropsias.hora', 'LIKE', "%$keyword%")
@@ -37,7 +37,7 @@ class SiniestroController extends Controller
 
         } else {
             $siniestro = Siniestro::join('necropsias','idNecropsia','=','necropsias.id')
-                ->select('medidaPreventiva','siniestros.id','necropsias.id','necropsias.lugar','necropsias.fecha','necropsias.hora','necropsias.marcajeEjemplar','necropsias.diagnosticoMuerte')
+                ->select('medidaPreventiva','siniestros.id','necropsias.lugar','necropsias.fecha','necropsias.hora','necropsias.marcajeEjemplar','necropsias.diagnosticoMuerte')
                  ->paginate($perPage);
         }
 

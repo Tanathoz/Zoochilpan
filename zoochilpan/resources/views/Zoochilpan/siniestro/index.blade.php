@@ -5,7 +5,7 @@
         <div class="row">
 
 
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading"><center><h3 class="opcion_iluminada">Gestión de Siniestros</h3></center></div>
                     <div class="panel-body">
@@ -38,6 +38,7 @@
                                 @foreach($siniestro as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
+
                                         <td>{{ $item->diagnosticoMuerte }}</td><td>{{ $item->fecha }}</td><td>{{ $item->hora }}</td><td>{{ $item->marcajeEjemplar }}</td><td>{{ $item->medidaPreventiva }}</td>
                                         <td>
                                             <a href="{{ url('/siniestro/' . $item->id) }}" title="Ver Siniestro"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> <span class="glyphicon glyphicon-eye-open"></span></button></a>

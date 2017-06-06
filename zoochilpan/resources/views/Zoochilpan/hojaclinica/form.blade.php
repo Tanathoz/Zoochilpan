@@ -74,7 +74,7 @@
         {!! $errors->first('tratamiento', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('fechaAplicacion') ? 'has-error' : ''}}">
-    {!! Form::label('fechaAplicacion', 'Fechaaplicacion', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('fechaAplicacion', 'Fecha Inicio', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <input type="text" class="form-control " name="fechaAplicacion" id="fechaAplicacion" >
         {!! $errors->first('fechaAplicacion', '<p class="help-block">:message</p>') !!}
@@ -109,7 +109,7 @@
         {!! $errors->first('comentarios', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('fechaAlta') ? 'has-error' : ''}}">
-    {!! Form::label('fechaAlta', 'Fechaalta', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('fechaAlta', 'Fecha de alta', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <input type="text" class="form-control " name="fechaAlta" id="fechaAlta" >
         {!! $errors->first('fechaAlta', '<p class="help-block">:message</p>') !!}
@@ -212,7 +212,7 @@
         </div>
     </div>
     </div>
-<
+
 @section('javascript')
     <script>
         $(document).ready(function (){

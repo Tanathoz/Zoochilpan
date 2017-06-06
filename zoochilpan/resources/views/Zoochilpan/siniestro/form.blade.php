@@ -76,7 +76,7 @@
 </div><div class="form-group {{ $errors->has('lesiones') ? 'has-error' : ''}}">
     {!! Form::label('lesiones', 'Lesiones', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('lesiones', null, ['class' => 'form-control','readonly']) !!}
+        {!! Form::textarea('lesiones', null, ['class' => 'form-control','readonly']) !!}
         {!! $errors->first('lesiones', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('toracica') ? 'has-error' : ''}}">

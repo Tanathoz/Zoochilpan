@@ -37,7 +37,7 @@
 
 
                         <li class="divider">  </li>
-                        <li > <a href="#">Dietas Ejemplares</a> </li>
+                        <li > <a href="/dietaEjemplar">Dietas Ejemplares</a> </li>
 
                     </ul>
                 </li>
@@ -46,7 +46,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">&nbsp;&nbsp;&nbsp;&nbsp;Control de  Salud <span class="caret"></span> </a>
                     <ul class="dropdown-menu" role="menu">
                         <li > Profilaxis  </li>
-                        <li > <a href="#">Consultas Clínicas</a> </li>
+                        <li > <a href="hojaclinica">Consultas Clínicas</a> </li>
                         <li > <a href="/profilaxis">Medicina Preventiva</a> </li>
                         <li > <a href="/farmaco">Gestion Farmacos</a> </li>
 
@@ -60,7 +60,7 @@
                         <li > <a href="/necropsia">Gestión Necropsias</a> </li>
 
                         <li > Siniestro </li>
-                        <li > <a href="#">Gestión Siniestros</a> </li>
+                        <li > <a href="/siniestro">Gestión Siniestros</a> </li>
 
                     </ul>
                 </li>

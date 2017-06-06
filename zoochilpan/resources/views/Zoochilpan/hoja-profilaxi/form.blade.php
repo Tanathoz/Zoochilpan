@@ -13,7 +13,12 @@
         {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-
+<div class="form-group">
+    {!! Form::label('idAnimal', 'Animal', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+        {!! Form::select ('idAnimal',['placeholder'=>'Selecciona animal'],null,['id'=>'idAnimal','class'=>'form-control']) !!}
+    </div>
+</div>
 <div class="form-group {{ $errors->has('lugar') ? 'has-error' : ''}}">
 
     {!! Form::label('marcajeSelect', 'Ejemplar', ['class' => 'col-md-4 control-label']) !!}
@@ -211,22 +216,22 @@
                 $('#fechaAplicacion').datetimepicker({
                     format: 'YYYY-MM-DD'
                 });
-
                 $.ajax({
                     type: 'get',
-                    url: '{!! URL::to('cargarEjemplares')!!}',
+                    url: '{!! URL::to('cargarAnimales')!!}',
                     data: {},
                     success: function (data) {
                         console.log('exito colega')
                         console.log(data)
                         for (var i = 0; i < data.length; i++) {
-                            $("#marcajeSelect").append('<option value="' + data[i].marcaje + '">' + data[i].nombrePropio + '</option>');
+                            $("#idAnimal").append('<option value="' + data[i].id + '">' + data[i].nombreComun + '</option>');
                         }
                     },
                     error: function () {
                         console.log('hay error')
                     }
                 });
+
                 $.ajax({
                     type: 'get',
                     url: '{!! URL::to('cargarMaxId')!!}',
@@ -270,6 +275,28 @@
                     error: function () {
                         console.log('hay error')
                     }
+                });
+                $("select[name=idAnimal]").change(function () {
+                    var idAnimal=$(this).val();
+
+                    $.ajax({
+                        type: 'get',
+                        url: '{!! URL::to('cargarVariosEjemplares')!!}',
+                        data: {'idAnimal':idAnimal},
+                        success: function (data) {
+                            console.log('exito colega');
+                            console.log(data);
+                            $('#marcajeSelect').empty();
+                            $("#marcajeSelect").append('<option value="0"> Selecciona Ejemplar </option>');
+
+                            for (var i = 0; i < data.length; i++) {
+                                $("#marcajeSelect").append('<option value="' + data[i].marcaje + '">' + data[i].nombrePropio + '</option>');
+                            }
+                        },
+                        error: function () {
+                            console.log('hay error')
+                        }
+                    });
                 });
                 $("select[name=marcajeSelect]").change(function () {
                     var marcaje = $(this).val();

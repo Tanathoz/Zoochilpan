@@ -86,7 +86,7 @@
 </div><div class="form-group {{ $errors->has('lesiones') ? 'has-error' : ''}}">
     {!! Form::label('lesiones', 'Lesiones', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('lesiones', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('lesiones', null, ['class' => 'form-control']) !!}
         {!! $errors->first('lesiones', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('toracica') ? 'has-error' : ''}}">
@@ -138,8 +138,31 @@
         var flag
         flag=$("#bandera").val();
         $(document).ready(function (){
+
             $('#fecha').datetimepicker({
                 format: 'YYYY-MM-DD'
+            });
+
+            $.validator.addMethod('antecedentes', function(value, element) {
+                return this.optional(element) || /^([A-ZÁÉÍÓÚa-zñáéíóú]+[\s]*)+$/.test(value);
+            }, "No puede tener caracteres expeciales o numeros")
+            $("#formy").validate({
+                rules: {
+                    antecedentes: {
+                        required: true,
+                        expNombre: true,
+                        minlength: 10,
+                        maxlength: 50
+                    }
+                },
+                messages: {
+                    antecedentes: {
+                        required: "El campo es requerido",
+                        expNombre: "El campo puede tener caracteres expeciales o numeros",
+                        minlength: "El campo debe tener minino 2 caracteres",
+                        maxlength: "El campo debe tener Maximo 30 caracteres"
+                    }
+                }
             });
             $.ajax({
                 type: 'get',

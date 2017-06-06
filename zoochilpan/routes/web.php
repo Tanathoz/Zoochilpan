@@ -32,7 +32,7 @@ Route::resource('farmacoProfilaxis','farmacoProfilaxisController');
 Route::resource('siniestro','SiniestroController');
 Route::resource('farmacoClinica','farmacoClinicaController');
 Route::resource('hojaclinica','hojaclinicaController');
-
+Route::resource('reporte','pdfReporte');
 Route::get('/cargarFamilias','FamController@getFamilias');
 Route::get('/cargarEspecies','EspController@getEspecies');
 Route::get('/cargarAnimales','AnimalControl@getAnimales');
@@ -66,6 +66,14 @@ Route::get('/cargarDatosNecropsia','NecropsiaController@getDatosNecropsia');
 Route::get('/cargarNecropsias','NecropsiaController@getNecropsias');
 Route::get('/cargarUnaNecropsia','NecropsiaController@getUnaNecropsia');
 Route::get('/cargarDatosSiniestro','SiniestroController@getDatosSiniestro');
+Route::get('/cargarReporte/{marcajeEjemplar}/{id}/{idVeterinario}/{idEncargado}','pdfReporte@crearPDF');
+Route::get('/cargarReporteSiniestro/{idNecropsia}/{id}','pdfReporte@crearPDFSiniestro');
+Route::get('pdf', function () {
+
+   $pdf = PDF::loadView('Animales.insertar');
+    return $pdf->download('archivo1.pdf');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });

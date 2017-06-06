@@ -39,7 +39,7 @@
         {!! $errors->first('horario', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('consideraciones') ? 'has-error' : ''}}">
-    {!! Form::label('consideraciones', 'Consideraciones', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('consideraciones', 'Observaciones', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::textarea('consideraciones', null, ['class' => 'form-control']) !!}
         {!! $errors->first('consideraciones', '<p class="help-block">:message</p>') !!}

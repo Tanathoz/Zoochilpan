@@ -37,7 +37,8 @@
 {!! Html::script('js/jquery-3.1.1.js') !!}
 {!! Html::script('js/jquery-1.11.3.js') !!}
 {!! Html::script('js/bootstrap.min.js') !!}
-
+{!! Html::script('plugin/Validate/lib/jquery.form.js') !!}
+{!! Html::script('plugin/Validate/dist/jquery.validate.js') !!}
 {!! Html::script('js/moment.min.js') !!}
 {!! Html::script('js/bootstrap-datetimepicker.min.js') !!}
 {!! Html::script('js/bootstrap-datetimepicker.es.js') !!}

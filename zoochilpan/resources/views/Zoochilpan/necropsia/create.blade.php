@@ -21,7 +21,7 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/necropsia', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        {!! Form::open(['url' => '/necropsia', 'class' => 'form-horizontal', 'files' => true,'id'=>'formy' ,'name'=>'formy' ]) !!}
 
                         @include ('Zoochilpan.necropsia.form',['submitButtonText' => 'Registrar'])
 

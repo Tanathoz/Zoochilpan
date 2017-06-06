@@ -13,7 +13,12 @@
         {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-
+<div class="form-group">
+    {!! Form::label('idAnimal', 'Animal', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+        {!! Form::select ('idAnimal',['placeholder'=>'Selecciona animal'],null,['id'=>'idAnimal','class'=>'form-control']) !!}
+    </div>
+</div>
 <div class="form-group {{ $errors->has('lugar') ? 'has-error' : ''}}">
 
     {!! Form::label('marcajeSelect', 'Ejemplar', ['class' => 'col-md-4 control-label']) !!}
@@ -71,8 +76,8 @@
 </div>
 
 
-{!! Form::label('Emergente', 'Agregar farmaco', ['class' => 'col-md-4 control-label']) !!}
-<a href="#ventanaFarmaco" class="btn btn-primary btn-sm" name="Emergente" data-toggle="modal"> <span class="glyphicon glyphicon-plus"></span></a>
+<center><h4>Farmacos de la hoja profilaxis</h4></center>
+
 <div class="table-responsive col-md-15" style="text-align:center;">
     <table id="tblFarmaco" class="table table-borderless" style="align:center">
         <thead>
@@ -369,7 +374,7 @@
                 });
 
                 if (flag=="Actualizar")  {
-                    var conM=1,conV=1,conE=1;
+                    var conM=1,conV=1,conE= 1,conA=1;
                     var id;
                     id ={{$hojaprofilaxi->id}}
                      var idProfilaxis;
@@ -525,6 +530,7 @@
                             console.log('exito colega')
                             $("#nombreComun").val(data[0].nombreComun)
                             $("#nombreCientifico").val(data[0].nombreCientifico)
+                            $("#idAnimal").empty().append('<option value="' + data[0].idAnimal+ '">' + data[0].nombreComun+ '</option>');
                             // $("#idAnimal").append('<option value="' + 2 + '">  cambiar animal</option>');
                         },
                         error:function(){
@@ -532,43 +538,94 @@
                         }
                     });
 
-                    $("select[name=marcajeSelect]").click(function(){
-                       var mar=$("#marcajeSelect").val();
-                        if(conM==1) {
-                            $('#marcajeSelect').empty();
+                    $("select[name=idAnimal]").click(function () {
+                        var idAnimal=$(this).val();
+                        if(conA==1) {
+                            $('#idAnimal').empty();
                             $.ajax({
                                 type: 'get',
-                                url: '{!! URL::to('cargarEjemplares')!!}',
+                                url: '{!! URL::to('cargarAnimales')!!}',
                                 data: {},
                                 success: function (data) {
                                     console.log('exito colega')
                                     console.log(data)
+                                    $("#idAnimal").append('<option value="0"> Selecciona Animal </option>');
                                     for (var i = 0; i < data.length; i++) {
-                                        $("#marcajeSelect").append('<option value="' + data[i].marcaje + '">' + data[i].nombrePropio + '</option>');
+                                        $("#idAnimal").append('<option value="' + data[i].id + '">' + data[i].nombreComun + '</option>');
                                     }
                                 },
                                 error: function () {
                                     console.log('hay error')
                                 }
                             });
-                            conM=2;
                         }
+                    });
+                    $("select[name=idAnimal]").change(function () {
+                        var idAnimal=$(this).val();
 
                         $.ajax({
-                            type:'get',
-                            url:'{!! URL::to('cargarDatosEjemplares')!!}',
-                            data:{'marcaje':mar},
-                            success:function(data){
-                                console.log('exito colega')
-                                $("#nombreComun").val(data[0].nombreComun)
-                                $("#nombreCientifico").val(data[0].nombreCientifico)
-                                // $("#idAnimal").append('<option value="' + 2 + '">  cambiar animal</option>');
+                            type: 'get',
+                            url: '{!! URL::to('cargarVariosEjemplares')!!}',
+                            data: {'idAnimal':idAnimal},
+                            success: function (data) {
+                                console.log('exito colega');
+                                console.log(data);
+                                $('#marcajeSelect').empty();
+                                $("#marcajeSelect").append('<option value="0"> Selecciona Ejemplar </option>');
+
+                                for (var i = 0; i < data.length; i++) {
+                                    $("#marcajeSelect").append('<option value="' + data[i].marcaje + '">' + data[i].nombrePropio + '</option>');
+                                }
                             },
-                            error:function(){
+                            error: function () {
                                 console.log('hay error')
                             }
                         });
                     });
+                    $("select[name=idAnimal]").change(function () {
+                        var idAnimal=$(this).val();
+
+                        $.ajax({
+                            type: 'get',
+                            url: '{!! URL::to('cargarVariosEjemplares')!!}',
+                            data: {'idAnimal':idAnimal},
+                            success: function (data) {
+                                console.log('exito colega');
+                                console.log(data);
+                                $('#marcajeSelect').empty();
+                                $("#marcajeSelect").append('<option value="0"> Selecciona Ejemplar </option>');
+
+                                for (var i = 0; i < data.length; i++) {
+                                    $("#marcajeSelect").append('<option value="' + data[i].marcaje + '">' + data[i].nombrePropio + '</option>');
+                                }
+                            },
+                            error: function () {
+                                console.log('hay error')
+                            }
+                        });
+                    });
+                    $("select[name=marcajeSelect]").change(function () {
+                        var marcaje = $(this).val();
+
+                        $.ajax({
+                            type: 'get',
+                            url: '{!! URL::to('cargarDatosEjemplares')!!}',
+                            data: {'marcaje': marcaje},
+                            success: function (data) {
+                                console.log('exito colega22')
+                                console.log(data)
+                                $("#marcajeEjemplar").val(marcaje);
+                                $("#sexo").val('' + data[0].sexo);
+                                $("#nombreComun").val('' + data[0].nombreComun);
+                                $("#nombreCientifico").val('' + data[0].nombreCientifico);
+                            },
+                            error: function () {
+                                console.log('hay error')
+                            }
+                        })
+                    });
+
+
 
                     $("select[name=idVeterinario]").click(function(){
                         var id=$("#idVeterinario").val();
