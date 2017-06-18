@@ -1,4 +1,4 @@
-<div class="form-group clase col-md-6 center-block">
+<div class="form-group clase col-md-10 center-block">
 
 
     {!! Form::label('clase a la que pertenece la especie') !!}
@@ -9,7 +9,7 @@
 
 </div>
 
-<div class="form-group col-md-6  align-content-center">
+<div class="form-group col-md-10  align-content-center">
     {!! Form::label('Orden') !!}
 
     <select name="orden" id="orden" class="form-control">
@@ -20,9 +20,9 @@
 </div>
 
 
-<div class="form-group col-md-6">
+<div class="form-group col-md-10">
     {!! Form::label('Nombre de la familia') !!}
-    {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Emydidae']) !!}
+    {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Emydidae','required' => 'required']) !!}
 
     <input type="hidden" class="form-control" id="idOrden" name="idOrden">
 
@@ -106,7 +106,7 @@
                 indiceFam=parseInt(indiceFam);
 
                 var idOrden=numOrdenes+indiceFam;
-                alert (idOrden)
+
 
                 $("#idOrden").val(''+idOrden);
 

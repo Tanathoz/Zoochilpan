@@ -6,9 +6,9 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit hojaProfilaxi #{{ $hojaprofilaxi->id }}</div>
+                    <div class="panel-heading"><center><h3 class="opcion_iluminada">Editar  Hoja Profilaxis  #{{ $hojaprofilaxi->id }}</h3></center></div>
                     <div class="panel-body">
-                        <a href="{{ url('/profilaxis') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/profilaxis') }}" title="volver"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i><span class="glyphicon glyphicon-arrow-left"></button></a>
                         <br />
                         <br />
 

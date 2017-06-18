@@ -15,7 +15,10 @@ class AnimalControl extends Controller
     public function hola(){
         return 'hol MUNDO';
     }
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function getAnimales(Request $request ){
 
         $animales=Animal::select('nombreComun','id')->get();
@@ -30,7 +33,7 @@ class AnimalControl extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 20;
 
         if (!empty($keyword)) {
             $ejemplares = Animal::where('nombreCientifico', 'LIKE', "%$keyword%")
@@ -83,7 +86,7 @@ class AnimalControl extends Controller
         return Redirect::to('/animal');
 
         } catch (\Illuminate\Database\QueryException $e) {
-            Session::flash('messageError','No se pudo guardar revise que el id no este en la base de datos ');
+            Session::flash('messageError','No se pudo guardar revise que el id no este en la base de datos  ');
             return Redirect::to('/animal');
 
         } catch (PDOException $e) {
@@ -92,13 +95,20 @@ class AnimalControl extends Controller
        // return redirect('/animal')->with('message','store');
     }
     public function update( Request $request, $id){
-       $animal = Animal::find($id);
+        try {
+        $animal = Animal::find($id);
         $animal->update($request->all());
         //$animal->fill($request->all());
         //$animal->save();
         Session::flash('message','Se actualizo correctamente ');
         return Redirect::to('/animal');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/animal');
 
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     public  function show($id){

@@ -16,23 +16,34 @@ class dietaEjemplarController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
         $keyword = $request->get('search');
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $dietaejemplar = dietaEjemplar::where('marcajeEjemplar', 'LIKE', "%$keyword%")
+            $dietaejemplar = dietaEjemplar::join('ejemplares', 'marcajeEjemplar', '=', 'ejemplares.marcaje')
+                ->select('marcajeEjemplar','fechaCambio','causaCambio','cantidad','alimento','horario','consideraciones','ejemplares.nombrePropio','ejemplares.sexo')
+                  -> where('marcajeEjemplar', 'LIKE', "%$keyword%")
 				->orWhere('fechaCambio', 'LIKE', "%$keyword%")
 				->orWhere('causaCambio', 'LIKE', "%$keyword%")
 				->orWhere('cantidad', 'LIKE', "%$keyword%")
 				->orWhere('alimento', 'LIKE', "%$keyword%")
 				->orWhere('horario', 'LIKE', "%$keyword%")
+                       ->orWhere('ejemplares.nombrePropio', 'LIKE', "%$keyword%")
+                       ->orWhere('ejemplares.sexo', 'LIKE', "%$keyword%")
 				->orWhere('consideraciones', 'LIKE', "%$keyword%")
 				
                 ->paginate($perPage);
         } else {
-            $dietaejemplar = dietaEjemplar::paginate($perPage);
+            $dietaejemplar = dietaEjemplar::join('ejemplares', 'marcajeEjemplar', '=', 'ejemplares.marcaje')
+                ->select('marcajeEjemplar','fechaCambio','causaCambio','cantidad','alimento','horario','consideraciones','ejemplares.nombrePropio','ejemplares.sexo')
+                ->paginate($perPage);
         }
 
         return view('zoochilpan.dieta-ejemplar.index', compact('dietaejemplar'));
@@ -62,7 +73,7 @@ class dietaEjemplarController extends Controller
      */
     public function store(Request $request)
     {
-        
+        try{
         $requestData = $request->all();
         
         dietaEjemplar::create($requestData);
@@ -70,6 +81,13 @@ class dietaEjemplarController extends Controller
         Session::flash('flash_message', 'dietaEjemplar added!');
 
         return redirect('dietaEjemplar');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/dietaEjemplar');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -110,7 +128,7 @@ class dietaEjemplarController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+        try{
         $requestData = $request->all();
         
         $dietaejemplar = dietaEjemplar::findOrFail($id);
@@ -119,6 +137,13 @@ class dietaEjemplarController extends Controller
         Session::flash('flash_message', 'dietaEjemplar updated!');
 
         return redirect('dietaEjemplar');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/dietaEjemplar');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**

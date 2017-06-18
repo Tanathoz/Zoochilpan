@@ -15,7 +15,7 @@
 </div><div class="form-group {{ $errors->has('fecha') ? 'has-error' : ''}}">
     {!! Form::label('fecha', 'Fecha', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        <input type="text" class="form-control " name="fecha" id="fecha" readonly>
+        <input type="text" class="form-control " readonly name="fecha" id="fecha" readonly>
         {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('hora') ? 'has-error' : ''}}">
@@ -61,13 +61,8 @@
         {!! Form::textarea('antecedentes', null, ['class' => 'form-control','readonly']) !!}
         {!! $errors->first('antecedentes', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('diagnosticoMuerte') ? 'has-error' : ''}}">
-    {!! Form::label('diagnosticoMuerte', 'Diagnostico muerte', ['class' => 'col-md-4 control-label']) !!}
-    <div class="col-md-6">
-        {!! Form::text('diagnosticoMuerte', null, ['class' => 'form-control','readonly']) !!}
-        {!! $errors->first('diagnosticoMuerte', '<p class="help-block">:message</p>') !!}
-    </div>
-</div><div class="form-group {{ $errors->has('estadoFisico') ? 'has-error' : ''}}">
+</div>
+<div class="form-group {{ $errors->has('estadoFisico') ? 'has-error' : ''}}">
     {!! Form::label('estadoFisico', 'Estado físico gral', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::textarea('estadoFisico', null, ['class' => 'form-control','readonly']) !!}
@@ -98,6 +93,13 @@
         {!! $errors->first('muestras', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+<div class="form-group {{ $errors->has('diagnosticoMuerte') ? 'has-error' : ''}}">
+    {!! Form::label('diagnosticoMuerte', 'Diagnostico muerte', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+        {!! Form::text('diagnosticoMuerte', null, ['class' => 'form-control','readonly']) !!}
+        {!! $errors->first('diagnosticoMuerte', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
 <div class="form-group ">
 
     {!! Form::label('idVeterinario', 'Veterinario', ['class' => 'col-md-4 control-label']) !!}
@@ -119,25 +121,25 @@
 <div class="form-group {{ $errors->has('medidaPreventiva') ? 'has-error' : ''}}">
     {!! Form::label('medidaPreventiva', 'Medida preventiva', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::textarea('medidaPreventiva', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('medidaPreventiva', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('medidaPreventiva', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('nombreMedida') ? 'has-error' : ''}}">
     {!! Form::label('nombreMedida', 'Nombre responsable medida', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('nombreMedida', null, ['class' => 'form-control']) !!}
+        {!! Form::text('nombreMedida', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('nombreMedida', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('apellido PaternoMedida') ? 'has-error' : ''}}">
     {!! Form::label('apellidoPaternoMedida', 'Apellido Paterno responsable', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('apellidoPaternoMedida', null, ['class' => 'form-control']) !!}
+        {!! Form::text('apellidoPaternoMedida', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('apellidoPaternoMedida', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('apellidoMaternoMedida') ? 'has-error' : ''}}">
     {!! Form::label('apellidoMaternoMedida', 'Apellido Materno responsable', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('apellidoMaternoMedida', null, ['class' => 'form-control']) !!}
+        {!! Form::text('apellidoMaternoMedida', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('apellidoMaternoMedida', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

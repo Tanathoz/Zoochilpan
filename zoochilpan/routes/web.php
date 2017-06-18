@@ -75,10 +75,13 @@ Route::get('pdf', function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes();
+Route::get('auth/login', 'LoginController@getLogin');
+Route::post('auth/login', 'LoginController@postLogin');
+Route::get('auth/logout', 'LoginController@getLogout');
 
 Route::get('/home', 'HomeController@index');
 

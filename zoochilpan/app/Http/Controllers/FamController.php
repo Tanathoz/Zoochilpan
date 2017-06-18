@@ -12,6 +12,10 @@ class FamController extends Controller
 {
 
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function create()
     {
 
@@ -34,7 +38,7 @@ class FamController extends Controller
 
     public function store(Request $request)
     {
-
+        try {
         Familium::create([
             'idFam'=>$request['idFam'],
             'idOrden'=>$request['idOrden'],
@@ -45,6 +49,13 @@ class FamController extends Controller
         Session::flash('message', 'Familia  Guardada!');
 
         return redirect('/animal');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar verifique la seleccion de clase y orden ');
+            return Redirect::to('/animal');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
 }

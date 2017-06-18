@@ -1,111 +1,129 @@
-<div class="fish"> </div>
+
 <fieldset class="scheduler-border">
     <legend align="left">Taxonomia</legend>
-<div class="form-group   ">
-    {!! Form::input('hidden','id',null,['id'=>'id','class'=>'form-control','placeholder'=>'numero de identificacion']) !!}
+    <div class="form-group   ">
+        {!! Form::input('hidden','id',null,['id'=>'id','class'=>'form-control','placeholder'=>'numero de identificacion','required' => 'required']) !!}
 
-</div>
-
-<div class="form-group ">
-    {!! Form::label('Nombre cientifico') !!}
-    {!! Form::text('nombreCientifico',null,['class'=>'form-control','placeholder'=>'Pathera Leo']) !!}
-
-</div>
-<div class="form-group">
-    {!! Form::label('Nombre Común') !!}
-    {!! Form::text('nombreComun',null,['class'=>'form-control','placeholder'=>'León']) !!}
-
-</div>
-
-
-
-<div class="form-group clase">
-    <?php $opciones = array();?>
-
-    {!! Form::label('Clase') !!}
-   {!! Form::select('clase',['Selecciona Clase'=>'Selecciona Clase','Anfibios'=>'Anfibios','Aves'=>'Aves',
-        'Mamiferos'=>'Mamiferos','Peces'=>'Peces','Reptiles'=>'Reptiles'],null,['class'=>'form-control'],array('onchange'=>'cambia_orden()')) !!}
-            <!--
-    {!! Form::select( 'clase', $opciones, 'default', array('onchange' => 'cambia_orden()') ,['class'=>'form-control'] ) !!}
-            -->
-</div>
-
-<div class="form-group">
-    {!! Form::label('Orden') !!}
-{!! Form::select ('orde',['placeholder'=>$animal->orden],null,['id'=>'orde','class'=>'form-control']) !!}
-
-    <input type="hidden" name="orden" id="orden">
+    </div>
+    <div class="form-group">
+        {!! Form::label('nombreCientifico', 'Nombre Científico', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::text('nombreCientifico',null,['class'=>'form-control','placeholder'=>'Pathera Leo','required' => 'required']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::label('nombreComun','Nombre Común', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::text('nombreComun',null,['class'=>'form-control','placeholder'=>'León','required' => 'required']) !!}
+        </div>
+    </div>
 
 
-</div>
 
-<div class="form-group">
-    {!! Form::label('Familia') !!}
-
-    {!! Form::select ('famili',['placeholder'=>$animal->familia],null,['id'=>'famili','class'=>'form-control']) !!}
-
-    <input type="hidden" name="familia" id="familia">
-
-</div>
+    <div class="form-group clase">
 
 
-<div class="form-group">
-    {!! Form::label('Especie') !!}
-    {!! Form::select ('especi',['placeholder'=>$animal->especie],null,['id'=>'especi','class'=>'form-control']) !!}
+        {!! Form::label('clase', 'Clase', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::select('clase',['Selecciona Clase'=>'Selecciona Clase','Anfibios'=>'Anfibios','Aves'=>'Aves',
+                 'Mamiferos'=>'Mamiferos','Peces'=>'Peces','Reptiles'=>'Reptiles'],null,['class'=>'form-control','required' => 'required'],array('onchange'=>'cambia_orden()')) !!}
+        </div>
+    </div>
 
-    <input type="hidden" name="especie" id="especie">
-</div>
+    <div class="form-group">
+        {!! Form::label('orden', 'Orden', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::select ('orde',['placeholder'=>$animal->orden],null,['id'=>'orde','class'=>'form-control','required' => 'required']) !!}
 
+            <input type="hidden" name="orden" id="orden">
+
+
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        {!! Form::label('familia', 'Familia', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::select ('famili',['placeholder'=>$animal->familia],null,['id'=>'famili','class'=>'form-control','required' => 'required']) !!}
+
+            <input type="hidden" name="familia" id="familia">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        {!! Form::label('especie', 'Especie', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::select ('especi',['placeholder'=>$animal->especie],null,['id'=>'especi','class'=>'form-control','required' => 'required']) !!}
+
+            <input type="hidden" name="especie" id="especie">
+        </div>
+    </div>
 </fieldset>
 <fieldset class="scheduler-border">
     <legend align="left">Vida y Reproduccion </legend>
+    <div class="form-group ">
+        {!! Form::label('habitat', 'Habitat', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::select('habitat',['Altiplano'=>'Altiplano','Arrecife de coral'=>'Arrecife de coral','Bosque'=>'Bosque','Desierto'=>'Desierto',
+            'Lago'=>'Lago','Marisma'=>'Marisma','Montaña'=>'Montaña','Océano'=>'Océano','Pantano'=>'Pantano','Pastizales'=>'Pastizales','Playa'=>'Playa','Pradera'=>'Pradera',
+            'Quebrada'=>'Quebrada','Región polar'=>'Región polar','Sabana'=>'Sabana','Selva'=>'Selva'],'carnivoros',['class'=>'form-control','required' => 'required']) !!}
+        </div>
 
-<div class="form-group ">
-    {!! Form::label('Habitat') !!}
-    {!! Form::select('habitat',['Altiplano'=>'Altiplano','Arrecife de coral'=>'Arrecife de coral','Bosque'=>'Bosque','Desierto'=>'Desierto',
-    'Lago'=>'Lago','Marisma'=>'Marisma','Montaña'=>'Montaña','Océano'=>'Océano','Pantano'=>'Pantano','Pastizales'=>'Pastizales','Playa'=>'Playa','Pradera'=>'Pradera',
-    'Quebrada'=>'Quebrada','Región polar'=>'Región polar','Sabana'=>'Sabana','Selva'=>'Selva'],null,['placeholder'=>$animal->habitat,'class'=>'form-control']) !!}
+    </div>
 
+    <div class="form-group">
+        {!! Form::label('gestacion', 'Gestación', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::text('gestacion',null,['class'=>'form-control','placeholder'=>'120 dias']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::label('camada', 'Camada', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::text('camada',null,['class'=>'form-control','placeholder'=>'1-4 Crías']) !!}
+        </div>
+    </div>
 
-</div>
-
-<div class="form-group">
-    {!! Form::label('Gestación') !!}
-    {!! Form::text('gestacion',null,['class'=>'form-control','placeholder'=>'120 dias']) !!}
-
-</div>
-<div class="form-group">
-    {!! Form::label('Camada') !!}
-    {!! Form::text('camada',null,['class'=>'form-control','placeholder'=>'1-4 Crías']) !!}
-
-</div>
-
-<div class="form-group">
-    {!! Form::label('Longevidad') !!}
-    {!! Form::text('longevidad',null,['class'=>'form-control','placeholder'=>'10-14 años']) !!}
-
-</div>
-
-
-<div class="form-group">
-    {!! Form::label('Peso') !!}
-    {!! Form::text('peso',null,['class'=>'form-control','placeholder'=>'130 kg']) !!}
-
-</div>
-
-<div class="form-group">
-    {!! Form::label('Ubicación Geografíca') !!}
-    {!! Form::text('ubicacionGeografica',null,['class'=>'form-control','placeholder'=>'Noroeste de Africa']) !!}
-
-</div>
+    <div class="form-group">
+        {!! Form::label('longevidad', 'Longevidad', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::text('longevidad',null,['class'=>'form-control','placeholder'=>'10-14 años']) !!}
+        </div>
+    </div>
 
 
-<div class="form-group">
-    {!! Form::label('Alimentacion') !!}
-    {!! Form::text('Alimentacion',null,['class'=>'form-control','placeholder'=>'cebras,buffalos']) !!}
+    <div class="form-group">
+        {!! Form::label('peso', 'Peso', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::text('peso',null,['class'=>'form-control','placeholder'=>'90-130 kg']) !!}
+        </div>
+    </div>
 
-</div>
+    <div class="form-group">
+        {!! Form::label('ubicacionGeografica','Ubicación Geografíca', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::text('ubicacionGeografica',null,['class'=>'form-control','placeholder'=>'Noroeste de Africa']) !!}
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        {!! Form::label('Alimentacion', 'Alimentación', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
+            {!! Form::text('Alimentacion',null,['class'=>'form-control','placeholder'=>'cebras,buffalos']) !!}
+        </div>
+    </div>
+
 </fieldset>
+<div class="form-group">
+    <div class="col-md-offset-4 col-md-4">
+        {!! Form::submit(isset($ButtonText) ? $ButtonText : 'Registrar', ['class' => 'btn btn-primary']) !!}
+    </div>
+</div>
+
 
 <!--{!! Form::text('prueba',null,['class'=>'form-control','placeholder'=>'']) !!} -->
 @section('javascript')
@@ -210,10 +228,6 @@
             $("select[name=orde]").click(function () {
                var div=$(this).val();
                 $('#famili').empty().append('elige una opcion');
-
-
-
-
 
                 if(indice==1)
                     numOrdenes=0;

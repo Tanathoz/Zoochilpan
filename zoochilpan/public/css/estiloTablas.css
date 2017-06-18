@@ -47,3 +47,8 @@ th {
     background-color: #4CAF50;
     color: white;
 }
+.carousel-inner .item a img {
+
+    margin: auto;
+
+}

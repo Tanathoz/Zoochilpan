@@ -11,19 +11,32 @@ use DB;
 use Session;
 class farmacoProfilaxisController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function store(Request $request)
     {
-        if($request->ajax()){
-            farmacoProfilaxis::create([
-                'idProfilaxis' =>$request['idProfilaxis'],
-                'idFarmaco' =>$request['idFarmaco'],
-                'dosis' =>$request['dosis'],
-                'frecuencia' =>$request['frecuencia'],
-                'fechaAplicacion' =>$request['fechaAplicacion'],
-            ]);
-            return response()->json([
-                "mensaje"=>"guardado"
-            ]);
+        try {
+            if ($request->ajax()) {
+                farmacoProfilaxis::create([
+                    'idProfilaxis' => $request['idProfilaxis'],
+                    'idFarmaco' => $request['idFarmaco'],
+                    'dosis' => $request['dosis'],
+                    'frecuencia' => $request['frecuencia'],
+                    'fechaAplicacion' => $request['fechaAplicacion'],
+                ]);
+                return response()->json([
+                    "mensaje" => "guardado"
+                ]);
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/profilaxis');
+
+        } catch (PDOException $e) {
+            dd($e);
         }
     }
 
@@ -69,10 +82,18 @@ class farmacoProfilaxisController extends Controller
     }
     public function UpdateFarmacoProfilaxis(Request $request)
     {
+        try {
         DB::table('farmacoprofilaxis')
             ->where('idProfilaxis','=',$request->idProfilaxis)
             ->where('idFarmaco','=',$request->idFarmaco)
             ->update(['dosis' => $request->dosis, 'frecuencia'=>$request->frecuencia, 'fechaAplicacion'=>$request->fechaAplicacion]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/profilaxis');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
 

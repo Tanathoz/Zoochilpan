@@ -6,6 +6,9 @@
     background-color: #398439;
     border-color: #411c0e;
 }
+.navbar-default .navbar-brand {
+    color: #000;
+}
 
 .navbar-inverse .navbar-nav > .open > a,
 .navbar-inverse .navbar-nav > .open > a:hover,
@@ -13,7 +16,7 @@
     color: #ffff00;
     background-color: #411c0e;
 }
- #tudiv
+ .tudiv
 {
     width:800px;  //ancho del div
     height:100px; // alto del div
@@ -32,6 +35,9 @@ table td{
 table thead {
     color: #fff;
     background-color: #4cae4c;
+}
+.input .input{
+    text-transform: capitalize;
 }
 
 fieldset.scheduler-border {
@@ -54,9 +60,75 @@ h3 {
     padding: 1px;
 }
 .opcion_iluminada {
-    font-size: 30px;
-    color: #78341a;
-    text-decoration:none;
-    padding: 1px;
-    word-spacing: 8.6pt;
+    font-family:Georgia,"Arial",Times,serif;
+    font-weight:normal;
+    text-shadow:0 0 1px #000;
+    color: #411c0e ;
+    font-size:3em;
+    padding:2px 0 0;
+    line-height:1.2em;
+    margin:0 0 10px;
+}
+.opcionfo{
+    font-family:Georgia,"Arial",Times,serif;
+    font-weight:900;
+    text-shadow:0 0 1px #000;
+    color: #411c0e ;
+    font-size:5em;
+    padding:2px 0 0;
+    text-transform:capitalize;
+    line-height:1.2em;
+    margin:0 0 10px;
+}
+.opc3{
+    background:#ECD078;
+    color:#542437;
+    font-size:160%;
+    font-style:normal;
+    font-weight:bold;
+    letter-spacing:-1px;
+    line-height:115%;
+    margin-top:5px;
+    padding:0;
+}
+.panel-default > .panel-heading {
+    background-color:#ECD078 ;
+}
+.panel-body {
+    background: #f5e79e;
+
+}
+.btn-info {
+    background-color: limegreen;
+}
+.btn-info.active {
+    background-color: limegreen;
+}
+.btn-info:hover {
+    color: #fff;
+    background-color: #1acd1c;
+    border-color:#411c0e ;
+}
+
+.btn-primary {
+    background-color: #E4A010;
+}
+.btn-primary:focus,
+.btn-primary.focus {
+    color: #fff;
+    background-color: #E48B1A;
+    border-color:#411c0e ;
+}
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #E48B1A;
+    border-color: #411c0e;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color:#E48B1A ;
+    border-color:#411c0e ;
 }

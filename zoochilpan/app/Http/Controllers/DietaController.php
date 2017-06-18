@@ -15,6 +15,11 @@ class DietaController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
         $keyword = $request->get('search');
@@ -58,7 +63,7 @@ class DietaController extends Controller
      */
     public function store(Request $request)
     {
-        
+        try {
         $requestData = $request->all();
         
         Dietas::create($requestData);
@@ -66,6 +71,13 @@ class DietaController extends Controller
         Session::flash('flash_message', 'Dietum added!');
 
         return redirect('dieta');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return redirect('dieta');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -91,9 +103,11 @@ class DietaController extends Controller
      */
     public function edit($idAnimal)
     {
+
         $dietum = Dietas::find($idAnimal);
 
         return view('zoochilpan.dieta.edit', compact('dietum'));
+
     }
 
     /**
@@ -106,7 +120,7 @@ class DietaController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+        try{
         $requestData = $request->all();
         
         $dietum = Dietas::findOrFail($id);
@@ -115,6 +129,13 @@ class DietaController extends Controller
         Session::flash('flash_message', 'Dietum updated!');
 
         return redirect('dieta');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/dieta');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**

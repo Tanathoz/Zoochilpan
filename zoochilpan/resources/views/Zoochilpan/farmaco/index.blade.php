@@ -7,10 +7,10 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><center><h3 class="opcion_iluminada">Gestion de Farmacos</h3></center></div>
+                    <div class="panel-heading"><center><h3 class="opcion_iluminada">Gestión de Farmacos</h3></center></div>
                     <div class="panel-body">
                         <a href="{{ url('/farmaco/create') }}" class="btn btn-success btn-sm" title="Agregar farmaco">
-                            <i class="fa fa-plus" aria-hidden="true"></i><span class="glyphicon glyphicon-plus">  </span> Agregar nuevo
+                            <i class="fa fa-plus" aria-hidden="true"></i><span class="glyphicon glyphicon-plus">  </span>
                         </a>
 
                         {!! Form::open(['method' => 'GET', 'url' => '/farmaco', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}

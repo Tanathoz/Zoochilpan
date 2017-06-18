@@ -1,105 +1,121 @@
-<div class="fish"> </div>
+
 <fieldset class="scheduler-border">
     <legend align="left">Taxonomia</legend>
 
 <div class="form-group">
-    {!! Form::label('Nombre cientifico') !!}
-    {!! Form::text('nombreCientifico',null,['class'=>'form-control','placeholder'=>'Pathera Leo']) !!}
-
+    {!! Form::label('nombreCientifico', 'Nombre Científico', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+    {!! Form::text('nombreCientifico',null,['class'=>'form-control','placeholder'=>'Pathera Leo','required' => 'required']) !!}
+    </div>
 </div>
 <div class="form-group">
-    {!! Form::label('Nombre Común') !!}
-    {!! Form::text('nombreComun',null,['class'=>'form-control','placeholder'=>'León']) !!}
-
+    {!! Form::label('nombreComun','Nombre Común', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+    {!! Form::text('nombreComun',null,['class'=>'form-control','placeholder'=>'León','required' => 'required']) !!}
+        </div>
 </div>
 
 
 
 <div class="form-group clase">
-    <?php $opciones = array();?>
 
-    {!! Form::label('Clase') !!}
+
+        {!! Form::label('clase', 'Clase', ['class' => 'col-md-4 control-label']) !!}
+        <div class="col-md-6">
    {!! Form::select('clase',['Selecciona Clase'=>'Selecciona Clase','Anfibios'=>'Anfibios','Aves'=>'Aves',
-        'Mamiferos'=>'Mamiferos','Peces'=>'Peces','Reptiles'=>'Reptiles'],null,['class'=>'form-control'],array('onchange'=>'cambia_orden()')) !!}
-            <!--
-    {!! Form::select( 'clase', $opciones, 'default', array('onchange' => 'cambia_orden()') ,['class'=>'form-control'] ) !!}
-            -->
+        'Mamiferos'=>'Mamiferos','Peces'=>'Peces','Reptiles'=>'Reptiles'],null,['class'=>'form-control','required' => 'required'],array('onchange'=>'cambia_orden()')) !!}
+            </div>
 </div>
 
 <div class="form-group">
-    {!! Form::label('Orden') !!}
-{!! Form::select ('orden',['placeholder'=>'Selecciona orden'],null,['id'=>'orden','class'=>'form-control']) !!}
+    {!! Form::label('orden', 'Orden', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+{!! Form::select ('orden',['placeholder'=>'Selecciona orden'],null,['id'=>'orden','class'=>'form-control','required' => 'required']) !!}
 
-
-
+</div>
 
 </div>
 
 <div class="form-group">
-    {!! Form::label('Familia') !!}
 
+    {!! Form::label('familia', 'Familia', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
     {!! Form::select ('familia',['placeholder'=>'Selecciona Familia'],null,['id'=>'familia','class'=>'form-control']) !!}
-    {!! Form::hidden('famili',null,['class'=>'form-control','placeholder'=>'1-4 Crías','id'=>'famili']) !!}
-
+    {!! Form::hidden('famili',null,['class'=>'form-control','placeholder'=>'1-4 Crías','id'=>'famili','required' => 'required']) !!}
+        </div>
 </div>
 
 
 <div class="form-group">
-    {!! Form::label('Especie') !!}
-    {!! Form::select ('especie',['placeholder'=>'selecciona Especie'],null,['id'=>'especie','class'=>'form-control']) !!}
-
+    {!! Form::label('especie', 'Especie', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+    {!! Form::select ('especie',['placeholder'=>'selecciona Especie'],null,['id'=>'especie','class'=>'form-control','required' => 'required']) !!}
+</div>
 </div>
 </fieldset>
 <fieldset class="scheduler-border">
     <legend align="left">Vida y Reproduccion </legend>
 <div class="form-group ">
-    {!! Form::label('Habitat') !!}
+    {!! Form::label('habitat', 'Habitat', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
     {!! Form::select('habitat',['Altiplano'=>'Altiplano','Arrecife de coral'=>'Arrecife de coral','Bosque'=>'Bosque','Desierto'=>'Desierto',
     'Lago'=>'Lago','Marisma'=>'Marisma','Montaña'=>'Montaña','Océano'=>'Océano','Pantano'=>'Pantano','Pastizales'=>'Pastizales','Playa'=>'Playa','Pradera'=>'Pradera',
-    'Quebrada'=>'Quebrada','Región polar'=>'Región polar','Sabana'=>'Sabana','Selva'=>'Selva'],'carnivoros',['class'=>'form-control']) !!}
-
+    'Quebrada'=>'Quebrada','Región polar'=>'Región polar','Sabana'=>'Sabana','Selva'=>'Selva'],'carnivoros',['class'=>'form-control','required' => 'required']) !!}
+</div>
 
 </div>
 
 <div class="form-group">
-    {!! Form::label('Gestación') !!}
+    {!! Form::label('gestacion', 'Gestación', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
     {!! Form::text('gestacion',null,['class'=>'form-control','placeholder'=>'120 dias']) !!}
-
+</div>
 </div>
 <div class="form-group">
-    {!! Form::label('Camada') !!}
+    {!! Form::label('camada', 'Camada', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
     {!! Form::text('camada',null,['class'=>'form-control','placeholder'=>'1-4 Crías']) !!}
-
+    </div>
 </div>
 
 <div class="form-group">
-    {!! Form::label('Longevidad') !!}
+    {!! Form::label('longevidad', 'Longevidad', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
     {!! Form::text('longevidad',null,['class'=>'form-control','placeholder'=>'10-14 años']) !!}
-
+    </div>
 </div>
 
 
 <div class="form-group">
-    {!! Form::label('Peso') !!}
-    {!! Form::text('peso',null,['class'=>'form-control','placeholder'=>'130 kg']) !!}
-
+    {!! Form::label('peso', 'Peso', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+    {!! Form::text('peso',null,['class'=>'form-control','placeholder'=>'90-130 kg']) !!}
+    </div>
 </div>
 
 <div class="form-group">
-    {!! Form::label('Ubicación Geografíca') !!}
+    {!! Form::label('ubicacionGeografica','Ubicación Geografíca', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
     {!! Form::text('ubicacionGeografica',null,['class'=>'form-control','placeholder'=>'Noroeste de Africa']) !!}
-
+    </div>
 </div>
 
 
 <div class="form-group">
-    {!! Form::label('Alimentacion') !!}
+    {!! Form::label('Alimentacion', 'Alimentación', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
     {!! Form::text('Alimentacion',null,['class'=>'form-control','placeholder'=>'cebras,buffalos']) !!}
+    </div>
+</div>
 
-</div>
-</div>
 </fieldset>
-<!--{!! Form::text('prueba',null,['class'=>'form-control','placeholder'=>'']) !!} -->
+<div class="form-group">
+    <div class="col-md-offset-4 col-md-4">
+        {!! Form::submit(isset($ButtonText) ? $ButtonText : 'Registrar', ['class' => 'btn btn-primary']) !!}
+    </div>
+</div>
+
+
 @section('javascript')
     <script>
 

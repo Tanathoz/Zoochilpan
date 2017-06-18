@@ -45,6 +45,12 @@
         margin: 0;
         margin-left: 0.0em;
     }
+    td{
+        border-bottom: 0.5px solid #080808;
+    }
+    th{
+        border-bottom: 0.5px solid #080808;
+    }
 </style>
 <header>
 
@@ -52,8 +58,8 @@
 
     </div>
 </header>
-<center><h2>Datos de la necropsia</h2></center>
-<div style="border: 2pt solid #000000;">
+<center><h2>Reporte de Necropsia</h2></center>
+<div >
     <div class="centraTabla">
     <table style="text-align: left; margin: auto;" >
   @foreach($necropsia as $necropsium )
@@ -61,25 +67,25 @@
 
 
 
-            <tr><th> ID </th><td> <h4>{{ $necropsium->id }}</h4> </td></tr>
-            <tr><th> Lugar </th><td> {{ $necropsium->lugar }} </td></tr>
-        <tr><th> Fecha </th><td> <h4>{{ $fecha = date('d/m/Y',strtotime( $necropsium->fecha))  }}</h4> </td></tr>
-            <tr><th> Hora </th><td> {{ $necropsium->hora }} </td></tr>
+            <tr><th> Número :</th><td> {{ $necropsium->id }} </td></tr>
+            <tr><th> Lugar :</th><td> {{ $necropsium->lugar }} </td></tr>
+            <tr><th> Fecha :</th><td> {{ $fecha = date('d/m/Y',strtotime( $necropsium->fecha))  }} </td></tr>
+            <tr><th> Hora :</th><td> {{ $necropsium->hora }} </td></tr>
 
-            <tr><th> Nombre Común </th><td> {{ $necropsium->nombreComun }} </td></tr>
-            <tr><th> Nombre Cientifico </th><td> {{ $necropsium->nombreCientifico }} </td></tr>
+            <tr><th> Nombre Común :</th><td> {{ $necropsium->nombreComun }} </td></tr>
+            <tr><th> Nombre Científico :</th><td> {{ $necropsium->nombreCientifico }} </td></tr>
 
-            <tr><th> Nombre </th><td> {{ $necropsium->nombrePropio }} </td></tr>
-            <tr><th> sexo </th><td> {{ $necropsium->sexo }} </td></tr>
+            <tr><th> Nombre :</th><td> {{ $necropsium->nombrePropio }} </td></tr>
+            <tr><th> Sexo :</th><td> {{ $necropsium->sexo }} </td></tr>
 
-            <tr><th> Antecedentes </th><td> {{ $necropsium->antecedentes }} </td></tr>
-        <tr><th> Diagnostico muerte </th><td> {{ $necropsium->diagnosticoMuerte }} </td></tr><tr><th> Estado Fisico </th><td> {{ $necropsium->estadoFisico }} </td></tr><tr><th> Lesiones </th><td> {{ $necropsium->lesiones }} </td></tr><tr><th> Toracica </th><td> {{ $necropsium->toracica }} </td></tr>
-        <tr><th> abdominal </th><td> {{ $necropsium->abdominal }} </td></tr><tr><th> Muestras </th><td> {{ $necropsium->muestras }} </td></tr>
+            <tr><th> Antecedentes :</th><td> {{ $necropsium->antecedentes }} </td></tr>
+        <tr><th> Estado Físico :</th><td> {{ $necropsium->estadoFisico }} </td></tr><tr><th> Lesiones :</th><td> {{ $necropsium->lesiones }} </td></tr><tr><th>Cavidad Toracica </th><td> {{ $necropsium->toracica }} </td></tr>
+        <tr><th> Cavidad Abdominal :</th><td> {{ $necropsium->abdominal }} </td></tr><tr><th> Muestras :</th><td> {{ $necropsium->muestras }} </td></tr>
+            <tr><th> Diagnostico muerte :</th><td> {{ $necropsium->diagnosticoMuerte }} </td></tr>
 
+                <tr><th>  Veterinario : </th><td> {{ $necropsium->nombre }}&nbsp;&nbsp;{{ $necropsium->apellidoPaterno }}&nbsp;&nbsp; {{ $necropsium->apellidoMaterno }} </td><td>    </td></tr>
 
-                <tr><th> Nombre Veterinario : </th><td> {{ $necropsium->nombre }}&nbsp;&nbsp;{{ $necropsium->apellidoPaterno }}&nbsp;&nbsp; {{ $necropsium->apellidoMaterno }} </td><td>    </td></tr>
-
-                <tr><th> Nombre Encargado aréa médica : </th><td> {{ $encargado[0]->nombre }}&nbsp;&nbsp;{{ $encargado[0]->apellidoPaterno }}&nbsp;&nbsp;{{ $encargado[0]->apellidoMaterno }} </td> <td>  </td></tr>
+                <tr><th>Encargado aréa médica: </th><td> {{ $encargado[0]->nombre }}&nbsp;&nbsp;{{ $encargado[0]->apellidoPaterno }}&nbsp;&nbsp;{{ $encargado[0]->apellidoMaterno }} </td> <td>  </td></tr>
 
 
         @endforeach

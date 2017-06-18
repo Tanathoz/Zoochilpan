@@ -9,11 +9,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">Zoochilpan</a>
+            <a href="/home" class="navbar-brand">Zoochilpan</a>
         </div>
         <!-- inicia menu -->
         <div class="collapse navbar-collapse  " id="navegacion">
             <ul class="nav navbar-nav">
+                @if(Auth::user())
                 <li class="dropdown ">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gestión de Fauna <span class="caret"></span> </a>
                     <ul class="dropdown-menu" role="menu">
@@ -23,8 +24,8 @@
                         <li > Ejemplares </li>
                         <li > <a href="/ejemplar"> Ejemplares</a> </li>
                         <li > Taxonomia</li>
-                        <li > <a href="/familia"> Familias</a> </li>
-                        <li > <a href="/especie"> Especies</a> </li>
+                        <li > <a href="/familia/create"> Familias</a> </li>
+                        <li > <a href="/especie/create"> Especies</a> </li>
 
 
 
@@ -48,7 +49,7 @@
                         <li > Profilaxis  </li>
                         <li > <a href="hojaclinica">Consultas Clínicas</a> </li>
                         <li > <a href="/profilaxis">Medicina Preventiva</a> </li>
-                        <li > <a href="/farmaco">Gestion Farmacos</a> </li>
+                        <li > <a href="/farmaco">Gestión Farmacos</a> </li>
 
                     </ul>
                 </li>
@@ -64,6 +65,28 @@
 
                     </ul>
                 </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">&nbsp;&nbsp;&nbsp; {{Auth::user()->name}} <span class="caret"></span> </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="{{ url('/logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                Cerrar sesión
+                            </a>
+
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+                    @else
+                        <li><a href="{{ url('/login') }}"> &nbsp;&nbsp;&nbsp;<strong>Iniciar Sesión</strong></a></li>
+
+
+                @endif
             </ul>
 
 

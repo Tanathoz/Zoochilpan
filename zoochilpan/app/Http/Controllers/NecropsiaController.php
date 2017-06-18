@@ -16,6 +16,11 @@ class NecropsiaController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
         $keyword = $request->get('search');
@@ -85,14 +90,21 @@ class NecropsiaController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        Necropsium::create($requestData);
+        try {
+            $requestData = $request->all();
 
-        Session::flash('flash_message', 'Necropsium added!');
+            Necropsium::create($requestData);
 
-        return redirect('necropsia');
+            Session::flash('flash_message', 'Necropsia Registrada!');
+
+            return redirect('necropsia');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/necropsia');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -133,15 +145,22 @@ class NecropsiaController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+        try {
         $requestData = $request->all();
         
         $necropsium = Necropsium::findOrFail($id);
         $necropsium->update($requestData);
 
-        Session::flash('flash_message', 'Necropsium updated!');
+        Session::flash('flash_message', 'Necropsia Actualizada!');
 
         return redirect('necropsia');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/necropsia');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -155,7 +174,7 @@ class NecropsiaController extends Controller
     {
         Necropsium::destroy($id);
 
-        Session::flash('flash_message', 'Necropsium deleted!');
+        Session::flash('flash_message', 'Necropsia Borrada!');
 
         return redirect('necropsia');
     }

@@ -1,7 +1,8 @@
 @extends('Layouts.principal')
 
 @section('content')
-
+    <div class="container">
+        <div class="row">
     {!! Form::model($veterinario,['route'=>['veterinario.update',$veterinario->id,'method'=>'PUT']]) !!}
     <input name="_method" type="hidden" value="PUT">
     <div class="panel panel-default">
@@ -17,7 +18,8 @@
     </div>
 
     {!! Form::close() !!}
-
+        </div>
+    </div>
 
     {!! Form::open(['route'=>['veterinario.destroy',$veterinario->id,'method'=>'DELETE']]) !!}
     <input name="_method" type="hidden" value="DELETE">
@@ -26,4 +28,4 @@
 
     {!! Form::close() !!}
 
-@stop
+@endsection

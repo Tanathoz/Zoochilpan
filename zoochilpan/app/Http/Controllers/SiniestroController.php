@@ -16,6 +16,11 @@ class SiniestroController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
         $keyword = $request->get('search');
@@ -37,7 +42,7 @@ class SiniestroController extends Controller
 
         } else {
             $siniestro = Siniestro::join('necropsias','idNecropsia','=','necropsias.id')
-                ->select('medidaPreventiva','siniestros.id','necropsias.lugar','necropsias.fecha','necropsias.hora','necropsias.marcajeEjemplar','necropsias.diagnosticoMuerte')
+                ->select('apellidoPaternoMedida','nombreMedida','medidaPreventiva','siniestros.id','necropsias.lugar','necropsias.fecha','necropsias.hora','necropsias.marcajeEjemplar','necropsias.diagnosticoMuerte')
                  ->paginate($perPage);
         }
 
@@ -71,14 +76,21 @@ class SiniestroController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        Siniestro::create($requestData);
+        try {
+            $requestData = $request->all();
 
-        Session::flash('flash_message', 'Siniestro added!');
+            Siniestro::create($requestData);
 
-        return redirect('siniestro');
+            Session::flash('flash_message', 'Siniestro Registrado!');
+
+            return redirect('siniestro');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/siniestro');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -119,15 +131,22 @@ class SiniestroController extends Controller
      */
     public function update($id, Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        $siniestro = Siniestro::findOrFail($id);
-        $siniestro->update($requestData);
+        try {
+            $requestData = $request->all();
 
-        Session::flash('flash_message', 'Siniestro updated!');
+            $siniestro = Siniestro::findOrFail($id);
+            $siniestro->update($requestData);
 
-        return redirect('siniestro');
+            Session::flash('flash_message', 'Siniestro Actualizado!');
+
+            return redirect('siniestro');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/siniestro');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -141,7 +160,7 @@ class SiniestroController extends Controller
     {
         Siniestro::destroy($id);
 
-        Session::flash('flash_message', 'Siniestro deleted!');
+        Session::flash('flash_message', 'Siniestro Borrado!');
 
         return redirect('siniestro');
     }

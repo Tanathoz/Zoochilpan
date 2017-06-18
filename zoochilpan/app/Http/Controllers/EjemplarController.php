@@ -17,11 +17,16 @@ class EjemplarController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
 
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 20;
 
 
         if (!empty($keyword)) {
@@ -93,7 +98,7 @@ class EjemplarController extends Controller
      */
     public function store(Request $request)
     {
-        
+        try {
         $requestData = $request->all();
         
         Ejemplar::create($requestData);
@@ -101,6 +106,13 @@ class EjemplarController extends Controller
         Session::flash('flash_message', 'Ejemplar registrado!');
 
         return redirect('/ejemplar');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/ejemplar');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -141,15 +153,22 @@ class EjemplarController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+        try {
         $requestData = $request->all();
         
         $ejemplar = Ejemplar::findOrFail($id);
         $ejemplar->update($requestData);
 
-        Session::flash('flash_message', 'Ejemplar updated!');
+        Session::flash('flash_message', 'Ejemplar Actualizado!');
 
         return redirect('/ejemplar');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/ejemplar');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**

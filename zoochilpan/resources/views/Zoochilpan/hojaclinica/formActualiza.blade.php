@@ -7,7 +7,7 @@
 </div><div class="form-group {{ $errors->has('fecha') ? 'has-error' : ''}}">
     {!! Form::label('fecha', 'Fecha', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        <input type="text" class="form-control" name="fecha" id="fecha">
+        <input type="text" required="required" readonly class="form-control" name="fecha" id="fecha">
         {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -58,25 +58,25 @@
 <div class="form-group {{ $errors->has('antecedentes') ? 'has-error' : ''}}">
     {!! Form::label('antecedentes', 'Antecedentes', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::textarea('antecedentes', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('antecedentes', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('antecedentes', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('diagnostico') ? 'has-error' : ''}}">
     {!! Form::label('diagnostico', 'Diagnostico', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('diagnostico', null, ['class' => 'form-control']) !!}
+        {!! Form::text('diagnostico', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('diagnostico', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('tratamiento') ? 'has-error' : ''}}">
     {!! Form::label('tratamiento', 'Tratamiento', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('tratamiento', null, ['class' => 'form-control']) !!}
+        {!! Form::text('tratamiento', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('tratamiento', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('fechaAplicacion') ? 'has-error' : ''}}">
     {!! Form::label('fechaAplicacion', 'Fechaaplicacion', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        <input type="text" class="form-control " name="fechaAplicacion" id="fechaAplicacion" >
+        <input type="text" required="required" readonly  class="form-control " name="fechaAplicacion" id="fechaAplicacion" >
         {!! $errors->first('fechaAplicacion', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -113,7 +113,7 @@
 </div><div class="form-group {{ $errors->has('fechaAlta') ? 'has-error' : ''}}">
     {!! Form::label('fechaAlta', 'Fechaalta', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        <input type="text" class="form-control " name="fechaAlta" id="fechaAlta" >
+        <input type="text" class="form-control " readonly name="fechaAlta" id="fechaAlta" >
         {!! $errors->first('fechaAlta', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('resultados') ? 'has-error' : ''}}">

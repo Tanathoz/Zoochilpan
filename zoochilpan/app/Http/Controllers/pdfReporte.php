@@ -15,6 +15,11 @@ use PDF;
 
 class pdfReporte extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 public function crearPDF( Request $request, $marcaje){
 
     //$necropsia= Necropsium::all();
@@ -59,7 +64,7 @@ public function crearPDF( Request $request, $marcaje){
                 'necropsias.diagnosticoMuerte','necropsias.antecedentes','necropsias.estadoFisico','animal.nombreComun','animal.nombreCientifico',
                 'necropsias.lesiones','necropsias.toracica','necropsias.abdominal','necropsias.muestras','necropsias.marcajeEjemplar','necropsias.idEncargado','necropsias.idVeterinario','veterinarios.nombre',
                 'veterinarios.apellidoMaterno','veterinarios.apellidoPaterno','ejemplares.nombrePropio','ejemplares.sexo','ejemplares.idAnimal',
-                'medidaPreventiva','nombreMedida','apellidoPaternoMedida','apellidoMaternoMedida')->where('siniestros.id',$request->id)->take(100)->get();
+                'medidaPreventiva','siniestros.id','nombreMedida','apellidoPaternoMedida','apellidoMaternoMedida')->where('siniestros.id',$request->id)->take(100)->get();
 
         $pdf=PDF::loadView('Zoochilpan.siniestro.reporte',['necropsia'=>$necropsia],['encargado'=>$encargado]);
         return $pdf->download('Siniestro'.$request->id.'reporte.pdf');

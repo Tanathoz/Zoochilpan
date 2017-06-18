@@ -10,10 +10,10 @@
         </style>
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading" id="marcaje">Necropsia {{ $necropsium->marcajeEjemplar }}</div>
+                    <div class="panel-heading" id="marcaje"><center><h3 class="opcion_iluminada">Datos de  Necropsia  #{{ $necropsium->id }}</h3></center></div>
                     <div class="panel-body">
 
-                        <a href="{{ url('/pdf') }}" title="Volver"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="glyphicon glyphicon-arrow-left"></span></button></a>
+                        <a href="{{ url('/necropsia') }}" title="Volver"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="glyphicon glyphicon-arrow-left"></span></button></a>
                         <a href="{{ url('/cargarReporte/' . $necropsium->marcajeEjemplar.'/'.$necropsium->id.'/'.$necropsium->idVeterinario.'/'.$necropsium->idEncargado ) }}" title="Descargar en PDF"><button class="btn btn-success btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="glyphicon glyphicon-save-file"></span></button></a>
 
                         <br/>

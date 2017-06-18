@@ -7,9 +7,9 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Create New Dietum</div>
+                    <div class="panel-heading"><center><h3 class="opcion_iluminada">Registrar Dieta</h3></center></div>
                     <div class="panel-body">
-                        <a href="{{ url('/dieta') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/dieta') }}" title="Volver"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="glyphicon glyphicon-arrow-left"></span></button></a>
                         <br />
                         <br />
 
@@ -21,7 +21,7 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/dieta', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        {!! Form::open(['url' => '/dieta', 'class' => 'form-horizontal', 'files' => true,'id'=>'formy' ,'name'=>'formy']) !!}
 
                         @include ('zoochilpan.dieta.form',['submitButtonText' => 'Registrar'])
 

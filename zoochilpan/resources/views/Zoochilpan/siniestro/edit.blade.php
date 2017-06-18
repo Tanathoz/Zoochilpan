@@ -7,9 +7,9 @@
 
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Editar Siniestro #{{ $siniestro->id }}</div>
+                    <div class="panel-heading"><center><h3 class="opcion_iluminada">Editar  Siniestro  #{{ $siniestro->id }}</h3></center></div>
                     <div class="panel-body">
-                        <a href="{{ url('/siniestro') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button></a>
+                        <a href="{{ url('/siniestro') }}" title="Volver"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="glyphicon glyphicon-arrow-left"></button></a>
                         <br />
                         <br />
 

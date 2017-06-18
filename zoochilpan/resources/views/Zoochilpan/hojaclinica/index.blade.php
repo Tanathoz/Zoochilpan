@@ -7,7 +7,7 @@
 
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><center><h3 class="opcion_iluminada">Gestión de Hojas Clinicas</h3></center></div>
+                    <div class="panel-heading"><center><h3 class="opcion_iluminada">Gestión de Hojas Clínicas</h3></center></div>
                     <div class="panel-body">
                         <a href="{{ url('/hojaclinica/create') }}" class="btn btn-success btn-sm" title="Registrar hoja clinica">
                             <i class="fa fa-plus" aria-hidden="true"></i> <span class="glyphicon glyphicon-plus"></span>
@@ -31,16 +31,16 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th>Lugar</th><th>Fecha</th><th>Antecedentes</th><th>Actions</th>
+                                        <th>ID</th><th>Lugar</th><th>Fecha</th><th>Diagnostico</th><th>Tratamiento</th><th>Marcaje</th><th>Ejemplar</th><th>Sexo</th><th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($hojaclinica as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->lugar }}</td><td>{{ $item->fecha }}</td><td>{{ $item->antecedentes }}</td>
+                                        <td>{{ $item->lugar }}</td><td>{{ $item->fecha }}</td><td>{{ $item->diagnostico }}</td><td>{{ $item->tratamiento }}</td><td>{{ $item->marcajeEjemplar }}</td><td>{{ $item->nombrePropio }}</td><td>{{ $item->sexo }}</td>
                                         <td>
-                                            <a href="{{ url('/hojaclinica/' . $item->id) }}" title="Ver hojaclinica"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> <span class="glyphicon glyphicon-eye-open"></span></button></a>
+
                                             <a href="{{ url('/hojaclinica/' . $item->id . '/edit') }}" title="Editar hojaclinica"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="glyphicon glyphicon-pencil"></span></button></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',

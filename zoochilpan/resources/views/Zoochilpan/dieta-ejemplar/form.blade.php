@@ -48,16 +48,18 @@
 <div class="form-group {{ $errors->has('fechaCambio') ? 'has-error' : ''}}">
     {!! Form::label('fechaCambio', 'Fecha cambio', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        <input type="text" class="form-control" name="fechaCambio" id="fechaCambio">
+        <input type="text" class="form-control" required="required" name="fechaCambio" id="fechaCambio">
         {!! $errors->first('fechaCambio', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('causaCambio') ? 'has-error' : ''}}">
-    {!! Form::label('causaCambio', 'Causa cambio', ['class' => 'col-md-4 control-label']) !!}
+</div>
+<div class="form-group {{ $errors->has('causaCambio') ? 'has-error' : ''}}">
+    {!! Form::label('causaCambio', 'Causa cambio', ['class' => 'col-md-4 control-label','required' => 'required']) !!}
     <div class="col-md-6">
         {!! Form::textarea('causaCambio', null, ['class' => 'form-control']) !!}
         {!! $errors->first('causaCambio', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('cantidad') ? 'has-error' : ''}}">
+</div>
+<div class="form-group {{ $errors->has('cantidad') ? 'has-error' : ''}}">
     {!! Form::label('cantidad', 'Frecuencia', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::text('cantidad', null, ['class' => 'form-control']) !!}
@@ -66,13 +68,13 @@
 </div><div class="form-group {{ $errors->has('alimento') ? 'has-error' : ''}}">
     {!! Form::label('alimento', 'Alimento', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::textarea('alimento', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('alimento', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('alimento', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('horario') ? 'has-error' : ''}}">
     {!! Form::label('horario', 'Horario', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::input('time', 'horario', null, ['class' => 'form-control']) !!}
+        {!! Form::input('time', 'horario', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('horario', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('consideraciones') ? 'has-error' : ''}}">

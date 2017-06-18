@@ -17,6 +17,11 @@ class farmacoClinicaController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
         $keyword = $request->get('search');
@@ -99,7 +104,7 @@ class farmacoClinicaController extends Controller
      */
     public function store(Request $request)
     {
-        
+        try {
         $requestData = $request->all();
         
         farmacoClinica::create($requestData);
@@ -107,6 +112,13 @@ class farmacoClinicaController extends Controller
         Session::flash('flash_message', 'farmacoClinica added!');
 
         return redirect('farmaco-clinica');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/farmaco-clinica');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -147,15 +159,23 @@ class farmacoClinicaController extends Controller
      */
     public function update($id, Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        $farmacoclinica = farmacoClinica::findOrFail($id);
-        $farmacoclinica->update($requestData);
+        try {
+            $requestData = $request->all();
 
-        Session::flash('flash_message', 'farmacoClinica updated!');
+            $farmacoclinica = farmacoClinica::findOrFail($id);
+            $farmacoclinica->update($requestData);
 
-        return redirect('farmaco-clinica');
+            Session::flash('flash_message', 'farmacoClinica updated!');
+
+            return redirect('farmaco-clinica');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/farmaco-clinica');
+
+            } catch (PDOException $e) {
+                dd($e);
+            }
+
     }
 
     /**

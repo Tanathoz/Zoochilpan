@@ -2,28 +2,27 @@
 
 
 @section('content')
+    <div class="container">
+        <div class="row">
 
-
-
-
-            {!! Form::open(['route'=>'animal.store','method'=>'POST']) !!}
-            {!! Html::script('js/mostrarOpciones') !!}
-            <div class="col-md-9">
+            <div class="col-md-10">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                   <center> <h3 class="panel-title opcion_iluminada"> Formularios de registro de Animal </h3></center>
+                   <center> <h3 class="panel-title opcion_iluminada"> Registro de Animal </h3></center>
                 </div>
                 <div class="panel-body">
-                @include('Animales.form.registro')
-                    <center>
-                {!! Form::submit('Registrar',['class'=>'btn btn-primary']) !!}
+                    <a href="{{ url('/animal') }}" title="Volver"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="glyphicon glyphicon-arrow-left"></span></button></a>
+                    {!! Form::open(['route'=>'animal.store','class' => 'form-horizontal','method'=>'POST']) !!}
 
-                    </center>
-                   </div>
-                </div>
+                @include('Animales.form.registro',['ButtonText' => 'Registrar'])
+
 
             {!! Form::close() !!}
-            </div>
+                  </div>
+               </div>
+             </div>
+        </div>
+    </div>
 
 @stop
 

@@ -14,12 +14,13 @@
   <!--  {!! Html::style('/css/bootstrap.min.css') !!}-->
    <!--{!! Html::style('/css/estiloTablas.css') !!}-->
     <title>Zoochilpan</title>
+    <link rel="shortcut icon" href="/plugin/img/huella.ico">
 </head>
 <body >
+
 <header>
-    <img src="/plugin/img/GobiernodelEstado.png"  width="433" height="100" title="imagen "/>
-    <img src="/plugin/img/semarenRGB.jpg" width=433" height="100" title="imagen "/>
-    <img src="/plugin/img/LogoZoochilpan.jpg"  width="433" height="100" title="imagen "/>
+
+    <img src="/plugin/img/logos.PNG"  class="img-responsive" width="1300px" height="50px"/>
 </header>
  @include('Layouts.barra')
 
@@ -27,18 +28,18 @@
 <section class="container"  >
 
     <div   class="row" >
-        <div class="col-md-12" >
+        <div class="col-md-12 " >
             @yield('content')
 
         </div>
     </div>
 
 </section>
+
+
 {!! Html::script('js/jquery-3.1.1.js') !!}
 {!! Html::script('js/jquery-1.11.3.js') !!}
 {!! Html::script('js/bootstrap.min.js') !!}
-{!! Html::script('plugin/Validate/lib/jquery.form.js') !!}
-{!! Html::script('plugin/Validate/dist/jquery.validate.js') !!}
 {!! Html::script('js/moment.min.js') !!}
 {!! Html::script('js/bootstrap-datetimepicker.min.js') !!}
 {!! Html::script('js/bootstrap-datetimepicker.es.js') !!}
@@ -46,6 +47,10 @@
 
 
 @yield('javascript')
+<footer>
+    <img src="/plugin/img/footer.png"  width="1400px" height="50px"/>
+
+</footer>
 </body>
 
 </html>

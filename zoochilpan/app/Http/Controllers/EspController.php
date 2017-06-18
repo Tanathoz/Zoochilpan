@@ -10,6 +10,10 @@ class EspController extends Controller
 {
 
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function create()
     {
 
@@ -31,7 +35,7 @@ class EspController extends Controller
 
     public function store(Request $request)
     {
-
+        try {
         Especie::create([
             'idEspecie'=>$request['idEspecie'],
             'idFamilia'=>$request['idFamilia'],
@@ -42,5 +46,12 @@ class EspController extends Controller
         Session::flash('message', 'Especie Guardada!');
 
         return redirect('/animal');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar verifique la seleccion de clase, orden y familia ');
+            return Redirect::to('/animal');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 }

@@ -16,27 +16,32 @@ class hojaclinicaController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
         $keyword = $request->get('search');
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $hojaclinica = hojaclinica::where('lugar', 'LIKE', "%$keyword%")
-				->orWhere('fecha', 'LIKE', "%$keyword%")
-				->orWhere('antecedentes', 'LIKE', "%$keyword%")
-				->orWhere('diagnostico', 'LIKE', "%$keyword%")
-				->orWhere('tratamiento', 'LIKE', "%$keyword%")
-				->orWhere('fechaAplicacion', 'LIKE', "%$keyword%")
-				->orWhere('observaciones', 'LIKE', "%$keyword%")
-				->orWhere('comentarios', 'LIKE', "%$keyword%")
-				->orWhere('resultados', 'LIKE', "%$keyword%")
-				->orWhere('marcajeEjemplar', 'LIKE', "%$keyword%")
-				->orWhere('idEncargado', 'LIKE', "%$keyword%")
-				
+
+				  $hojaclinica = hojaclinica::join('ejemplares', 'marcajeEjemplar', '=', 'ejemplares.marcaje')
+                      ->select('id','lugar','fecha','marcajeEjemplar','diagnostico','tratamiento','fechaAplicacion', 'ejemplares.nombrePropio','ejemplares.sexo')
+                      ->where('lugar', 'LIKE', "%$keyword%")
+                      ->orWhere('fecha', 'LIKE', "%$keyword%")
+                      ->orWhere('tratamiento', 'LIKE', "%$keyword%")
+                      ->orWhere('fechaAplicacion', 'LIKE', "%$keyword%")
+                      ->orWhere('ejemplares.nombrePropio','LIKE', "%$keyword%" )
+                      ->orWhere('ejemplares.sexo', 'LIKE', "%$keyword%")
+
                 ->paginate($perPage);
         } else {
-            $hojaclinica = hojaclinica::paginate($perPage);
+            $hojaclinica = hojaclinica::join('ejemplares', 'marcajeEjemplar','=','ejemplares.marcaje')
+                ->select('id','lugar','fecha','marcajeEjemplar','diagnostico','tratamiento','fechaAplicacion','ejemplares.nombrePropio','ejemplares.sexo')
+                ->paginate($perPage);
         }
 
         return view('Zoochilpan.hojaclinica.index', compact('hojaclinica'));
@@ -61,14 +66,21 @@ class hojaclinicaController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        hojaclinica::create($requestData);
+        try {
+            $requestData = $request->all();
 
-        Session::flash('flash_message', 'hojaclinica added!');
+            hojaclinica::create($requestData);
 
-        return redirect('hojaclinica');
+            Session::flash('flash_message', 'hojaclinica added!');
+
+            return redirect('hojaclinica');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/hojaclinica');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -109,15 +121,22 @@ class hojaclinicaController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+        try {
         $requestData = $request->all();
-        
+
         $hojaclinica = hojaclinica::findOrFail($id);
         $hojaclinica->update($requestData);
 
         Session::flash('flash_message', 'hojaclinica updated!');
 
         return redirect('hojaclinica');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/hojaclinica');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**

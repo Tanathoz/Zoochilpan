@@ -17,6 +17,11 @@ class farmacoController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
         $keyword = $request->get('search');
@@ -76,7 +81,7 @@ class farmacoController extends Controller
      */
     public function store(Request $request)
     {
-        
+        try {
         $requestData = $request->all();
         
         Farmaco::create($requestData);
@@ -84,6 +89,13 @@ class farmacoController extends Controller
         Session::flash('flash_message', 'farmaco agregado!');
 
         return redirect('farmaco');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/farmaco');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -124,15 +136,23 @@ class farmacoController extends Controller
      */
     public function update($id, Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        $farmaco = Farmaco::findOrFail($id);
-        $farmaco->update($requestData);
+        try {
+            $requestData = $request->all();
 
-        Session::flash('flash_message', 'farmaco actualizado!');
+            $farmaco = Farmaco::findOrFail($id);
+            $farmaco->update($requestData);
 
-        return redirect('farmaco');
+            Session::flash('flash_message', 'farmaco actualizado!');
+
+            return redirect('farmaco');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/farmaco');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
+
     }
 
     /**

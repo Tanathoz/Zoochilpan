@@ -5,9 +5,9 @@
         <div class="row">
 
 
-            <div class="col-md-12">
+            <div class="col-md-10">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><center><h3 class="opcion_iluminada">Gestión de Siniestros</h3></center></div>
+                    <div class="panel-heading"><center><h2 class="opcion_iluminada">Gestión de Siniestros</h2></center></div>
                     <div class="panel-body">
                         <a href="{{ url('/siniestro/create') }}" class="btn btn-success btn-sm" title="Registrar Siniestro">
                             <i class="fa fa-plus" aria-hidden="true"></i> <span class="glyphicon glyphicon-plus"></span>
@@ -31,7 +31,7 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th>Causa Muerte</th><th>Fecha</th><th>Hora</th><th>Marcaje</th><th>MedidaPreventiva</th><th>Acciones</th>
+                                        <th>ID</th><th>Causa Muerte</th><th>Fecha</th><th>Hora</th><th>Marcaje</th><th>Nombre</th><th>Apellido Paterno</th><th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,7 +39,7 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
 
-                                        <td>{{ $item->diagnosticoMuerte }}</td><td>{{ $item->fecha }}</td><td>{{ $item->hora }}</td><td>{{ $item->marcajeEjemplar }}</td><td>{{ $item->medidaPreventiva }}</td>
+                                        <td>{{ $item->diagnosticoMuerte }}</td><td>{{ $item->fecha }}</td><td>{{ $item->hora }}</td><td>{{ $item->marcajeEjemplar }}</td><td>{{ $item->nombreMedida }}</td><td>{{ $item->apellidoPaternoMedida }}</td>
                                         <td>
                                             <a href="{{ url('/siniestro/' . $item->id) }}" title="Ver Siniestro"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> <span class="glyphicon glyphicon-eye-open"></span></button></a>
                                             <a href="{{ url('/siniestro/' . $item->id . '/edit') }}" title="Editar Siniestro"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  <span class="glyphicon glyphicon-pencil"></span></button></a>

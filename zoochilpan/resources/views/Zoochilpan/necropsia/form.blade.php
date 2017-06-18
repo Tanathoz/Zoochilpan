@@ -3,19 +3,19 @@
 <div class="form-group {{ $errors->has('lugar') ? 'has-error' : ''}}">
     {!! Form::label('lugar', 'Lugar', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('lugar', 'Zoológico Zoochilpan', ['class' => 'form-control']) !!}
+        {!! Form::text('lugar', 'Zoológico Zoochilpan', ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('lugar', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('fecha') ? 'has-error' : ''}}">
     {!! Form::label('fecha', 'Fecha', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        <input type="text" class="form-control" name="fecha" id="fecha">
+        <input type="text" required="required" readonly class="form-control" name="fecha" id="fecha">
         {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('hora') ? 'has-error' : ''}}">
     {!! Form::label('hora', 'Hora', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::input('time', 'hora', null, ['class' => 'form-control']) !!}
+        {!! Form::input('time', 'hora', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('hora', '<p class="help-block">:message</p>') !!}
     </div>
     </div>
@@ -68,44 +68,47 @@
    <div class="form-group {{ $errors->has('antecedentes') ? 'has-error' : ''}}">
     {!! Form::label('antecedentes', 'Antecedentes', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::textarea('antecedentes', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('antecedentes', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('antecedentes', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('diagnosticoMuerte') ? 'has-error' : ''}}">
-    {!! Form::label('diagnosticoMuerte', 'Diagnostico muerte', ['class' => 'col-md-4 control-label']) !!}
-    <div class="col-md-6">
-        {!! Form::text('diagnosticoMuerte', null, ['class' => 'form-control']) !!}
-        {!! $errors->first('diagnosticoMuerte', '<p class="help-block">:message</p>') !!}
-    </div>
-</div><div class="form-group {{ $errors->has('estadoFisico') ? 'has-error' : ''}}">
+</div>
+
+<div class="form-group {{ $errors->has('estadoFisico') ? 'has-error' : ''}}">
     {!! Form::label('estadoFisico', 'Estado físico gral', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::textarea('estadoFisico', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('estadoFisico', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('estadoFisico', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('lesiones') ? 'has-error' : ''}}">
     {!! Form::label('lesiones', 'Lesiones', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::textarea('lesiones', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('lesiones', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('lesiones', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('toracica') ? 'has-error' : ''}}">
     {!! Form::label('toracica', 'Cavidad Toracica', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::textarea('toracica', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('toracica', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('toracica', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('abdominal') ? 'has-error' : ''}}">
     {!! Form::label('abdominal', 'Cavidad Abdominal', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::textarea('abdominal', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('abdominal', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('abdominal', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('muestras') ? 'has-error' : ''}}">
-    {!! Form::label('muestras', 'Muestras', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('muestras', 'Muestras', ['class' => 'col-md-4 control-label','required' => 'required']) !!}
     <div class="col-md-6">
         {!! Form::textarea('muestras', null, ['class' => 'form-control']) !!}
         {!! $errors->first('muestras', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+<div class="form-group {{ $errors->has('diagnosticoMuerte') ? 'has-error' : ''}}">
+    {!! Form::label('diagnosticoMuerte', 'Diagnostico muerte', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+        {!! Form::text('diagnosticoMuerte', null, ['class' => 'form-control','required' => 'required']) !!}
+        {!! $errors->first('diagnosticoMuerte', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <div class="form-group ">

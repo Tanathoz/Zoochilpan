@@ -4,10 +4,24 @@
     <div class="container">
         <div class="row">
 
+            @if(Session::has('message'))
 
+                <div class="alert alert-success alert-dismissible " role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{Session::get('message')}}
+                </div>
+
+            @elseif(Session::has('messageError'))
+
+                <div class="alert alert-danger alert-dismissible " role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{Session::get('messageError')}}
+                </div>
+
+            @endif
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dieta</div>
+                    <div class="panel-heading"><center><h3 class="opcion_iluminada">Gestión de Dietas</h3></center></div>
                     <div class="panel-body">
                         <a href="{{ url('/dieta/create') }}" class="btn btn-success btn-sm" title="Registrar Dieta">
                             <i class="fa fa-plus" aria-hidden="true"><span class="glyphicon glyphicon-plus"></span></i>

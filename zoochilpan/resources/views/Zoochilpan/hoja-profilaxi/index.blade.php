@@ -5,7 +5,7 @@
         <div class="row">
 
 
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <div class="panel panel-default">
                     <div class="panel-heading"><center><h3 class="opcion_iluminada">Gestión de Profilaxis</h3></center></div>
                     <div class="panel-body">
@@ -13,7 +13,7 @@
                             <i class="fa fa-plus" aria-hidden="true"> <span class="glyphicon glyphicon-plus"></span></i>
                         </a>
 
-                        {!! Form::open(['method' => 'GET', 'url' => '/hojaprofilaxi', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
+                        {!! Form::open(['method' => 'GET', 'url' => '/profilaxis', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Buscar...">
                             <span class="input-group-btn">
@@ -38,9 +38,8 @@
                                 @foreach($hojaprofilaxi as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->lugar }}</td><td>{{ $item->fecha }}</td><td>{{ $item->tratamiento }}</td><td>{{ $item->marcajeEjemplar }}</td><td>{{ $item->nombrePropio }}</td><td>{{ $item->sexo }}</td>
+                                        <td>{{ $item->lugar }}</td><td>{{ $item->fecha }}</td><td>{{ $item->tratamiento }}</td><td>{{ $item->marcajeEjemplar }}</td><td>{{ $item->nombreComun }}</td><td>{{ $item->sexo }}</td>
                                         <td>
-                                            <a href="{{ url('/profilaxis/' . $item->id) }}" title="Ver datos hoja"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> <span class="glyphicon glyphicon-eye-open"></span></button></a>
                                             <a href="{{ url('/profilaxis/' . $item->id . '/edit') }}" title="Edit hojaProfilaxi"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="glyphicon glyphicon-pencil"></span></button></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',

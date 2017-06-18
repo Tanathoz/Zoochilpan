@@ -16,6 +16,7 @@
         <th>Sexo</th>
         <th>Especialidad</th>
         <th>Area a cargo</th>
+        <th>Acciones</th>
         </thead>
 
         @foreach($veterinarios as $veterinario)

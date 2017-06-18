@@ -16,37 +16,35 @@ class hojaProfilaxiController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
         $keyword = $request->get('search');
         $perPage = 25;
 
         if (!empty($keyword)) {
-           // $hojaprofilaxi = hojaProfilaxi::where('lugar', 'LIKE', "%$keyword%")
-		//		->orWhere('fecha', 'LIKE', "%$keyword%")
-		//		->orWhere('tratamiento', 'LIKE', "%$keyword%")
-		//		->orWhere('fechaAplicacion', 'LIKE', "%$keyword%")
-	   //			->orWhere('observaciones', 'LIKE', "%$keyword%")
-		//		->orWhere('comentarios', 'LIKE', "%$keyword%")
-          //      ->paginate($perPage);
 
             $hojaprofilaxi = hojaProfilaxi::join('ejemplares', 'marcajeEjemplar', '=', 'ejemplares.marcaje')
-                ->select('id','lugar','fecha','marcajeEjemplar','tratamiento','fechaAplicacion', 'ejemplares.nombrePropio','ejemplares.sexo')
+               -> join('animal', 'ejemplares.idAnimal', '=', 'animal.id')
+                ->select('hojaprofilaxis.id','lugar','fecha','marcajeEjemplar','tratamiento','fechaAplicacion','animal.nombreComun', 'ejemplares.nombrePropio','ejemplares.sexo','ejemplares.idAnimal')
                 ->where('lugar', 'LIKE', "%$keyword%")
                 ->orWhere('fecha', 'LIKE', "%$keyword%")
                 ->orWhere('tratamiento', 'LIKE', "%$keyword%")
                 ->orWhere('fechaAplicacion', 'LIKE', "%$keyword%")
                 ->orWhere('ejemplares.nombrePropio','LIKE', "%$keyword%" )
                 ->orWhere('ejemplares.sexo', 'LIKE', "%$keyword%")
+                ->orWhere('animal.nombreComun', 'LIKE', "%$keyword%")
                 ->paginate($perPage);
 
         } else {
-            //$ejemplar = Ejemplar::join('animal', 'idAnimal', '=', 'animal.id')
-              //  ->select('marcaje','fechaNacimiento','fechaAlta','sexo','nombrePropio', 'animal.nombreComun', 'animal.especie','animal.nombreCientifico')
-               // ->paginate($perPage);
 
             $hojaprofilaxi = hojaProfilaxi::join('ejemplares', 'marcajeEjemplar','=','ejemplares.marcaje')
-            ->select('id','lugar','fecha','marcajeEjemplar','tratamiento','fechaAplicacion','ejemplares.nombrePropio','ejemplares.sexo')
+                -> join('animal', 'ejemplares.idAnimal', '=', 'animal.id')
+            ->select('hojaprofilaxis.id','lugar','fecha','marcajeEjemplar','tratamiento','fechaAplicacion','animal.nombreComun','ejemplares.nombrePropio','ejemplares.sexo')
             ->paginate($perPage);
         }
 
@@ -81,6 +79,7 @@ class hojaProfilaxiController extends Controller
      */
     public function store(Request $request)
     {
+        try {
         $requestData = $request->all();
         
         hojaProfilaxi::create($requestData);
@@ -88,6 +87,13 @@ class hojaProfilaxiController extends Controller
         Session::flash('flash_message', 'hojaProfilaxi agregado!');
 
         return redirect('/profilaxis');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/profilaxis');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
 
     }
 
@@ -155,15 +161,22 @@ class hojaProfilaxiController extends Controller
      */
     public function update($id, Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        $hojaprofilaxi = hojaProfilaxi::findOrFail($id);
-        $hojaprofilaxi->update($requestData);
+        try {
+            $requestData = $request->all();
 
-        Session::flash('flash_message', 'hojaProfilaxi updated!');
+            $hojaprofilaxi = hojaProfilaxi::findOrFail($id);
+            $hojaprofilaxi->update($requestData);
 
-        return redirect('/profilaxis');
+            Session::flash('flash_message', 'hojaProfilaxi updated!');
+
+            return redirect('/profilaxis');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/profilaxis');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**

@@ -23,13 +23,13 @@
 <div class="form-group {{ $errors->has('cantidad') ? 'has-error' : ''}}">
     {!! Form::label('cantidad', 'Cantidad', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('cantidad', null, ['class' => 'form-control']) !!}
+        {!! Form::text('cantidad', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('cantidad', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('alimento') ? 'has-error' : ''}}">
     {!! Form::label('alimento', 'Alimento', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::textarea('alimento', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('alimento', null, ['class' => 'form-control','required' => 'required']) !!}
         {!! $errors->first('alimento', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('horario') ? 'has-error' : ''}}">

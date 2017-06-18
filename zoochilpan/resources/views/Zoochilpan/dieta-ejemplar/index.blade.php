@@ -7,7 +7,7 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dietaejemplar</div>
+                    <div class="panel-heading"><center><h3 class="opcion_iluminada">Gestión de Dietas de Ejemplar</h3></center></div>
                     <div class="panel-body">
                         <a href="{{ url('/dietaEjemplar/create') }}" class="btn btn-success btn-sm" title="Registrar dietaEjemplar">
                             <i class="fa fa-plus" aria-hidden="true"><span class="glyphicon glyphicon-plus"></span></i>
@@ -31,14 +31,14 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>MarcajeEjemplar</th> <th>FechaCambio</th> <th>CausaCambio</th><th>Alimento</th><th>Acciones</th>
+                                        <th>MarcajeEjemplar</th> <th>Nombre Ejemplar</th><th>Sexo</th><th>FechaCambio</th> <th>CausaCambio</th><th>Alimento</th><th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($dietaejemplar as $item)
                                     <tr>
 
-                                        <td>{{ $item->marcajeEjemplar }}</td><td>{{ $item->fechaCambio }}</td><td>{{ $item->causaCambio }}</td><td>{{ $item->alimento }}</td>
+                                        <td>{{ $item->marcajeEjemplar }}</td> <td>{{ $item->nombrePropio }}</td><td>{{ $item->sexo }}</td><td>{{ $item->fechaCambio }}</td><td>{{ $item->causaCambio }}</td><td>{{ $item->alimento }}</td>
                                         <td>
 
                                             <a href="{{ url('/dietaEjemplar/' . $item->marcajeEjemplar . '/edit') }}" title="Edit dietaEjemplar"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="glyphicon glyphicon-pencil"></span></button></a>

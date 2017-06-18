@@ -15,6 +15,11 @@ class VeterinarioController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $veterinarios = Veterinario::paginate(25);
@@ -53,22 +58,29 @@ class VeterinarioController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        Veterinario::create([
-        'id'=>$request['id'],
-         'nombre'=>$request['nombre'],
-          'apellidoPaterno'=>$request['apellidoPaterno'],
-            'apellidoMaterno'=>$request['apellidoMaterno'],
-            'sexo'=>$request['sexo'],
-            'especialidad'=>$request['especialidad'],
-            'areaEncargada'=>$request['areaEncargada'],
-        ]);
+        try {
+            $requestData = $request->all();
 
-        Session::flash('message', 'Veterinario Agregado!');
+            Veterinario::create([
+                'id' => $request['id'],
+                'nombre' => $request['nombre'],
+                'apellidoPaterno' => $request['apellidoPaterno'],
+                'apellidoMaterno' => $request['apellidoMaterno'],
+                'sexo' => $request['sexo'],
+                'especialidad' => $request['especialidad'],
+                'areaEncargada' => $request['areaEncargada'],
+            ]);
 
-        return redirect('/veterinario');
+            Session::flash('message', 'Veterinario Agregado!');
+
+            return redirect('/veterinario');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/veterinario');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -110,15 +122,22 @@ class VeterinarioController extends Controller
      */
     public function update($id, Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        $veterinario = Veterinario::findOrFail($id);
-        $veterinario->update($requestData);
+        try {
+            $requestData = $request->all();
 
-        Session::flash('message', 'Veterinario Actualizado!');
+            $veterinario = Veterinario::findOrFail($id);
+            $veterinario->update($requestData);
 
-        return redirect('/veterinario');
+            Session::flash('message', 'Veterinario Actualizado!');
+
+            return redirect('/veterinario');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('messageError','No se pudo guardar revise que ha llenado todos los datos ');
+            return Redirect::to('/veterinario');
+
+        } catch (PDOException $e) {
+            dd($e);
+        }
     }
 
     /**

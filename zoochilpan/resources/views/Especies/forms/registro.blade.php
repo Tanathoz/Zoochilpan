@@ -1,12 +1,12 @@
-
-<div class="form-group clase col-md-6 center-block">
+<fieldset class="scheduler-border">
+    <legend align="left">Datos de Especie</legend>
+<div class="form-group  col-md-10 ">
     {!! Form::label('clase a la que pertenece la especie') !!}
     {!! Form::select('clase',['Selecciona Clase'=>'Selecciona Clase','Anfibios'=>'Anfibios','Aves'=>'Aves',
-         'Mamiferos'=>'Mamiferos','Peces'=>'Peces','Reptiles'=>'Reptiles'],null,['class'=>'form-control'],array('onchange'=>'cambia_orden()')) !!}
+         'Mamiferos'=>'Mamiferos','Peces'=>'Peces','Reptiles'=>'Reptiles'],null,['class'=>'form-control','required' => 'required'],array('onchange'=>'cambia_orden()')) !!}
 </div>
 
-
-<div class="form-group col-md-6  align-content-center">
+<div class="form-group col-md-10 ">
     {!! Form::label('Orden') !!}
 
     <select name="orden" id="orden" class="form-control">
@@ -17,7 +17,7 @@
 </div>
 
 
-<div class="form-group  col-md-6 ">
+<div class="form-group  col-md-10 ">
     {!! Form::label('Familia') !!}
 
     <select  id="familia" class="form-control" name="familia">
@@ -29,14 +29,16 @@
 </div>
 
 
-<div class="form-group col-md-6">
+<div class="form-group col-md-10">
     {!! Form::label('Nombre de la especie') !!}
-    {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Emydidae']) !!}
+    {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Emydidae','required' => 'required']) !!}
 
     <input type="hidden" class="form-control" id="idFamilia" name="idFamilia">
 
 
 </div>
+</fieldset>
+
 
 
 @section('javascript')

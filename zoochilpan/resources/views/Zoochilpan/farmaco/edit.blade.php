@@ -7,10 +7,10 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Editar farmaco :{{ $farmaco->nombre }}</div>
+                    <div class="panel-heading"><center><h3 class="opcion_iluminada">Editar  Farmaco #{{ $farmaco->nombre }}</h3></center></div>
                     <div class="panel-body">
 
-                        <a href="{{ url('/farmaco') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="glyphicon glyphicon-arrow-left">  </span>Volver</button></a>
+                        <a href="{{ url('/farmaco') }}" title="Volver"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="glyphicon glyphicon-arrow-left">  </span></button></a>
                         <br />
                         <br />
 
